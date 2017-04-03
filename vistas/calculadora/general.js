@@ -91,12 +91,11 @@ Ext.onReady(function () {
                     idPeriodo: 1,
                     kwhMes: totalConsumo,
 //                    costoMes: 2,
-//                    participacion: 0.5
+                    participacion: 0
                 });
                 storeConsumoDispositivos.insert(0, r);
                 gridConsumoDispositivos.editingPlugin.startEdit(0, 0);
                 gridConsumoDispositivos.getView().refresh();
-                gridSemaforo.getView().refresh();
                 sumaTotal = 0;
                 storeConsumoDispositivos.each(function (rec) {
                     sumaTotal += rec.get('kwhMes');
@@ -175,7 +174,6 @@ Ext.onReady(function () {
                             limpiarPanelCentral();
                             gridConsumoDispositivos.show();
                             storeConsumoDispositivos.sorters.clear();
-//                            Ext.getCmp('panelDerecha').expand();
                             panelDerecha.show();
                             dataview.enable();
                             btnAtras.hide();
@@ -189,7 +187,8 @@ Ext.onReady(function () {
                         handler: function () {
                             Ext.getCmp('panelCentral').setTitle('<center class="title-general">SEMAFORO</center>');
                             limpiarPanelCentral();
-                            gridSemaforo.show();
+                            calcularParticipacion();
+                            casaSemaforo.show();
                             chartSemaforo.show();
                             storeConsumoDispositivos.setSorters({
                                 property: 'kwhMes',
@@ -252,7 +251,7 @@ Ext.onReady(function () {
                         id: 'viewSemaforo',
                         layout: 'hbox',
                         autoScroll: true,
-                        items: [gridSemaforo, chartSemaforo]
+                        items: [casaSemaforo, chartSemaforo]
                     }
                 ]
             }]

@@ -21,14 +21,13 @@ Ext.onReady(function () {
             {name: 'idPeriodo', type: 'int'},
             {name: 'kwhMes', type: 'float'},
 //            {name: 'costoMes', type: 'float'},
-//            {name: 'participacion', type: 'float'}
+            {name: 'participacion', type: 'float'}
         ]
     });
 
     storeConsumoDispositivos = Ext.create('Ext.data.Store', {
         model: 'ConsumoModel',
-        groupField: 'categoria',
-//        sorters: []
+        groupField: 'categoria'
     });
 
     storePeriodos = Ext.create('Ext.data.Store', {
@@ -41,7 +40,7 @@ Ext.onReady(function () {
             {id: 1, name: 'Horas/Día', cant: 30},
             {id: 2, name: 'Horas/Semana', cant: 4},
             {id: 3, name: 'Horas/Mes', cant: 1},
-//            {id: 4, name: 'Minutos/Día'}
+            {id: 4, name: 'Minutos/Día', cant: 30}
         ]
     });
 

@@ -21,8 +21,17 @@ function formatoImgDispositivos(id) {
 
 function limpiarPanelCentral() {
     gridConsumoDispositivos.hide();
-    gridSemaforo.hide();
+    casaSemaforo.hide();
     chartSemaforo.hide();
+}
+
+function calcularParticipacion() {
+    var limit = storeConsumoDispositivos.data.items.length;
+    for (var i = 0; i < limit; i++) {
+        var record = storeConsumoDispositivos.data.items[i];
+        var participacion = (record.data.kwhMes / sumaTotal) * 100;
+        record.set('participacion', participacion);
+    }
 }
 
 
