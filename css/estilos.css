@@ -1,0 +1,190 @@
+div{
+    background-color: transparent !important;
+}
+body{
+    background-image:url(../img/fondo.jpg) !important;
+    background-repeat:no-repeat !important;
+    background-size: 100% 100% !important;
+}
+#maquinas {
+    background-color: #fff;
+    text-shadow: #fff 0 1px 0;
+    position: relative;
+    display: block;
+    height: auto;
+}
+
+#maquinas div.phone img {
+    margin-bottom: 1px;
+}
+
+#maquinas div.phone {
+    float: left;
+    padding: 8px 17px;
+    margin: 5px;
+    /*    margin: 10px 0 0 25px;*/
+    text-align: center;
+    line-height: 14px;
+    color: #333;
+    font-size: 10px;
+    font-family: "Helvetica Neue",sans-serif;
+    height: 110px;
+    width: 100px;
+    overflow: hidden;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+}
+
+.x-ie6 #maquinas div.phone,
+.x-ie7 #maquinas div.phone,
+.x-ie8 #maquinas div.phone {
+    border-top: none;
+    padding: 3px 2px;
+    margin: 2px;
+}
+
+#maquinas div.phone-hover {
+    background-color: #eee;
+}
+
+#maquinas .x-item-selected {
+    background-color: #D3E1F1 !important;
+}
+
+#maquinas div.phone strong {
+    color: #000;
+    display: block;
+}
+
+#maquinas div.phone span {
+    color: #999;
+}
+
+.x-grid-group-hd-collapsible .x-grid-group-title {
+    background : none !important;
+    background-image: none !important;
+
+}
+
+#panel-1037-outerCt, .x-grid-cell, .x-grid-item, .x-grid-row-summary, .x-grid-td {
+    background: rgba(204, 204, 204, 0.5) !important;
+}
+
+.x-grid-row-summary .x-grid-cell, .x-grid-row-summary .x-grid-rowwrap, .x-grid-row-summary .x-grid-cell-rowbody {
+    background: rgba(153, 153, 153, 0.5) !important;
+}
+
+.group-title{
+    color: #DAA948 !important;
+    text-transform: uppercase !important;
+    font-size: 130% !important;
+    font-family: Georgia !important;
+}
+
+.title-column{
+    color: #E83C41 !important;
+    text-transform: uppercase !important;
+}
+
+.title-general{
+    background-color: #003466 !important;
+    text-transform: uppercase !important;
+    border-radius: 15px !important;
+    font-size: 130% !important;
+    height: 30px !important;
+    padding: 5px !important;
+}
+
+.separador{
+    background-color: #DAA948 !important;
+    color: #DAA948 !important;
+    height: 10px !important;
+    margin: 0px !important;
+}
+
+#titulo-header{
+    background-color: #003466 !important;
+    color: white !important;
+    padding: 1% !important;
+    height: 70px !important;
+    font-family: cursive !important;
+}
+
+.pasos-consumo{
+    color: red !important;
+}
+
+.itemMenu{
+    background: rgba(255, 255, 255, 0.9) !important; 
+    border-radius:15em !important;
+    margin-top: 0.4em !important;
+    margin-left: 0.7em !important;
+    height: 55px !important;
+    width: 9% !important;
+}
+
+.x-boundlist-item{
+    background-color: white !important;
+}
+
+.icon-fase1 {
+    background-image: url(../img/icon-fase1.png) !important;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.icon-fase2 {
+    background-image: url(../img/icon-fase2.png) !important;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    vertical-align: middle;
+    width: 32px !important;
+    height: 50px;
+}
+
+.btnNextFase{
+    margin: 0px !important;
+    padding: 0px !important;
+    border: 0px;
+    background: #003466 !important;
+}
+
+.btnNextFase .x-btn-inner{
+    color: #DAA948 !important;
+    font-size: 300%;
+}
+
+.fondo-menu {
+    height: 300px;
+    position: fixed;
+    left: 1px;
+    top: 120px;
+    z-index: 1000;
+}
+
+.fase1 span{
+    color: #EF423C;
+}
+
+.fase2 span{
+    color: #CCDE6D;
+}
+
+.fase3 span{
+    color: #82D3D9;
+}
+
+.fase4 span{
+    color: #884AA1;
+}
+
+.gridSemaforo .x-grid-cell-inner {
+    height: 40px;
+    line-height: 30px;
+    text-align: center !important;
+}
