@@ -27,18 +27,15 @@ Ext.onReady(function () {
                 yField: 'participacion',
                 xField: 'idMaquina',
                 renderer: function (sprite, record, attr, index, store) {
-                    var setColor = 0;
-                    if (index < 4) {
-                        setColor = 0;
-                    } else if (index >= 4 && index < 8) {
-                        setColor = 1;
-                    } else {
-                        setColor = 2;
-                    }
                     var color = [
-                        '#EF423C',
-                        '#DAA948',
-                        'green'][setColor];
+                        '#E72D2E',
+                        '#E07115',
+                        '#E89D42',
+                        '#F9EA1B',
+                        '#93C123',
+                        '#3BA938',
+                        '#3EA738',
+                        '#088E33'][index];
                     return Ext.apply(attr, {
                         fill: color
                     });
@@ -54,7 +51,7 @@ Ext.onReady(function () {
                 label: {
                     contrast: true,
                     display: 'insideEnd',
-                    font: '1.5em news-gothic-std,sans-serif',
+                    font: '1.4em news-gothic-std,sans-serif',
                     field: 'participacion',
                     color: '#000',
                     orientation: 'horizontal',
@@ -66,9 +63,16 @@ Ext.onReady(function () {
                 tips: {
                     trackMouse: true,
                     style: 'background-color: white !important; color: black !important;',
-                    height: 20,
                     renderer: function (storeItem, item) {
-                        this.setTitle('Consumo: ' + storeItem.data.kwhMes + " KWh/Mes");
+                        var consumo = storeItem.get('kwhMes').toFixed(2);
+                        var urlImg = storeDispositivos.getById(storeItem.get('idMaquina')).data.url;
+                        this.setTitle('<center><strong>' + formatoDispositivos(storeItem.get('idMaquina')).toUpperCase() + '</strong><center>');
+                        var conten = '<center>';
+                        conten += '<img src="' + urlImg + '" width="100" height="100">';
+//                        conten += '<br>';
+//                        conten += '<strong>Consumo:</strong><p>' + consumo + ' KWh/Mes</p>';
+                        conten += '</center>';
+                        this.setHtml(conten);
                     }
                 }
             }]

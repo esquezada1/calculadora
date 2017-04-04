@@ -249,7 +249,6 @@ Ext.onReady(function () {
                     {
                         xtype: 'panel',
                         id: 'viewSemaforo',
-                        layout: 'hbox',
                         autoScroll: true,
                         items: [casaSemaforo, chartSemaforo]
                     }
