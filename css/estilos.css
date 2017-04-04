@@ -196,5 +196,12 @@ body{
     padding-left: 100px;
     margin: 0;
     z-index: 1000;
+    top: 130px;
 }
 
+.img-dis{
+    width: 50%;
+    margin-left: 49%;
+    margin-top: 40%;
+    height: 210px !important;
+}

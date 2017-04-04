@@ -250,6 +250,8 @@ Ext.onReady(function () {
                         xtype: 'panel',
                         id: 'viewSemaforo',
                         autoScroll: true,
+                        layout: 'hbox',
+                        bodyStyle: 'background: rgba(255, 255, 255, 0.7) !important',
                         items: [casaSemaforo, chartSemaforo]
                     }
                 ]

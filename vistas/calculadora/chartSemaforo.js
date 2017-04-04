@@ -2,9 +2,9 @@ var chartSemaforo, casaSemaforo, selectItemChart;
 Ext.onReady(function () {
 
     chartSemaforo = Ext.create('Ext.chart.Chart', {
-        background: 'rgba(220, 220, 220, 0.5)',
-        width: '65%',
-        height: 410,
+//        background: 'rgba(220, 220, 220, 0.5)',
+        width: '60%',
+        height: 415,
         hidden: true,
         padding: '0',
         animate: true,
@@ -43,11 +43,6 @@ Ext.onReady(function () {
                 style: {
                     opacity: 0.80
                 },
-                highlight: {
-                    fill: '#000',
-                    'stroke-width': 20,
-                    stroke: '#fff'
-                },
                 label: {
                     contrast: true,
                     display: 'insideEnd',
@@ -74,24 +69,53 @@ Ext.onReady(function () {
                         conten += '</center>';
                         this.setHtml(conten);
                     }
-                }
+                },
+                listeners: {
+                    itemmouseup: function (item) {
+                        var record = item.storeItem;
+                        selectItemChart(record);
+                        var srcImg = storeDispositivos.getById(record.data.idMaquina).data.url;
+                        document.getElementById('dis-casa').src = srcImg;
+                        document.getElementById('tit-casa').innerHtml = formatoDispositivos(record.get('idMaquina'));
+                        document.getElementById('cons-casa').innerHTML = record.data.kwhMes + 'KW/MES';
+                    }
+                },
+            }],
+        items: [{
+                type: 'text',
+                text: 'Más eficiente',
+                font: '22px Helvetica',
+                width: 100,
+                height: 30,
+                fill: "#088E33",
+                x: 12, //the sprite x position
+                y: 10  //the sprite y position
+            }, {
+                type: 'text',
+                text: 'Menos eficiente',
+                font: '22px Helvetica',
+                width: 100,
+                height: 30,
+                fill: "#E72D2E",
+                x: 12,
+                y: 408
             }]
     });
-//
-//    selectItemChart = function (storeItem) {
-//        var name = storeItem.get('kwhMes'),
-//                series = chartSemaforo.series.get(0),
-//                i, items, l;
-//
-//        series.highlight = true;
-//        series.unHighlightItem();
-//        series.cleanHighlights();
-//        for (i = 0, items = series.items, l = items.length; i < l; i++) {
-//            if (name == items[i].storeItem.get('kwhMes')) {
-//                series.highlightItem(items[i]);
-//                break;
-//            }
-//        }
-//        series.highlight = false;
-//    };
+
+    selectItemChart = function (storeItem) {
+        var name = storeItem.get('participacion'),
+                series = chartSemaforo.series.get(0),
+                i, items, l;
+
+        series.highlight = true;
+        series.unHighlightItem();
+        series.cleanHighlights();
+        for (i = 0, items = series.items, l = items.length; i < l; i++) {
+            if (name == items[i].storeItem.get('participacion')) {
+                series.highlightItem(items[i]);
+                break;
+            }
+        }
+        series.highlight = false;
+    };
 });
