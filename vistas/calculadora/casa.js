@@ -1,6 +1,5 @@
 casaSemaforo = Ext.create('Ext.panel.Panel', {
     width: '35%',
-    hidden: true,
     items: [{
             html: '<img class = "fondo-casa" src="img/casaSemaforo1.png">',
             items: [

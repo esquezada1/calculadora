@@ -5,7 +5,6 @@ Ext.onReady(function () {
 //        background: 'rgba(220, 220, 220, 0.5)',
         width: '60%',
         height: 415,
-        hidden: true,
         padding: '0',
         animate: true,
         shadow: false,
