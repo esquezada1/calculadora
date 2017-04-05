@@ -205,3 +205,7 @@ body{
     margin-top: 40%;
     height: 210px !important;
 }
+
+.x-border-box {
+			background-color: white !important;
+		}

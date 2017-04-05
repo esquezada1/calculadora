@@ -237,6 +237,7 @@ Ext.onReady(function () {
                         tooltip: 'Eliminar de la Tabla',
                         handler: function (grid, rowIndex, colIndex) {
                             grid.getStore().removeAt(rowIndex);
+                            gridConsumoDispositivos.getView().refresh();
                         },
                         scope: this
                     }]

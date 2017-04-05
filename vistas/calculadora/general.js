@@ -183,21 +183,26 @@ Ext.onReady(function () {
                     {
                         id: 'btnFase2',
                         cls: 'itemMenu fase2',
-                        text: 'SEMAFORO',
+                        text: 'INDICADOR<br>DE CONSUMO',
                         handler: function () {
-                            Ext.getCmp('panelCentral').setTitle('<center class="title-general">SEMAFORO</center>');
-                            limpiarPanelCentral();
-                            calcularParticipacion();
-                            casaSemaforo.show();
-                            chartSemaforo.show();
-                            storeConsumoDispositivos.setSorters({
-                                property: 'kwhMes',
-                                direction: 'DESC'
-                            });
-                            panelDerecha.hide();
-                            dataview.disable();
-                            btnAtras.show();
-                            fase = 2;
+                            if (storeConsumoDispositivos.data.items.length > 0) {
+                                Ext.getCmp('panelCentral').setTitle('<center class="title-general">INDICADOR DE CONSUMO</center>');
+                                limpiarPanelCentral();
+                                calcularParticipacion();
+                                casaSemaforo.show();
+                                chartSemaforo.show();
+                                storeConsumoDispositivos.setSorters({
+                                    property: 'kwhMes',
+                                    direction: 'DESC'
+                                });
+                                cargarDispositivoCasa(storeConsumoDispositivos.data.items[0]);
+                                panelDerecha.hide();
+                                dataview.disable();
+                                btnAtras.show();
+                                fase = 2;
+                            } else {
+                                mostrarNotificacion('Aún no se han agregado dispositivos.');
+                            }
                         }
                     }, {
                         id: 'btnFase3',

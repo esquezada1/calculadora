@@ -25,11 +25,14 @@ Ext.onReady(function () {
         [7, "Olla Arrocera", 1, 'Electrodomésticos', 700, "http://tienda.comedera.com/wp-content/uploads/2016/02/olla-arrocera-electrica.jpg"],
         [8, "Plancha", 1, 'Electrodomésticos', 1200, "http://blackanddeckerhome.com/ve/wp-content/themes/wpbootstrap/img/products/IRBD100_B+D_FP%20copy.jpg"],
         [9, "Microondas", 1, 'Electrodomésticos', 1000, "http://media.www.bestbuy.com.mx/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/H/o/Horno-Microondas.Conveccion-Samsung-1.1_x1.jpg"],
-        [10, "Plancha de Pelo", 1, 'Electrodomésticos', 50, "http://www.andaluciaconfort.es/data/imagenes/HP4669_1.jpg"],
-        [11, "Led", 2, 'Iluminación', 9, "http://cipresshop.com/513-thickbox_default/foco-led-10-watts-1100-lumenes-mazorca-e27-marte.jpg"],
-        [12, "Fluorescente", 2, 'Iluminación', 20, "http://2a33bac5d73c8f56fc53-0b086369f3430e616156762bdbd428e5.r73.cf1.rackcdn.com/productos/622262/622262-z.jpg"],
-        [13, "Ducha Eléctrica", 3, 'Agua Caliente', 100, "https://cristobaledu.files.wordpress.com/2012/05/ducha.jpg"],
-        [14, "Calefón a Gas", 3, 'Agua Caliente', 150, "http://www.ecoline.com.ec/es/images/stories/virtuemart/product/complementocilindro.jpg"]
+        [10, "Aire Acondicionado", 1, 'Electrodomésticos', 50, "img/dis/aire-acon.png"],
+        [11, "Plancha de Pelo", 1, 'Electrodomésticos', 50, "img/dis/aspiradora.png"],
+        [12, "Aspiradora", 1, 'Electrodomésticos', 50, "http://www.andaluciaconfort.es/data/imagenes/HP4669_1.jpg"],
+        [13, "Led", 2, 'Iluminación', 9, "http://cipresshop.com/513-thickbox_default/foco-led-10-watts-1100-lumenes-mazorca-e27-marte.jpg"],
+        [14, "Fluorescente", 2, 'Iluminación', 20, "http://2a33bac5d73c8f56fc53-0b086369f3430e616156762bdbd428e5.r73.cf1.rackcdn.com/productos/622262/622262-z.jpg"],
+        [15, "Incandescente", 2, 'Iluminación', 40, "http://2a33bac5d73c8f56fc53-0b086369f3430e616156762bdbd428e5.r73.cf1.rackcdn.com/productos/622262/622262-z.jpg"],
+        [16, "Ducha Eléctrica", 3, 'Agua Caliente', 100, "https://cristobaledu.files.wordpress.com/2012/05/ducha.jpg"],
+        [17, "Calefón a Gas", 3, 'Agua Caliente', 150, "http://www.ecoline.com.ec/es/images/stories/virtuemart/product/complementocilindro.jpg"]
     ];
 
     Ext.define('DispositivosModel', {

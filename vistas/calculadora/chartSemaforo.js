@@ -74,12 +74,9 @@ Ext.onReady(function () {
                     itemmouseup: function (item) {
                         var record = item.storeItem;
                         selectItemChart(record);
-                        var srcImg = storeDispositivos.getById(record.data.idMaquina).data.url;
-                        document.getElementById('dis-casa').src = srcImg;
-                        document.getElementById('tit-casa').innerHtml = formatoDispositivos(record.get('idMaquina'));
-                        document.getElementById('cons-casa').innerHTML = record.data.kwhMes + 'KW/MES';
+                        cargarDispositivoCasa(record);
                     }
-                },
+                }
             }],
         items: [{
                 type: 'text',

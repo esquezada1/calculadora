@@ -34,4 +34,13 @@ function calcularParticipacion() {
     }
 }
 
+function mostrarNotificacion(text) {
+    Ext.example.msg("Aviso!", text);
+}
 
+function cargarDispositivoCasa(record) {
+    var srcImg = storeDispositivos.getById(record.get('idMaquina')).data.url;
+    document.getElementById('dis-casa').src = srcImg;
+    document.getElementById('tit-casa').innerHTML = formatoDispositivos(record.get('idMaquina'));
+    document.getElementById('cons-casa').innerHTML = record.data.kwhMes + ' KWh/MES';
+}
