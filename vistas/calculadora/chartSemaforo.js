@@ -63,7 +63,7 @@ Ext.onReady(function () {
                         var urlImg = storeDispositivos.getById(storeItem.get('idMaquina')).data.url;
                         this.setTitle('<center><strong>' + formatoDispositivos(storeItem.get('idMaquina')).toUpperCase() + '</strong><center>');
                         var conten = '<center>';
-                        conten += '<img src="' + urlImg + '" width="100" height="100">';
+                        conten += '<img src="' + urlImg + '" width="45" height="45">';
 //                        conten += '<br>';
 //                        conten += '<strong>Consumo:</strong><p>' + consumo + ' KWh/Mes</p>';
                         conten += '</center>';

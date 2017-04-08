@@ -4,7 +4,7 @@ function formatoDispositivos(id) {
 }
 
 function formatoPeriodos(id, metaData) {
-    metaData.style = "background-color:#DAA948 !important;";
+    metaData.style = "background-color:#FFF59D !important;";
     var item = storePeriodos.getById(id);
     return item.data.name;
 }

@@ -168,9 +168,9 @@ Ext.onReady(function () {
                         id: 'btnFase1',
                         pressed: true,
                         cls: 'itemMenu fase1',
-                        text: 'CONSUMO<br>TOTAL',
+                        text: 'CÁLCULO DE<br>CONSUMO',
                         handler: function () {
-                            Ext.getCmp('panelCentral').setTitle('<center class="title-general">CONSUMO TOTAL</center>');
+                            Ext.getCmp('panelCentral').setTitle('<center class="title-general">CÁLCULO DE CONSUMO</center>');
                             limpiarPanelCentral();
                             gridConsumoDispositivos.show();
                             storeConsumoDispositivos.sorters.clear();
@@ -183,10 +183,10 @@ Ext.onReady(function () {
                     {
                         id: 'btnFase2',
                         cls: 'itemMenu fase2',
-                        text: 'INDICADOR<br>DE CONSUMO',
+                        text: 'ANÁLISIS DE<br>CONSUMIDORES',
                         handler: function () {
                             if (storeConsumoDispositivos.data.items.length > 0) {
-                                Ext.getCmp('panelCentral').setTitle('<center class="title-general">INDICADOR DE CONSUMO</center>');
+                                Ext.getCmp('panelCentral').setTitle('<center class="title-general">ANÁLISIS DE CONSUMIDORES</center>');
                                 limpiarPanelCentral();
                                 calcularParticipacion();
                                 casaSemaforo.show();
