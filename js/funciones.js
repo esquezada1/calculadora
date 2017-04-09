@@ -33,6 +33,7 @@ function calcularParticipacion() {
         participacion = participacion * 100;
         record.set('participacion', participacion);
     }
+    storeConsumoFinal.removeAll();
     storeConsumoDispositivos.each(function (rec) {
         var r = Ext.create('ConsumoModel', {
             id: record.get('idMaquina'),

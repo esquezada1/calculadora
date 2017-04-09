@@ -176,7 +176,7 @@ Ext.onReady(function () {
                     , '->',
             btnSiguiente
         ],
-        layout: 'border',
+        layout: 'fit',
         items: [
             viewConsumo
         ]
