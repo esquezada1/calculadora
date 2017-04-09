@@ -80,21 +80,23 @@ Ext.onReady(function () {
         listeners: {
             select: function (dv, record, item, index, e) {
                 var cantPeriodo = storePeriodos.getById(1).data.cant;
-                var totalConsumo = 1 * record.data.potencia * 10 * cantPeriodo;
+                var tiempoUso = 10;
+                var cantidad = 1;
+                var totalConsumo = cantidad * record.data.potencia * tiempoUso * cantPeriodo;
                 totalConsumo = totalConsumo / 1000;
                 var r = Ext.create('ConsumoModel', {
                     idMaquina: record.id,
                     idCategoria: record.data.idCategoria,
                     categoria: record.data.categoria,
-                    cantidad: 1,
+                    cantidad: cantidad,
                     potencia: record.data.potencia,
-                    tiempoUso: 10,
+                    tiempoUso: tiempoUso,
                     idPeriodo: 1,
                     kwhMes: totalConsumo,
 //                    costoMes: 2,
                     participacion: 0
                 });
-                storeConsumoDispositivos.insert(0, r);
+                storeConsumoDispositivos.add(r);
 //                gridConsumoDispositivos.editingPlugin.startEdit(0, 0);
                 gridConsumoDispositivos.getView().refresh();
             }

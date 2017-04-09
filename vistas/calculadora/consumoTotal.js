@@ -178,7 +178,9 @@ Ext.onReady(function () {
                             emptyText: 'Nro'
                         },
                         renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
-                            metaData.style = "background-color:#FFF59D !important;";
+                            if (record.get('idMaquina') !== 19) {
+                                metaData.style = "background-color:#FFF59D !important;";
+                            }
                             return value + ' watts';
                         },
                         field: {
