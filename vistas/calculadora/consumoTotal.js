@@ -57,10 +57,13 @@ Ext.onReady(function () {
     });
 
     gridConsumoDispositivos = Ext.create('Ext.grid.Panel', {
-        forceFit: true,
+        height: 380,
+        frame: true,
         multiSelect: false,
+        columnLines: true,
         region: 'center',
         store: storeConsumoDispositivos,
+        cls: 'tablas-calculadora',
         plugins: Ext.create('Ext.grid.plugin.CellEditing', {
             clicksToEdit: 1
         }),
@@ -72,8 +75,8 @@ Ext.onReady(function () {
                 enableToggle: true,
                 disabled: true,
                 handler: function () {
-                    gridConsumoDispositivos.getView().getFeature('totalSum').toggleSummaryRow();
-                    gridConsumoDispositivos.getView().getFeature('groupSum').toggleSummaryRow();
+                    gridConsumoDispositivos.normalGrid.getView().getFeature('totalSum').toggleSummaryRow();
+                    gridConsumoDispositivos.lockedGrid.getView().getFeature('groupSum').toggleSummaryRow();
                     boolTotal = true;
                     gridConsumoDispositivos.getView().refresh();
                     Ext.getCmp('btnTotal').disable();
@@ -90,8 +93,8 @@ Ext.onReady(function () {
                 enableToggle: true,
                 pressed: false,
                 handler: function () {
-                    gridConsumoDispositivos.getView().getFeature('totalSum').toggleSummaryRow();
-                    gridConsumoDispositivos.getView().getFeature('groupSum').toggleSummaryRow();
+                    gridConsumoDispositivos.normalGrid.getView().getFeature('totalSum').toggleSummaryRow();
+                    gridConsumoDispositivos.lockedGrid.getView().getFeature('groupSum').toggleSummaryRow();
                     boolTotal = false;
                     gridConsumoDispositivos.getView().refresh();
                     Ext.getCmp('btnTotal').enable();
@@ -121,23 +124,20 @@ Ext.onReady(function () {
                 ftype: 'groupingsummary',
                 groupHeaderTpl: '<center class="group-title">{name}<center>',
                 hideGroupedHeader: true,
-                enableGroupingMenu: false
+                enableGroupingMenu: false,
             }, {
                 id: 'totalSum',
                 HeaderTpl: 'TOTAL',
-                ftype: 'summary'
+                ftype: 'summary',
+                dock: 'bottom',
+                disabled: true
             }],
         columns: [
-            {
-                header: '<center class="title-column">Categoria</center>',
-                width: 180,
-                sortable: true,
-                dataIndex: 'categoria'
-            },
-            {header: "<center class='title-column'>Dispositivo</center>", width: 100, dataIndex: 'idMaquina', name: 'idMaquina',
+            {header: "<center class='title-column'>Dispositivo</center>", width: 250, dataIndex: 'idMaquina', name: 'idMaquina',
                 renderer: formatoDispositivos, filter: {type: 'list', store: storeDispositivos},
                 hideable: false,
                 summaryType: 'count',
+                locked: true,
                 summaryRenderer: function (value, summaryData, dataIndex) {
                     if (boolTotal) {
                         return '<center><strong>TOTAL</strong></center>';
@@ -146,91 +146,99 @@ Ext.onReady(function () {
                     }
                 }
             },
-            {header: "<center class='title-column'>Cantidad</center>", width: 80, dataIndex: 'cantidad', name: 'cantidad',
-                editor: {
-                    xtype: 'textfield',
-                    value: 1,
-                    emptyText: 'Nro'
-                },
-                summaryType: 'sum',
-                renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
-                    metaData.style = "background-color:#FFF59D !important;";
-                    return value + ' Dispositivo(s)';
-                },
-                summaryRenderer: function (value, summaryData, dataIndex) {
-                    return '<strong>' + value + ' Dispositivo(s)</strong>';
-                },
-                field: {
-                    xtype: 'numberfield'
-                }
-            },
-            {header: "<center class='title-column'>Potencia</center>", width: 80, dataIndex: 'potencia', name: 'potencia',
-                editor: {
-                    xtype: 'textfield',
-                    value: 1,
-                    emptyText: 'Nro'
-                },
-                renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
-                    metaData.style = "background-color:#FFF59D !important;";
-                    return value + ' watts';
-                },
-                field: {
-                    xtype: 'numberfield'
-                }
-            },
-            {header: "<center class='title-column'>Tiempo Uso</center>", width: 80, dataIndex: 'tiempoUso', name: 'tiempoUso',
-                editor: {
-                    xtype: 'textfield',
-                    value: 1,
-                    emptyText: 'Nro'
-                },
-                renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
-                    metaData.style = "background-color:#FFF59D !important;";
-                    if (record.get('idPeriodo') === 4) {
-                        return value + ' minuto(s)';
-                    } else {
-                        return value + ' hora(s)';
-                    }
-                },
-                field: {
-                    xtype: 'numberfield'
-                }
-            },
-            {header: "<center class='title-column'>Periodo</center>", width: 70, dataIndex: 'idPeriodo', name: 'idPeriodo',
-                renderer: formatoPeriodos,
-                editor: {
-                    xtype: 'combobox',
-                    store: storePeriodos,
-                    displayField: 'name',
-                    queryMode: 'local',
-                    valueField: 'id'
-                }
-            },
-            {header: "<center class='title-column'>kWh(mes)</center>", width: 70, dataIndex: 'kwhMes', name: 'kwhMes',
-                hideable: false,
-                summaryType: 'sum',
-                renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
-                    value = value.toFixed(2);
-                    return value;
-                },
-                summaryRenderer: function (value, summaryData, dataIndex) {
-                    value = value.toFixed(2);
-                    return '<strong>' + value + ' KWh/mes<strong>';
-                }
-            },
             {
-                xtype: 'actioncolumn',
-                width: 30,
-                items: [{
-                        icon: 'https://cdn4.iconfinder.com/data/icons/colicon/24/close_delete-128.png',
-                        tooltip: 'Eliminar de la Tabla',
-                        handler: function (grid, rowIndex, colIndex) {
-                            grid.getStore().removeAt(rowIndex);
-                            gridConsumoDispositivos.getView().refresh();
+                header: '<center class="title-column">Categoria</center>',
+                width: 180,
+                sortable: true,
+                dataIndex: 'categoria'
+            },
+            {columns: [
+                    {header: "<center class='title-column'>Cantidad</center>", width: 120, dataIndex: 'cantidad', name: 'cantidad',
+                        editor: {
+                            xtype: 'textfield',
+                            value: 1,
+                            emptyText: 'Nro'
                         },
-                        scope: this
-                    }]
-            }
+                        summaryType: 'sum',
+                        renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
+                            metaData.style = "background-color:#FFF59D !important;";
+                            return value + ' Dispositivo(s)';
+                        },
+                        summaryRenderer: function (value, summaryData, dataIndex) {
+                            return '<strong>' + value + ' Dispositivo(s)</strong>';
+                        },
+                        field: {
+                            xtype: 'numberfield'
+                        }
+                    },
+                    {header: "<center class='title-column'>Potencia</center>", width: 110, dataIndex: 'potencia', name: 'potencia',
+                        editor: {
+                            xtype: 'textfield',
+                            value: 1,
+                            emptyText: 'Nro'
+                        },
+                        renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
+                            metaData.style = "background-color:#FFF59D !important;";
+                            return value + ' watts';
+                        },
+                        field: {
+                            xtype: 'numberfield'
+                        }
+                    },
+                    {header: "<center class='title-column'>Tiempo Uso</center>", width: 100, dataIndex: 'tiempoUso', name: 'tiempoUso',
+                        editor: {
+                            xtype: 'textfield',
+                            value: 1,
+                            emptyText: 'Nro'
+                        },
+                        renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
+                            metaData.style = "background-color:#FFF59D !important;";
+                            if (record.get('idPeriodo') === 4) {
+                                return value + ' minuto(s)';
+                            } else {
+                                return value + ' hora(s)';
+                            }
+                        },
+                        field: {
+                            xtype: 'numberfield'
+                        }
+                    },
+                    {header: "<center class='title-column'>Periodo</center>", width: 100, dataIndex: 'idPeriodo', name: 'idPeriodo',
+                        renderer: formatoPeriodos,
+                        editor: {
+                            xtype: 'combobox',
+                            store: storePeriodos,
+                            displayField: 'name',
+                            queryMode: 'local',
+                            valueField: 'id'
+                        }
+                    },
+                    {header: "<center class='title-column'>kWh(mes)</center>", width: 100, dataIndex: 'kwhMes', name: 'kwhMes',
+                        hideable: false,
+                        summaryType: 'sum',
+                        renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
+                            value = value.toFixed(2);
+                            return value;
+                        },
+                        summaryRenderer: function (value, summaryData, dataIndex) {
+                            value = value.toFixed(2);
+                            return '<strong>' + value + ' KWh/mes<strong>';
+                        }
+                    },
+                    {
+                        xtype: 'actioncolumn',
+                        width: 30,
+                        items: [{
+                                icon: 'img/delete.png',
+                                tooltip: 'Eliminar de la Tabla',
+                                handler: function (grid, rowIndex, colIndex) {
+                                    grid.getStore().removeAt(rowIndex);
+                                    gridConsumoDispositivos.getView().refresh();
+                                },
+                                scope: this
+                            }]
+                    }
+                ]},
         ],
         listeners: {
             edit: function (thisObj, record, item, index, e, eOpts) {
@@ -253,6 +261,6 @@ Ext.onReady(function () {
             }
         }
     });
-    gridConsumoDispositivos.getView().getFeature('groupSum').toggleSummaryRow();
+    gridConsumoDispositivos.lockedGrid.getView().getFeature('groupSum').toggleSummaryRow();
 });
 

@@ -95,7 +95,7 @@ Ext.onReady(function () {
                     participacion: 0
                 });
                 storeConsumoDispositivos.insert(0, r);
-                gridConsumoDispositivos.editingPlugin.startEdit(0, 0);
+//                gridConsumoDispositivos.editingPlugin.startEdit(0, 0);
                 gridConsumoDispositivos.getView().refresh();
             }
         }
@@ -185,7 +185,7 @@ Ext.onReady(function () {
                     }]
             }, {
                 region: 'west',
-                margin: '35 0 0 0',
+                margin: '30 0 0 0',
                 collapsible: false,
                 width: 200,
                 split: true,
