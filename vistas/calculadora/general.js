@@ -3,7 +3,7 @@ Ext.Loader.setPath('Ext.ux.DataView', '../ux/DataView/');
 var sumaTotal = 0;
 var btnSiguiente, btnAtras, fase = 1;
 var panelDerecha, panelCentral;
-var viewConsumo, viewSemaforo;
+var viewConsumo, viewSemaforo, viewAhorro;
 Ext.require([
     'Ext.data.*',
     'Ext.util.*',
@@ -116,6 +116,14 @@ Ext.onReady(function () {
         layout: 'hbox',
         bodyStyle: 'background: rgba(255, 255, 255, 0.7) !important',
         items: [casaSemaforo, chartSemaforo]
+    });
+    
+    viewAhorro = Ext.create('Ext.panel.Panel', {
+        id: 'viewAhorro',
+        autoScroll: true,
+        layout: 'hbox',
+        bodyStyle: 'background: rgba(255, 255, 255, 0.7) !important',
+        items: [tabAhorro]
     });
 
     panelDerecha = Ext.create('Ext.panel.Panel', {
@@ -243,6 +251,7 @@ Ext.onReady(function () {
                         handler: function () {
                             Ext.getCmp('panelCentral').setTitle('<center class="title-general">CALCULO DE AHORRO</center>');
                             limpiarPanelCentral();
+                            panelCentral.add(viewAhorro);
                             panelDerecha.hide();
                             btnSiguiente.show();
                             fase = 3;
