@@ -20,9 +20,9 @@ function formatoImgDispositivos(id) {
 }
 
 function limpiarPanelCentral() {
-    gridConsumoDispositivos.hide();
-    casaSemaforo.hide();
-    chartSemaforo.hide();
+    for (var i = 0; i < panelCentral.items.length; i++) {
+        panelCentral.remove(i, false);
+    }
 }
 
 function calcularParticipacion() {

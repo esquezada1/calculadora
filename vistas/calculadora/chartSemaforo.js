@@ -5,7 +5,6 @@ Ext.onReady(function () {
 //        background: 'rgba(220, 220, 220, 0.5)',
         width: '60%',
         height: 415,
-        hidden: true,
         padding: '0',
         animate: true,
         shadow: false,
@@ -80,8 +79,8 @@ Ext.onReady(function () {
             }],
         items: [{
                 type: 'text',
-                text: 'Más eficiente',
-                font: '22px Helvetica',
+                text: 'Menor consumidor',
+                font: '20px Helvetica',
                 width: 100,
                 height: 30,
                 fill: "#088E33",
@@ -89,11 +88,11 @@ Ext.onReady(function () {
                 y: 10  //the sprite y position
             }, {
                 type: 'text',
-                text: 'Menos eficiente',
-                font: '22px Helvetica',
+                text: 'Mayor consumidor',
+                font: '20px Helvetica',
                 width: 100,
                 height: 30,
-                fill: "#E72D2E",
+                fill: "#F44336",
                 x: 12,
                 y: 408
             }]

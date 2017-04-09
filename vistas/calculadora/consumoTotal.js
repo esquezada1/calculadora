@@ -61,7 +61,6 @@ Ext.onReady(function () {
         multiSelect: false,
         region: 'center',
         store: storeConsumoDispositivos,
-//        title: 'Consumo del hogar',
         plugins: Ext.create('Ext.grid.plugin.CellEditing', {
             clicksToEdit: 1
         }),
@@ -112,6 +111,7 @@ Ext.onReady(function () {
                 tooltip: 'Eliminar todos los elementos',
                 handler: function () {
                     storeConsumoDispositivos.removeAll();
+                    //gridConsumoDispositivos.reconfigure(storeConsumoDispositivos, gridConsumoDispositivos.initialConfig.columns);
                     gridConsumoDispositivos.getView().refresh();
                 }
             }
@@ -193,7 +193,7 @@ Ext.onReady(function () {
                     xtype: 'numberfield'
                 }
             },
-            {header: "<center class='title-column'>Periodo</center>", width: 100, dataIndex: 'idPeriodo', name: 'idPeriodo',
+            {header: "<center class='title-column'>Periodo</center>", width: 70, dataIndex: 'idPeriodo', name: 'idPeriodo',
                 renderer: formatoPeriodos,
                 editor: {
                     xtype: 'combobox',
@@ -203,7 +203,7 @@ Ext.onReady(function () {
                     valueField: 'id'
                 }
             },
-            {header: "<center class='title-column'>kWh(mes)</center>", width: 80, dataIndex: 'kwhMes', name: 'kwhMes',
+            {header: "<center class='title-column'>kWh(mes)</center>", width: 70, dataIndex: 'kwhMes', name: 'kwhMes',
                 hideable: false,
                 summaryType: 'sum',
                 renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
@@ -215,23 +215,9 @@ Ext.onReady(function () {
                     return '<strong>' + value + ' KWh/mes<strong>';
                 }
             },
-//            {header: "<center class='title-column'>Costo por<br>Mes(S/.)</center>", width: 80, dataIndex: 'costoMes', name: 'costoMes',
-//                editor: {
-//                    xtype: 'textfield',
-//                    value: 1,
-//                    emptyText: 'Nro'
-//                }
-//            },
-//            {header: "<center class='title-column'>%<br>Participación</center>", width: 80, dataIndex: 'participacion', name: 'participacion',
-//                editor: {
-//                    xtype: 'textfield',
-//                    value: 1,
-//                    emptyText: 'Nro'
-//                }
-//            },
             {
                 xtype: 'actioncolumn',
-                width: 20,
+                width: 30,
                 items: [{
                         icon: 'https://cdn4.iconfinder.com/data/icons/colicon/24/close_delete-128.png',
                         tooltip: 'Eliminar de la Tabla',
@@ -244,9 +230,6 @@ Ext.onReady(function () {
             }
         ],
         listeners: {
-            select: function (thisObj, record, item, index, e, eOpts) {
-
-            },
             edit: function (thisObj, record, item, index, e, eOpts) {
                 var cantPeriodo = storePeriodos.getById(record.record.data.idPeriodo).data.cant;
                 var totalConsumo = record.record.data.cantidad * record.record.data.potencia * record.record.data.tiempoUso * cantPeriodo;

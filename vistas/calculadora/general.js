@@ -2,7 +2,8 @@ Ext.Loader.setConfig({enabled: true});
 Ext.Loader.setPath('Ext.ux.DataView', '../ux/DataView/');
 var sumaTotal = 0;
 var btnSiguiente, btnAtras, fase = 1;
-var panelDerecha;
+var panelDerecha, panelCentral;
+var viewConsumo, viewSemaforo;
 Ext.require([
     'Ext.data.*',
     'Ext.util.*',
@@ -104,6 +105,21 @@ Ext.onReady(function () {
         }
     });
 
+    viewConsumo = Ext.create('Ext.panel.Panel', {
+        id: 'viewConsumo',
+        xtype: 'panel',
+        autoScroll: true,
+        items: [gridConsumoDispositivos]
+    });
+
+    viewSemaforo = Ext.create('Ext.panel.Panel', {
+        id: 'viewSemaforo',
+        autoScroll: true,
+        layout: 'hbox',
+        bodyStyle: 'background: rgba(255, 255, 255, 0.7) !important',
+        items: [casaSemaforo, chartSemaforo]
+    });
+
     panelDerecha = Ext.create('Ext.panel.Panel', {
         id: 'panelDerecha',
         region: 'east',
@@ -140,6 +156,23 @@ Ext.onReady(function () {
     }
     );
 
+    panelCentral = Ext.create('Ext.panel.Panel', {
+        id: 'panelCentral',
+        title: '<center class="title-general">CÁLCULO DE CONSUMO</center>',
+        region: 'center',
+        bodyStyle: "background: rgba(255, 255, 255, 0.5) !important; padding: 3%;",
+        width: '100% !important',
+        buttons: [
+            btnAtras
+                    , '->',
+            btnSiguiente
+        ],
+        layout: 'fit',
+        items: [
+            viewConsumo
+        ]
+    });
+
     Ext.create('Ext.container.Viewport', {
         id: 'myContainer',
         renderTo: Ext.getBody(),
@@ -157,7 +190,6 @@ Ext.onReady(function () {
             }, {
                 region: 'west',
                 collapsible: true,
-                title: '<center class="title-general">Pasos</center>',
                 width: 200,
                 split: true,
                 items: [{
@@ -172,10 +204,9 @@ Ext.onReady(function () {
                         handler: function () {
                             Ext.getCmp('panelCentral').setTitle('<center class="title-general">CÁLCULO DE CONSUMO</center>');
                             limpiarPanelCentral();
-                            gridConsumoDispositivos.show();
+                            panelCentral.add(viewConsumo);
                             storeConsumoDispositivos.sorters.clear();
                             panelDerecha.show();
-                            dataview.enable();
                             btnAtras.hide();
                             fase = 1;
                         }
@@ -187,17 +218,16 @@ Ext.onReady(function () {
                         handler: function () {
                             if (storeConsumoDispositivos.data.items.length > 0) {
                                 Ext.getCmp('panelCentral').setTitle('<center class="title-general">ANÁLISIS DE CONSUMIDORES</center>');
+                                panelCentral.setTitle('<center class="title-general">ANÁLISIS DE CONSUMIDORES</center>');
                                 limpiarPanelCentral();
                                 calcularParticipacion();
-                                casaSemaforo.show();
-                                chartSemaforo.show();
+                                panelCentral.add(viewSemaforo);
                                 storeConsumoDispositivos.setSorters({
                                     property: 'kwhMes',
                                     direction: 'DESC'
                                 });
                                 cargarDispositivoCasa(storeConsumoDispositivos.data.items[0]);
                                 panelDerecha.hide();
-                                dataview.disable();
                                 btnAtras.show();
                                 fase = 2;
                             } else {
@@ -238,29 +268,8 @@ Ext.onReady(function () {
 //                height: 100,
 //                minHeight: 100
 //            }, 
-            panelDerecha, {
-                id: 'panelCentral',
-                title: '<center class="title-general">CONSUMO TOTAL</center>',
-                region: 'center',
-                bodyStyle: "background: rgba(255, 255, 255, 0.5) !important; padding: 3%;",
-                width: '100% !important',
-                buttons: [
-                    btnAtras
-                            , '->',
-                    btnSiguiente
-                ],
-                items: [
-                    gridConsumoDispositivos,
-                    {
-                        xtype: 'panel',
-                        id: 'viewSemaforo',
-                        autoScroll: true,
-                        layout: 'hbox',
-                        bodyStyle: 'background: rgba(255, 255, 255, 0.7) !important',
-                        items: [casaSemaforo, chartSemaforo]
-                    }
-                ]
-            }]
+            panelDerecha,
+            panelCentral]
     });
     storeDispositivos.filter({
         property: 'idCategoria',
