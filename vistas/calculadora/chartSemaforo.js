@@ -62,7 +62,7 @@ Ext.onReady(function () {
                         var urlImg = storeDispositivos.getById(storeItem.get('idMaquina')).data.url;
                         this.setTitle('<center><strong>' + formatoDispositivos(storeItem.get('idMaquina')).toUpperCase() + '</strong><center>');
                         var conten = '<center>';
-                        conten += '<img src="' + urlImg + '" width="100" height="100">';
+                        conten += '<img src="' + urlImg + '" width="45" height="45">';
 //                        conten += '<br>';
 //                        conten += '<strong>Consumo:</strong><p>' + consumo + ' KWh/Mes</p>';
                         conten += '</center>';
@@ -79,8 +79,8 @@ Ext.onReady(function () {
             }],
         items: [{
                 type: 'text',
-                text: 'Más eficiente',
-                font: '22px Helvetica',
+                text: 'Menor consumidor',
+                font: '20px Helvetica',
                 width: 100,
                 height: 30,
                 fill: "#088E33",
@@ -88,11 +88,11 @@ Ext.onReady(function () {
                 y: 10  //the sprite y position
             }, {
                 type: 'text',
-                text: 'Menos eficiente',
-                font: '22px Helvetica',
+                text: 'Mayor consumidor',
+                font: '20px Helvetica',
                 width: 100,
                 height: 30,
-                fill: "#E72D2E",
+                fill: "#F44336",
                 x: 12,
                 y: 384
             }]

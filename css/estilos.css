@@ -67,7 +67,7 @@ body{
 }
 
 #panel-1037-outerCt, .x-grid-cell, .x-grid-item, .x-grid-row-summary, .x-grid-td {
-    background: rgba(204, 204, 204, 0.5) !important;
+    background: rgba(224, 222, 216, 0.5) !important;
 }
 
 .x-grid-row-summary .x-grid-cell, .x-grid-row-summary .x-grid-rowwrap, .x-grid-row-summary .x-grid-cell-rowbody {
@@ -75,14 +75,14 @@ body{
 }
 
 .group-title{
-    color: #DAA948 !important;
+    color: #003F72 !important;
     text-transform: uppercase !important;
     font-size: 130% !important;
     font-family: Georgia !important;
 }
 
 .title-column{
-    color: #E83C41 !important;
+    color: #F44336 !important;
     text-transform: uppercase !important;
 }
 
@@ -96,8 +96,8 @@ body{
 }
 
 .separador{
-    background-color: #DAA948 !important;
-    color: #DAA948 !important;
+    background-color: #EAAB00 !important;
+    color: #EAAB00 !important;
     height: 10px !important;
     margin: 0px !important;
 }
@@ -117,7 +117,7 @@ body{
 .itemMenu{
     background: rgba(255, 255, 255, 0.9) !important; 
     border-radius:15em !important;
-    margin-top: 0.4em !important;
+    margin-top: 0.6em !important;
     margin-left: 0.7em !important;
     height: 55px !important;
     width: 9% !important;
@@ -155,7 +155,7 @@ body{
 }
 
 .btnNextFase .x-btn-inner{
-    color: #DAA948 !important;
+    color: #EAAB00 !important;
     font-size: 300%;
 }
 
@@ -190,22 +190,53 @@ body{
 }
 
 .fondo-casa {
-    height: 450px;
+    height: 420px;
     position: fixed;
-    padding-top: 3px;
-    padding-left: 100px;
+    padding-left: 8.5%;
     margin: 0;
     z-index: 1000;
-    top: 130px;
+    top: 120px;
 }
 
 .img-dis{
     width: 50%;
-    margin-left: 49%;
+    margin-left: 50%;
     margin-top: 40%;
     height: 210px !important;
 }
 
 .x-border-box {
     background-color: white !important;
+}
+
+@media (max-width: 1280px){
+    .fondo-casa {
+        height: 420px;
+        padding-left: 6%;
+        top: 130px;
+    }
+    .img-dis{
+        margin-left: 50%;
+        margin-top: 50%;
+    }
+    #dis-casa{
+        width: 130px;
+        height: 130px;
+    }
+}
+
+@media (max-width: 1024px){
+    .fondo-casa {
+        height: 390px;
+        padding-left: 1%;
+        top: 130px;
+    }
+    .img-dis{
+        margin-left: 40%;
+        margin-top: 55%;
+    }
+    #dis-casa{
+        width: 120px;
+        height: 120px;
+    }
 }

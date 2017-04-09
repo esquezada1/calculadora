@@ -154,7 +154,7 @@ Ext.onReady(function () {
 
     panelCentral = Ext.create('Ext.panel.Panel', {
         id: 'panelCentral',
-        title: '<center class="title-general">CONSUMO TOTAL</center>',
+        title: '<center class="title-general">CÁLCULO DE CONSUMO</center>',
         region: 'center',
         bodyStyle: "background: rgba(255, 255, 255, 0.5) !important; padding: 3%;",
         width: '100% !important',

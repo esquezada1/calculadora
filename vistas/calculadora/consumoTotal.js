@@ -102,7 +102,7 @@ Ext.onReady(function () {
             },
             {
                 xtype: 'panel',
-                html: '<span style="background-color:#DAA948 !important;">Campo Editable</span>'
+                html: '<span style="background-color:#FFF59D !important;">Campo Editable</span>'
             },
             '->',
             {
@@ -154,7 +154,7 @@ Ext.onReady(function () {
                 },
                 summaryType: 'sum',
                 renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
-                    metaData.style = "background-color:#DAA948 !important;";
+                    metaData.style = "background-color:#FFF59D !important;";
                     return value + ' Dispositivo(s)';
                 },
                 summaryRenderer: function (value, summaryData, dataIndex) {
@@ -171,7 +171,7 @@ Ext.onReady(function () {
                     emptyText: 'Nro'
                 },
                 renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
-                    metaData.style = "background-color:#DAA948 !important;";
+                    metaData.style = "background-color:#FFF59D !important;";
                     return value + ' watts';
                 },
                 field: {
@@ -185,7 +185,7 @@ Ext.onReady(function () {
                     emptyText: 'Nro'
                 },
                 renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
-                    metaData.style = "background-color:#DAA948 !important;";
+                    metaData.style = "background-color:#FFF59D !important;";
                     if (record.get('idPeriodo') === 4) {
                         return value + ' minuto(s)';
                     } else {
