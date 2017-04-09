@@ -92,11 +92,11 @@ Ext.onReady(function () {
                     potencia: record.data.potencia,
                     tiempoUso: tiempoUso,
                     idPeriodo: 1,
-                    kwhMes: totalConsumo,
-//                    costoMes: 2,
-                    participacion: 0
+                    kwhMes: totalConsumo
                 });
+                storeConsumoDispositivos.clearGrouping();
                 storeConsumoDispositivos.add(r);
+                storeConsumoDispositivos.group('categoria');
 //                gridConsumoDispositivos.editingPlugin.startEdit(0, 0);
                 gridConsumoDispositivos.getView().refresh();
             }
@@ -239,7 +239,7 @@ Ext.onReady(function () {
 //                                    property: 'kwhMes',
 //                                    direction: 'DESC'
 //                                });
-                                cargarDispositivoCasa(storeConsumoDispositivos.data.items[0]);
+                                cargarDispositivoCasa(storeConsumoFinal.data.items[0]);
                                 panelDerecha.hide();
                                 btnAtras.show();
                                 fase = 2;

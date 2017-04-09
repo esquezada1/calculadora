@@ -26,23 +26,18 @@ function limpiarPanelCentral() {
 }
 
 function calcularParticipacion() {
-    var limit = storeConsumoDispositivos.data.items.length;
-    for (var i = 0; i < limit; i++) {
-        var record = storeConsumoDispositivos.data.items[i];
-        var participacion = (parseFloat(record.data.kwhMes) / parseFloat(sumaTotal));
-        participacion = participacion * 100;
-        record.set('participacion', participacion);
-    }
     storeConsumoFinal.removeAll();
     storeConsumoDispositivos.each(function (rec) {
-        var r = Ext.create('ConsumoModel', {
-            id: record.get('idMaquina'),
-            cantidad: record.get('cantidad'),
-            potencia: record.get('potencia'),
-            tiempoUso: record.get('tiempoUso'),
-            idPeriodo: record.get('idPeriodo'),
-            kwhMes: record.get('kwhMes'),
-            participacion: record.get('participacion')
+        var participacion = (parseFloat(rec.get('kwhMes'))) / parseFloat(sumaTotal);
+        participacion = participacion * 100;
+        var r = Ext.create('ConsumoModelFinal', {
+            idMaquina: rec.get('idMaquina'),
+            cantidad: rec.get('cantidad'),
+            potencia: rec.get('potencia'),
+            tiempoUso: rec.get('tiempoUso'),
+            idPeriodo: rec.get('idPeriodo'),
+            kwhMes: rec.get('kwhMes'),
+            participacion: participacion
         });
         storeConsumoFinal.add(r);
     });

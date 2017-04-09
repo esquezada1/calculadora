@@ -10,7 +10,7 @@ var storePeriodos, boolTotal = true;
 Ext.onReady(function () {
     Ext.define('ConsumoModel', {
         extend: 'Ext.data.Model',
-        idProperty: 'idMaquina',
+        idProperty: 'id',
         fields: [
             {name: 'idMaquina', type: 'int'},
             {name: 'idCategoria', type: 'int'},
@@ -19,9 +19,7 @@ Ext.onReady(function () {
             {name: 'potencia', type: 'int'},
             {name: 'tiempoUso', type: 'int'},
             {name: 'idPeriodo', type: 'int'},
-            {name: 'kwhMes', type: 'float'},
-//            {name: 'costoMes', type: 'float'},
-            {name: 'participacion', type: 'float'}
+            {name: 'kwhMes', type: 'float'}
         ]
     });
 

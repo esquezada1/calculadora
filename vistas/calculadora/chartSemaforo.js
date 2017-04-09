@@ -18,12 +18,11 @@ Ext.onReady(function () {
     });
 
     chartSemaforo = Ext.create('Ext.chart.Chart', {
-//        background: 'rgba(220, 220, 220, 0.5)',
         width: '60%',
         padding: '0',
         animate: true,
         shadow: false,
-        store: storeConsumoDispositivos,
+        store: storeConsumoFinal,
         axes: [{
                 hidden: true,
                 type: 'Numeric',
