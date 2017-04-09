@@ -80,7 +80,7 @@ Ext.onReady(function () {
         listeners: {
             select: function (dv, record, item, index, e) {
                 var cantPeriodo = storePeriodos.getById(1).data.cant;
-                var totalConsumo = 1 * record.data.potencia * 1 * cantPeriodo;
+                var totalConsumo = 1 * record.data.potencia * 10 * cantPeriodo;
                 totalConsumo = totalConsumo / 1000;
                 var r = Ext.create('ConsumoModel', {
                     idMaquina: record.id,
@@ -88,7 +88,7 @@ Ext.onReady(function () {
                     categoria: record.data.categoria,
                     cantidad: 1,
                     potencia: record.data.potencia,
-                    tiempoUso: 1,
+                    tiempoUso: 10,
                     idPeriodo: 1,
                     kwhMes: totalConsumo,
 //                    costoMes: 2,
@@ -97,10 +97,6 @@ Ext.onReady(function () {
                 storeConsumoDispositivos.insert(0, r);
                 gridConsumoDispositivos.editingPlugin.startEdit(0, 0);
                 gridConsumoDispositivos.getView().refresh();
-                sumaTotal = 0;
-                storeConsumoDispositivos.each(function (rec) {
-                    sumaTotal += rec.get('kwhMes');
-                });
             }
         }
     });
@@ -125,7 +121,7 @@ Ext.onReady(function () {
         region: 'east',
         title: '<center class="title-general">Dispositivos</center>',
         bodyStyle: "background: rgba(255, 255, 255, 0.7) !important; border-radius:30px;",
-        collapsible: true,
+        collapsible: false,
         split: true,
         scrollable: true,
         width: 240,
@@ -189,8 +185,8 @@ Ext.onReady(function () {
                     }]
             }, {
                 region: 'west',
-                collapsible: true,
-                title: '<center class="title-general">Pasos</center>',
+                margin: '35 0 0 0',
+                collapsible: false,
                 width: 200,
                 split: true,
                 items: [{
@@ -201,13 +197,13 @@ Ext.onReady(function () {
                         id: 'btnFase1',
                         pressed: true,
                         cls: 'itemMenu fase1',
-                        text: 'CONSUMO<br>TOTAL',
+                        text: 'CÁLCULO<br>DE CONSUMO',
                         handler: function () {
-                            Ext.getCmp('panelCentral').setTitle('<center class="title-general">CONSUMO TOTAL</center>');
+                            Ext.getCmp('panelCentral').setTitle('<center class="title-general">CÁLCULO DE CONSUMO</center>');
                             limpiarPanelCentral();
+                            panelDerecha.show();
                             panelCentral.add(viewConsumo);
                             storeConsumoDispositivos.sorters.clear();
-                            panelDerecha.show();
                             btnAtras.hide();
                             fase = 1;
                         }
@@ -215,10 +211,14 @@ Ext.onReady(function () {
                     {
                         id: 'btnFase2',
                         cls: 'itemMenu fase2',
-                        text: 'INDICADOR<br>DE CONSUMO',
+                        text: 'ANÁLISIS DE<br>CONSUMIDORES',
                         handler: function () {
                             if (storeConsumoDispositivos.data.items.length > 0) {
-                                panelCentral.setTitle('<center class="title-general">INDICADOR DE CONSUMO</center>');
+                                panelCentral.setTitle('<center class="title-general">ANÁLISIS DE CONSUMIDORES</center>');
+                                sumaTotal = 0;
+                                storeConsumoDispositivos.each(function (rec) {
+                                    sumaTotal += rec.get('kwhMes');
+                                });
                                 limpiarPanelCentral();
                                 calcularParticipacion();
                                 panelCentral.add(viewSemaforo);

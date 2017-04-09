@@ -34,13 +34,13 @@ Ext.onReady(function () {
         fields: [
             {name: 'id', type: 'int'},
             {name: 'name', type: 'string'},
-            {name: 'cant', type: 'int'}
+            {name: 'cant', type: 'float'}
         ],
         data: [
-            {id: 1, name: 'Horas/Día', cant: 30},
+            {id: 1, name: 'Horas/Mes', cant: 1},
             {id: 2, name: 'Horas/Semana', cant: 4},
-            {id: 3, name: 'Horas/Mes', cant: 1},
-            {id: 4, name: 'Minutos/Día', cant: 30}
+            {id: 3, name: 'Horas/Día', cant: 30},
+            {id: 4, name: 'Minutos/Día', cant: 0.5}
         ]
     });
 
@@ -111,7 +111,6 @@ Ext.onReady(function () {
                 tooltip: 'Eliminar todos los elementos',
                 handler: function () {
                     storeConsumoDispositivos.removeAll();
-                    //gridConsumoDispositivos.reconfigure(storeConsumoDispositivos, gridConsumoDispositivos.initialConfig.columns);
                     gridConsumoDispositivos.getView().refresh();
                 }
             }
@@ -179,7 +178,7 @@ Ext.onReady(function () {
                     xtype: 'numberfield'
                 }
             },
-            {header: "<center class='title-column'>Tiempo Uso<br>(Horas)</center>", width: 80, dataIndex: 'tiempoUso', name: 'tiempoUso',
+            {header: "<center class='title-column'>Tiempo Uso</center>", width: 80, dataIndex: 'tiempoUso', name: 'tiempoUso',
                 editor: {
                     xtype: 'textfield',
                     value: 1,
@@ -187,7 +186,11 @@ Ext.onReady(function () {
                 },
                 renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
                     metaData.style = "background-color:#DAA948 !important;";
-                    return value + ' hora(s)';
+                    if (record.get('idPeriodo') === 4) {
+                        return value + ' minuto(s)';
+                    } else {
+                        return value + ' hora(s)';
+                    }
                 },
                 field: {
                     xtype: 'numberfield'

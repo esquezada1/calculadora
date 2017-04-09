@@ -163,7 +163,7 @@ body{
     height: 300px;
     position: fixed;
     left: 1px;
-    top: 120px;
+    top: 105px;
     z-index: 1000;
 }
 
@@ -207,5 +207,5 @@ body{
 }
 
 .x-border-box {
-			background-color: white !important;
-		}
+    background-color: white !important;
+}

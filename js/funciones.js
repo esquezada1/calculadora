@@ -29,7 +29,12 @@ function calcularParticipacion() {
     var limit = storeConsumoDispositivos.data.items.length;
     for (var i = 0; i < limit; i++) {
         var record = storeConsumoDispositivos.data.items[i];
-        var participacion = (record.data.kwhMes / sumaTotal) * 100;
+        var participacion = (parseFloat(record.data.kwhMes) / parseFloat(sumaTotal));
+        console.log(parseFloat(record.data.kwhMes) + " / " + parseFloat(sumaTotal));
+        console.log(participacion);
+        participacion = participacion * 100;
+//        console.log(participacion);
+//        console.log("-----------------------------------------------");
         record.set('participacion', participacion);
     }
 }

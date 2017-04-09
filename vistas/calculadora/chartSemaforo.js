@@ -4,7 +4,7 @@ Ext.onReady(function () {
     chartSemaforo = Ext.create('Ext.chart.Chart', {
 //        background: 'rgba(220, 220, 220, 0.5)',
         width: '60%',
-        height: 415,
+        height: 390,
         padding: '0',
         animate: true,
         shadow: false,
@@ -94,7 +94,7 @@ Ext.onReady(function () {
                 height: 30,
                 fill: "#E72D2E",
                 x: 12,
-                y: 408
+                y: 384
             }]
     });
 
