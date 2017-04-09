@@ -31,8 +31,8 @@ and open the template in the editor.
         <script src="vistas/calculadora/consumoTotal.js" type="text/javascript"></script>
         <script src="vistas/calculadora/chartSemaforo.js" type="text/javascript"></script>
         <script src="vistas/calculadora/casa.js" type="text/javascript"></script>
-        <script src="vistas/calculadora/general.js" type="text/javascript"></script>
         <script src="vistas/calculadora/calculoAhorro.js" type="text/javascript"></script>
+        <script src="vistas/calculadora/general.js" type="text/javascript"></script>
         <script src="js/funciones.js" type="text/javascript"></script>
         <!--<script type="text/javascript" src="vistas/grid/newPanel.js"></script>
         <script type="text/javascript" language="Javascript">

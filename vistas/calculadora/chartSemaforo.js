@@ -1,5 +1,21 @@
-var chartSemaforo, casaSemaforo, selectItemChart;
+var chartSemaforo, casaSemaforo, selectItemChart, storeConsumoFinal;
 Ext.onReady(function () {
+    Ext.define('ConsumoModelFinal', {
+        extend: 'Ext.data.Model',
+        fields: [
+            {name: 'idMaquina', type: 'int'},
+            {name: 'cantidad', type: 'int'},
+            {name: 'potencia', type: 'int'},
+            {name: 'tiempoUso', type: 'int'},
+            {name: 'idPeriodo', type: 'int'},
+            {name: 'kwhMes', type: 'float'},
+            {name: 'participacion', type: 'float'}
+        ]
+    });
+
+    storeConsumoFinal = Ext.create('Ext.data.Store', {
+        model: 'ConsumoModelFinal'
+    });
 
     chartSemaforo = Ext.create('Ext.chart.Chart', {
 //        background: 'rgba(220, 220, 220, 0.5)',

@@ -33,6 +33,18 @@ function calcularParticipacion() {
         participacion = participacion * 100;
         record.set('participacion', participacion);
     }
+    storeConsumoDispositivos.each(function (rec) {
+        var r = Ext.create('ConsumoModel', {
+            id: record.get('idMaquina'),
+            cantidad: record.get('cantidad'),
+            potencia: record.get('potencia'),
+            tiempoUso: record.get('tiempoUso'),
+            idPeriodo: record.get('idPeriodo'),
+            kwhMes: record.get('kwhMes'),
+            participacion: record.get('participacion')
+        });
+        storeConsumoFinal.add(r);
+    });
 }
 
 function mostrarNotificacion(text) {

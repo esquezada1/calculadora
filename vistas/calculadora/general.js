@@ -117,13 +117,16 @@ Ext.onReady(function () {
         bodyStyle: 'background: rgba(255, 255, 255, 0.7) !important',
         items: [casaSemaforo, chartSemaforo]
     });
-    
-    viewAhorro = Ext.create('Ext.panel.Panel', {
-        id: 'viewAhorro',
-        autoScroll: true,
-        layout: 'hbox',
-        bodyStyle: 'background: rgba(255, 255, 255, 0.7) !important',
-        items: [tabAhorro]
+
+    viewAhorro = Ext.create('Ext.tab.Panel', {
+        width: 600,
+        bodyPadding: 10,
+        listeners: {
+            beforetabchange: function (tabs, newTab, oldTab) {
+                return newTab.title != 'P2';
+            }
+        },
+        items: [consejosAhorro, panelesSolares]
     });
 
     panelDerecha = Ext.create('Ext.panel.Panel', {
@@ -173,7 +176,7 @@ Ext.onReady(function () {
                     , '->',
             btnSiguiente
         ],
-        layout: 'fit',
+        layout: 'border',
         items: [
             viewConsumo
         ]

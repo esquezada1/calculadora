@@ -65,7 +65,12 @@ Ext.onReady(function () {
         store: storeConsumoDispositivos,
         cls: 'tablas-calculadora',
         plugins: Ext.create('Ext.grid.plugin.CellEditing', {
-            clicksToEdit: 1
+            clicksToEdit: 1,
+            listeners: {
+                beforeedit: function (e, editor) {
+                    console.log('hola');
+                }
+            }
         }),
         tbar: [{
                 id: 'btnTotal',
