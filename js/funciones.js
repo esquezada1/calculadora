@@ -46,6 +46,10 @@ function calcularParticipacion() {
         });
         storeConsumoFinal.add(r);
     });
+    storeConsumoFinal.setSorters({
+        property: 'participacion',
+        direction: 'DESC'
+    });
 }
 
 function mostrarNotificacion(text) {
