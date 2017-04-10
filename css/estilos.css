@@ -117,8 +117,8 @@ body{
 .itemMenu{
     background: rgba(255, 255, 255, 0.9) !important; 
     border-radius:15em !important;
-    margin-top: 0.6em !important;
-    margin-left: 0.7em !important;
+    margin-top: 0.5em !important;
+    margin-left: 0.4em !important;
     height: 55px !important;
     width: 9% !important;
 }
