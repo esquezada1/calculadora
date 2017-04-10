@@ -61,9 +61,16 @@ Ext.onReady(function () {
 
     var columnsGrids = [
         {header: '<center>Consejo</center>', dataIndex: 'consejo', width: 290},
-        {header: '<center>Ahorro<br>de energía</center>', dataIndex: 'ahorro', width: 85},
+        {header: '<center>Ahorro<br>de energía</center>', dataIndex: 'ahorro', width: 85, renderer: function (value) {
+                return value + "%";
+            }},
         {header: '', xtype: 'checkcolumn', width: 35, sortable: false, dataIndex: 'active', menuDisabled: true}
     ];
+
+    var viewConfig = {
+        loadingText: 'Cargando...',
+        emptyText: '<br><center>No hay consejos disponibles</center>'
+    };
 
     gridConsejos1 = Ext.create('Ext.panel.Panel', {
         flex: 1,
@@ -86,7 +93,8 @@ Ext.onReady(function () {
                 cls: 'tablas-calculadora',
                 store: storeConsejos1,
                 columns: columnsGrids
-            }]
+            }],
+        viewConfig: viewConfig
     });
 
     gridConsejos2 = Ext.create('Ext.panel.Panel', {
@@ -110,7 +118,8 @@ Ext.onReady(function () {
                 cls: 'tablas-calculadora',
                 store: storeConsejos2,
                 columns: columnsGrids
-            }]
+            }],
+        viewConfig: viewConfig
     });
 
     gridConsejos3 = Ext.create('Ext.panel.Panel', {
@@ -134,7 +143,8 @@ Ext.onReady(function () {
                 cls: 'tablas-calculadora',
                 store: storeConsejos3,
                 columns: columnsGrids
-            }]
+            }],
+        viewConfig: viewConfig
     });
 
     gridConsejos4 = Ext.create('Ext.panel.Panel', {
@@ -158,7 +168,8 @@ Ext.onReady(function () {
                 cls: 'tablas-calculadora',
                 store: storeConsejos4,
                 columns: columnsGrids
-            }]
+            }],
+        viewConfig: viewConfig
     });
 
     viewConsejos = Ext.create('Ext.panel.Panel', {

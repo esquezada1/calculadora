@@ -255,6 +255,7 @@ Ext.onReady(function () {
                             Ext.getCmp('panelCentral').setTitle('<center class="title-general">CALCULO DE AHORRO</center>');
                             limpiarPanelCentral();
                             panelCentral.add(viewAhorro);
+                            limpiarFiltros();
                             filtrarStores();
                             panelDerecha.hide();
                             btnSiguiente.show();

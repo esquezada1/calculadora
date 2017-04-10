@@ -59,32 +59,73 @@ function cargarDispositivoCasa(record) {
 }
 
 function filtrarStores() {
+    var cont = 0;
+    storeConsumoFinal.each(function (rec) {
+        switch (cont) {
+            case 0:
+                storeConsejos1.filter({
+                    property: 'idMaquina',
+                    exactMatch: true,
+                    value: storeConsumoFinal.data.items[cont].data.idMaquina
+                });
+                document.getElementById('img-consumidor1').src = storeDispositivos.getById(storeConsumoFinal.data.items[cont].data.idMaquina).get('url');
+
+                break;
+            case 1:
+                storeConsejos2.filter({
+                    property: 'idMaquina',
+                    exactMatch: true,
+                    value: storeConsumoFinal.data.items[cont].data.idMaquina
+                });
+                document.getElementById('img-consumidor2').src = storeDispositivos.getById(storeConsumoFinal.data.items[cont].data.idMaquina).get('url');
+
+                break;
+            case 2:
+                storeConsejos3.filter({
+                    property: 'idMaquina',
+                    exactMatch: true,
+                    value: storeConsumoFinal.data.items[cont].data.idMaquina
+                });
+                document.getElementById('img-consumidor3').src = storeDispositivos.getById(storeConsumoFinal.data.items[cont].data.idMaquina).get('url');
+
+                break;
+            case 3:
+                storeConsejos4.filter({
+                    property: 'idMaquina',
+                    exactMatch: true,
+                    value: storeConsumoFinal.data.items[cont].data.idMaquina
+                });
+                document.getElementById('img-consumidor4').src = storeDispositivos.getById(storeConsumoFinal.data.items[cont].data.idMaquina).get('url');
+
+                break;
+        }
+        cont++;
+    });
+}
+
+function limpiarFiltros() {
+    document.getElementById('img-consumidor1').src = "";
+    document.getElementById('img-consumidor2').src = "";
+    document.getElementById('img-consumidor3').src = "";
+    document.getElementById('img-consumidor4').src = "";
     storeConsejos1.filter({
         property: 'idMaquina',
         exactMatch: true,
-        value: storeConsumoFinal.data.items[0].data.idMaquina
+        value: 0
     });
-    document.getElementById('img-consumidor1').src = storeDispositivos.getById(storeConsumoFinal.data.items[0].data.idMaquina).get('url');
     storeConsejos2.filter({
         property: 'idMaquina',
         exactMatch: true,
-        value: storeConsumoFinal.data.items[1].data.idMaquina
+        value: 0
     });
-    document.getElementById('img-consumidor2').src = storeDispositivos.getById(storeConsumoFinal.data.items[1].data.idMaquina).get('url');
     storeConsejos3.filter({
         property: 'idMaquina',
         exactMatch: true,
-        value: storeConsumoFinal.data.items[2].data.idMaquina
+        value: 0
     });
-    document.getElementById('img-consumidor3').src = storeDispositivos.getById(storeConsumoFinal.data.items[2].data.idMaquina).get('url');
     storeConsejos4.filter({
         property: 'idMaquina',
         exactMatch: true,
-        value: storeConsumoFinal.data.items[3].data.idMaquina
+        value: 0
     });
-    document.getElementById('img-consumidor4').src = storeDispositivos.getById(storeConsumoFinal.data.items[3].data.idMaquina).get('url');
-//    storeConsejos1.filter('idMaquina', storeConsumoFinal.data.items[0].data.idMaquina);
-//    storeConsejos2.filter('idMaquina', storeConsumoFinal.data.items[1].data.idMaquina);
-//    storeConsejos3.filter('idMaquina', storeConsumoFinal.data.items[2].data.idMaquina);
-//    storeConsejos4.filter('idMaquina', storeConsumoFinal.data.items[3].data.idMaquina);
 }
