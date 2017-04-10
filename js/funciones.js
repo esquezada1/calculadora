@@ -57,3 +57,30 @@ function cargarDispositivoCasa(record) {
     document.getElementById('tit-casa').innerHTML = formatoDispositivos(record.get('idMaquina'));
     document.getElementById('cons-casa').innerHTML = record.data.kwhMes + ' KWh/MES';
 }
+
+function filtrarStores() {
+    storeConsejos1.filter({
+        property: 'idMaquina',
+        exactMatch: true,
+        value: storeConsumoFinal.data.items[0].data.idMaquina
+    });
+    storeConsejos2.filter({
+        property: 'idMaquina',
+        exactMatch: true,
+        value: storeConsumoFinal.data.items[1].data.idMaquina
+    });
+    storeConsejos3.filter({
+        property: 'idMaquina',
+        exactMatch: true,
+        value: storeConsumoFinal.data.items[2].data.idMaquina
+    });
+    storeConsejos4.filter({
+        property: 'idMaquina',
+        exactMatch: true,
+        value: storeConsumoFinal.data.items[3].data.idMaquina
+    });
+//    storeConsejos1.filter('idMaquina', storeConsumoFinal.data.items[0].data.idMaquina);
+//    storeConsejos2.filter('idMaquina', storeConsumoFinal.data.items[1].data.idMaquina);
+//    storeConsejos3.filter('idMaquina', storeConsumoFinal.data.items[2].data.idMaquina);
+//    storeConsejos4.filter('idMaquina', storeConsumoFinal.data.items[3].data.idMaquina);
+}

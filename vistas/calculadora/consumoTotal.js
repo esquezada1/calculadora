@@ -127,7 +127,7 @@ Ext.onReady(function () {
                 ftype: 'groupingsummary',
                 groupHeaderTpl: '<center class="group-title">{name}<center>',
                 hideGroupedHeader: true,
-                enableGroupingMenu: false,
+                enableGroupingMenu: false
             }, {
                 id: 'totalSum',
                 HeaderTpl: 'TOTAL',
