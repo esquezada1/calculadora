@@ -37,7 +37,10 @@ Ext.onReady(function () {
         [19, "Calefón a Gas", 3, 'Agua Caliente', 150, "img/dis/gas.png"],
         [20, "Otro", 1, 'Electrodomésticos', 150, "img/dis/otro.png"],
         [21, "Otro", 1, 'Electrodomésticos', 150, "img/dis/otro.png"],
-        [22, "Otro", 1, 'Electrodomésticos', 150, "img/dis/otro.png"]
+        [22, "Otro", 1, 'Electrodomésticos', 150, "img/dis/otro.png"],
+        [23, "Iluminación", 4, 'Otros', 0, "img/dis/iluminacion.png"],
+        [24, "Agua Caliente", 4, 'Otros', 0, "img/dis/aguaCaliente.png"],
+        
     ];
 
     Ext.define('DispositivosModel', {
