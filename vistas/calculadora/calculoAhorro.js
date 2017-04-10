@@ -9,7 +9,8 @@ Ext.onReady(function () {
             {name: 'idMaquina', type: 'int'},
             {name: 'consejo', type: 'string'},
             {name: 'ahorro', type: 'int'},
-            {name: 'cambio', type: 'bool'}
+            {name: 'cambio', type: 'bool'},
+            {name: 'active', type: 'bool'}
         ]
     });
 
@@ -59,56 +60,111 @@ Ext.onReady(function () {
     });
 
     var columnsGrids = [
-        {header: 'Dispositivo', dataIndex: 'idMaquina', width: 100},
-        {header: 'Consejo', dataIndex: 'consejo', width: 150},
-        {header: 'Ahorro de energía', dataIndex: 'ahorro', width: 150, editor: {xtype: 'checkbox'}}
+        {header: '<center>Consejo</center>', dataIndex: 'consejo', width: 290},
+        {header: '<center>Ahorro<br>de energía</center>', dataIndex: 'ahorro', width: 85},
+        {header: '', xtype: 'checkcolumn', width: 35, sortable: false, dataIndex: 'active', menuDisabled: true}
     ];
 
-    gridConsejos1 = Ext.create('Ext.grid.Panel', {
+    gridConsejos1 = Ext.create('Ext.panel.Panel', {
         flex: 1,
+        layout: 'hbox',
         height: 150,
-        frame: true,
-        multiSelect: false,
-        columnLines: true,
-        cls: 'tablas-calculadora',
-        store: storeConsejos1,
-        columns: columnsGrids
+        cls: 'panel-consejos',
+        items: [{
+                width: '20%',
+                height: 150,
+                xtype: 'panel',
+                html: '<img class="img-consumidores" id="img-consumidor1">'
+            },
+            {
+                width: '80%',
+                height: 150,
+                xtype: 'grid',
+                frame: true,
+                multiSelect: false,
+                columnLines: true,
+                cls: 'tablas-calculadora',
+                store: storeConsejos1,
+                columns: columnsGrids
+            }]
     });
 
-    gridConsejos2 = Ext.create('Ext.grid.Panel', {
+    gridConsejos2 = Ext.create('Ext.panel.Panel', {
         flex: 1,
+        layout: 'hbox',
         height: 150,
-        frame: true,
-        multiSelect: false,
-        columnLines: true,
-        cls: 'tablas-calculadora',
-        store: storeConsejos2,
-        columns: columnsGrids
+        cls: 'panel-consejos',
+        items: [{
+                width: '20%',
+                height: 150,
+                xtype: 'panel',
+                html: '<img class="img-consumidores" id="img-consumidor2">'
+            },
+            {
+                width: '80%',
+                height: 150,
+                xtype: 'grid',
+                frame: true,
+                multiSelect: false,
+                columnLines: true,
+                cls: 'tablas-calculadora',
+                store: storeConsejos2,
+                columns: columnsGrids
+            }]
     });
 
-    gridConsejos3 = Ext.create('Ext.grid.Panel', {
+    gridConsejos3 = Ext.create('Ext.panel.Panel', {
         flex: 1,
+        layout: 'hbox',
         height: 150,
-        frame: true,
-        multiSelect: false,
-        columnLines: true,
-        cls: 'tablas-calculadora',
-        store: storeConsejos3,
-        columns: columnsGrids
+        cls: 'panel-consejos',
+        items: [{
+                height: 150,
+                width: '20%',
+                xtype: 'panel',
+                html: '<img class="img-consumidores" id="img-consumidor3">'
+            },
+            {
+                width: '80%',
+                height: 150,
+                xtype: 'grid',
+                frame: true,
+                multiSelect: false,
+                columnLines: true,
+                cls: 'tablas-calculadora',
+                store: storeConsejos3,
+                columns: columnsGrids
+            }]
     });
 
-    gridConsejos4 = Ext.create('Ext.grid.Panel', {
+    gridConsejos4 = Ext.create('Ext.panel.Panel', {
         flex: 1,
+        layout: 'hbox',
         height: 150,
-        frame: true,
-        multiSelect: false,
-        columnLines: true,
-        cls: 'tablas-calculadora',
-        store: storeConsejos4,
-        columns: columnsGrids
+        cls: 'panel-consejos',
+        items: [{
+                width: '20%',
+                height: 150,
+                xtype: 'panel',
+                html: '<img class="img-consumidores" id="img-consumidor4">'
+            },
+            {
+                width: '80%',
+                height: 150,
+                xtype: 'grid',
+                frame: true,
+                multiSelect: false,
+                columnLines: true,
+                cls: 'tablas-calculadora',
+                store: storeConsejos4,
+                columns: columnsGrids
+            }]
     });
 
     viewConsejos = Ext.create('Ext.panel.Panel', {
+        defaults: {
+            margin: '5 5 5 5'
+        },
         items: [{
                 layout: 'hbox',
                 items: [gridConsejos1, gridConsejos2]

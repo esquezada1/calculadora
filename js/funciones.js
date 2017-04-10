@@ -64,21 +64,25 @@ function filtrarStores() {
         exactMatch: true,
         value: storeConsumoFinal.data.items[0].data.idMaquina
     });
+    document.getElementById('img-consumidor1').src = storeDispositivos.getById(storeConsumoFinal.data.items[0].data.idMaquina).get('url');
     storeConsejos2.filter({
         property: 'idMaquina',
         exactMatch: true,
         value: storeConsumoFinal.data.items[1].data.idMaquina
     });
+    document.getElementById('img-consumidor2').src = storeDispositivos.getById(storeConsumoFinal.data.items[1].data.idMaquina).get('url');
     storeConsejos3.filter({
         property: 'idMaquina',
         exactMatch: true,
         value: storeConsumoFinal.data.items[2].data.idMaquina
     });
+    document.getElementById('img-consumidor3').src = storeDispositivos.getById(storeConsumoFinal.data.items[2].data.idMaquina).get('url');
     storeConsejos4.filter({
         property: 'idMaquina',
         exactMatch: true,
         value: storeConsumoFinal.data.items[3].data.idMaquina
     });
+    document.getElementById('img-consumidor4').src = storeDispositivos.getById(storeConsumoFinal.data.items[3].data.idMaquina).get('url');
 //    storeConsejos1.filter('idMaquina', storeConsumoFinal.data.items[0].data.idMaquina);
 //    storeConsejos2.filter('idMaquina', storeConsumoFinal.data.items[1].data.idMaquina);
 //    storeConsejos3.filter('idMaquina', storeConsumoFinal.data.items[2].data.idMaquina);
