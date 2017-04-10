@@ -219,6 +219,19 @@ body{
     height: auto !important;*/
 }
 
+.consumoTotal{
+    background-color: #F4D03F !important;
+    vertical-align: middle !important;
+    text-align: center !important;
+    border: #1E3C87 solid thin;
+}
+.valorTotal{
+    padding: 0.1em;
+    margin: 0;
+    font-size: 180% !important;
+    color:#7B241C;
+}
+ 
 @media (max-width: 1280px){
     .fondo-casa {
         height: 420px;
