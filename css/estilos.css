@@ -215,8 +215,8 @@ body{
 }
 
 #viewConsumo-body{
-/*    width: auto !important;
-    height: auto !important;*/
+    /*    width: auto !important;
+        height: auto !important;*/
 }
 
 .consumoTotal{
@@ -231,7 +231,17 @@ body{
     font-size: 180% !important;
     color:#7B241C;
 }
- 
+
+.x-tab{
+    background-color: #003F72 !important;
+    border-color: #D5D8DC !important;
+}
+
+.x-tab-active{
+    background-color: white !important;
+}
+
+
 @media (max-width: 1280px){
     .fondo-casa {
         height: 420px;
