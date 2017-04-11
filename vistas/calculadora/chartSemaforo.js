@@ -22,7 +22,7 @@ Ext.onReady(function () {
         padding: '0',
         animate: true,
         shadow: false,
-        store: storeConsumoFinal,
+        store: storeConsumoDispositivos,
         axes: [{
                 hidden: true,
                 type: 'Numeric',
@@ -77,8 +77,6 @@ Ext.onReady(function () {
                         this.setTitle('<center><strong>' + formatoDispositivos(storeItem.get('idMaquina')).toUpperCase() + '</strong><center>');
                         var conten = '<center>';
                         conten += '<img src="' + urlImg + '" width="45" height="45">';
-//                        conten += '<br>';
-//                        conten += '<strong>Consumo:</strong><p>' + consumo + ' KWh/Mes</p>';
                         conten += '</center>';
                         this.setHtml(conten);
                     }

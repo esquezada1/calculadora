@@ -19,7 +19,8 @@ Ext.onReady(function () {
             {name: 'potencia', type: 'int'},
             {name: 'tiempoUso', type: 'int'},
             {name: 'idPeriodo', type: 'int'},
-            {name: 'kwhMes', type: 'float'}
+            {name: 'kwhMes', type: 'float'},
+            {name: 'participacion', type: 'float'}
         ]
     });
 

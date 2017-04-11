@@ -216,7 +216,8 @@ Ext.onReady(function () {
                             limpiarPanelCentral();
                             panelDerecha.show();
                             panelCentral.add(viewConsumo);
-//                            storeConsumoDispositivos.sorters.clear();
+                            storeConsumoDispositivos.group('categoria');
+                            storeConsumoDispositivos.sorters.clear();
                             btnAtras.hide();
                             fase = 1;
                         }
@@ -235,10 +236,11 @@ Ext.onReady(function () {
                                 limpiarPanelCentral();
                                 calcularParticipacion();
                                 panelCentral.add(viewSemaforo);
-//                                storeConsumoDispositivos.setSorters({
-//                                    property: 'kwhMes',
-//                                    direction: 'DESC'
-//                                });
+                                storeConsumoDispositivos.clearGrouping();
+                                storeConsumoDispositivos.setSorters({
+                                    property: 'kwhMes',
+                                    direction: 'DESC'
+                                });
                                 cargarDispositivoCasa(storeConsumoFinal.data.items[0]);
                                 panelDerecha.hide();
                                 btnAtras.show();

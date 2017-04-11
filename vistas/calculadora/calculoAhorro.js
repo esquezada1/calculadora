@@ -21,7 +21,7 @@ Ext.onReady(function () {
         {id: 3, idMaquina: 4, consejo: 'Usar ollas con diametro superior al de la placa', ahorro: 20},
         {id: 4, idMaquina: 4, consejo: 'Tapar los recipientes a la hora de cocinar', ahorro: 20},
         {id: 5, idMaquina: 4, consejo: 'Usar olla de presion para cocinar', ahorro: 60},
-        {id: 6, idMaquina: 5, consejo: 'Configurar a "Capacidad variable automatica"', ahorro: 40},
+        {id: 6, idMaquina: 5, consejo: 'Configurar a Capacidad variable automatica', ahorro: 40},
         {id: 7, idMaquina: 5, consejo: 'Cambiar a una lavadora mas eficiente de Etiqueta A', ahorro: 45, cambio: true},
         {id: 8, idMaquina: 6, consejo: 'No abrir innecesariamente la puerta del congelador', ahorro: 2},
         {id: 9, idMaquina: 6, consejo: 'Aumentar grado de temperatura', ahorro: 5},
@@ -34,7 +34,7 @@ Ext.onReady(function () {
         {id: 16, idMaquina: 10, consejo: 'Cambiar a un aire mas eficiente  de tecnologia inverter', ahorro: 60},
         {id: 17, idMaquina: 10, consejo: 'Instalar toldos ( carpas) en las ventanas ', ahorro: 30},
         {id: 18, idMaquina: 13, consejo: 'No abrir innecesariamente la puerta del horno ', ahorro: 20},
-        {id: 19, idMaquina: 13, consejo: 'Se recomienda usar microondas ', ahorro: 70},
+        {id: 19, idMaquina: 13, consejo: 'Se recomienda usar microondas', ahorro: 70},
         {id: 20, idMaquina: 23, consejo: 'Cambiar focos incandecentes a led', ahorro: 30, cambio: true},
         {id: 21, idMaquina: 23, consejo: 'Cambiar focos incandecentes a fluoroscentes', ahorro: 30, cambio: true},
         {id: 22, idMaquina: 23, consejo: 'Cambiar de Fluorescentes a Led ', ahorro: 30, cambio: true}
@@ -77,9 +77,9 @@ Ext.onReady(function () {
     });
 
     var columnsGrids = [
-        {header: '<center>Consejo</center>', dataIndex: 'consejo', width: 290,
+        {header: '<center>Consejo</center>', dataIndex: 'consejo', width: 289,
             renderer: function (value, metaData, record, rowIdx, colIdx, store) {
-                metaData.tdAttr = 'data-qtip="' + value + '"';
+                metaData.tdAttr = 'data-qtip=\"' + value + '\"';
                 var srcIcon = "";
                 if (record.get('cambio')) {
                     srcIcon = "img/cambio.png";
@@ -89,15 +89,15 @@ Ext.onReady(function () {
                 return '<img style="padding-top:1%" width="15" height="15" src="' + srcIcon + '"> ' + value;
             }
         },
-        {header: '<center>Ahorro<br>de energía</center>', dataIndex: 'ahorro', width: 85,
+        {header: '<center>Ahorro</center>', dataIndex: 'ahorro', width: 70,
             renderer: function (value) {
                 return value + "%";
             }},
-        {header: '', xtype: 'checkcolumn', width: 35, sortable: false, dataIndex: 'active', menuDisabled: true,
+        {header: '', xtype: 'checkcolumn', width: 34, sortable: false, dataIndex: 'active', menuDisabled: true,
             listeners: {
                 checkchange: function (comp, rowIndex, checked, eOpts, a, b, c) {
-                    var gridId = comp.up('grid');
-                    console.log(gridId.getId());
+                    var gridId = comp.up('grid').getId();
+                    aplicarConsejos(gridId, rowIndex, checked);
                 }
             }
         }
@@ -302,7 +302,7 @@ Ext.onReady(function () {
                         width: '23%',
                         cls: 'consumoTotalDis',
                         title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 85%;">PORCENTAJE DE<br>AHORRO</strong></center>',
-                        html: '<p class="valorTotalDis" id="ahorroDis4">0KWH</p>'
+                        html: '<p class="valorTotalDis" id="ahorroDis4">0%</p>'
                     }]
             }],
         viewConfig: viewConfig,

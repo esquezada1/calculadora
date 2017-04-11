@@ -26,6 +26,13 @@ function limpiarPanelCentral() {
 }
 
 function calcularParticipacion() {
+    var limit = storeConsumoDispositivos.data.items.length;
+    for (var i = 0; i < limit; i++) {
+        var record = storeConsumoDispositivos.data.items[i];
+        var participacion = (parseFloat(record.data.kwhMes) / parseFloat(sumaTotal));
+        participacion = participacion * 100;
+        record.set('participacion', participacion);
+    }
     storeConsumoFinal.removeAll();
     storeConsumoDispositivos.each(function (rec) {
         var participacion = (parseFloat(rec.get('kwhMes'))) / parseFloat(sumaTotal);
@@ -37,7 +44,7 @@ function calcularParticipacion() {
             tiempoUso: rec.get('tiempoUso'),
             idPeriodo: rec.get('idPeriodo'),
             kwhMes: rec.get('kwhMes'),
-            participacion: participacion
+            participacion: rec.get('participacion')
         });
         storeConsumoFinal.add(r);
     });
@@ -57,11 +64,11 @@ function cargarDispositivoCasa(record) {
     document.getElementById('tit-casa').innerHTML = formatoDispositivos(record.get('idMaquina'));
     document.getElementById('cons-casa').innerHTML = record.data.kwhMes + ' KWh/MES';
 }
-
+var mayorConsumo = 0;
 function filtrarStores() {
     var cont = 0;
-    var mayorConsumo = 0;
-    storeConsumoFinal.each(function (rec) {
+    mayorConsumo = 0;
+    storeConsumoDispositivos.each(function (rec) {
         switch (cont) {
             case 0:
                 storeConsejos1.filter({
@@ -135,4 +142,69 @@ function limpiarFiltros() {
         exactMatch: true,
         value: 0
     });
+}
+
+function aplicarConsejos(idGrid, index, check) {
+    var optimizacion = 0;
+    var ahorro = 0;
+    var storeConsejo;
+    var idDivAhorro, idDivOptimizacion;
+    var numDis;
+    switch (idGrid) {
+        case 'gridConsejos1':
+            storeConsejo = storeConsejos1;
+            idDivAhorro = 'ahorroDis1';
+            idDivOptimizacion = 'optimizacionDis1';
+            numDis = 0;
+            break;
+        case 'gridConsejos2':
+            storeConsejo = storeConsejos2;
+            idDivAhorro = 'ahorroDis2';
+            idDivOptimizacion = 'optimizacionDis2';
+            numDis = 1;
+            break;
+        case 'gridConsejos3':
+            storeConsejo = storeConsejos3;
+            idDivAhorro = 'ahorroDis3';
+            idDivOptimizacion = 'optimizacionDis3';
+            numDis = 2;
+            break;
+        case 'gridConsejos4':
+            storeConsejo = storeConsejos4;
+            idDivAhorro = 'ahorroDis4';
+            idDivOptimizacion = 'optimizacionDis4';
+            numDis = 3;
+            break;
+    }
+    storeConsejo.each(function (rec) {
+        if (rec.get('active') && rec.get('cambio')) {
+            storeConsejo.each(function (rec) {
+                if (!rec.get('cambio')) {
+                    rec.set('active', false);
+                }
+            });
+        }
+        if (rec.get('active')) {
+            ahorro += parseInt(rec.get('ahorro'));
+        }
+    });
+    var record = storeConsumoDispositivos.data.items[numDis];
+    var recordFinal = storeConsumoFinal.data.items[numDis];
+    optimizacion = 100 - ahorro;
+    optimizacion = optimizacion / 100;
+    optimizacion = optimizacion * record.get('kwhMes');
+    recordFinal.set('kwhMes', optimizacion);
+    optimizacion = optimizacion.toFixed(2);
+    document.getElementById(idDivOptimizacion).innerHTML = optimizacion + " KWH";
+    document.getElementById(idDivAhorro).innerHTML = ahorro + "%";
+    var optimizacionTotal = 0;
+    var ahorroTotal = 0;
+    for (var i = 0; i < 4; i++) {
+        optimizacionTotal += storeConsumoFinal.data.items[i].get('kwhMes');
+    }
+    ahorroTotal = (1 - optimizacionTotal / mayorConsumo) * 100;
+    ahorroTotal = ahorroTotal.toFixed(2);
+    optimizacionTotal = optimizacionTotal.toFixed(2);
+    document.getElementById('optimizacionTotalDis').innerHTML = optimizacionTotal + " KWH";
+    document.getElementById('ahorroTotalDis').innerHTML = ahorroTotal + "%";
 }
