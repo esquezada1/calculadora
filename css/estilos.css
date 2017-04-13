@@ -268,6 +268,10 @@ body{
     background: rgba(224, 222, 216, 0.5) !important;
 }
 
+.x-grid-cell-inner{
+    text-align: center !important;
+}
+
 @media (max-width: 1280px){
     .fondo-casa {
         height: 420px;

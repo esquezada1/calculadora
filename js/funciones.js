@@ -251,13 +251,15 @@ function aplicarConsejos(idGrid, index, check) {
     document.getElementById('ahorroTotalDis').innerHTML = ahorroTotal + "%";
 }
 
-function consumoTotal(){
+function consumoTotal() {
     var totalDispositivos = 0;
     var totalConsumo = 0;
     storeConsumoDispositivos.each(function (rec) {
         totalDispositivos += rec.get('cantidad');
         totalConsumo += rec.get('kwhMes');
     });
-    document.getElementById('totalDispositivos').innerHTML = totalDispositivos + " Dispositivo(s)";
-    document.getElementById('totalConsumo').innerHTML = totalConsumo.toFixed(2) + " KWH/MES";
+    if (fase === 1) {
+        document.getElementById('totalDispositivos').innerHTML = totalDispositivos + " Dispositivo(s)";
+        document.getElementById('totalConsumo').innerHTML = totalConsumo.toFixed(2) + " KWH/MES";
+    }
 }

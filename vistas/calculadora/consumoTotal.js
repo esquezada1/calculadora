@@ -161,8 +161,10 @@ Ext.onReady(function () {
                 renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
                     if (record.get('idMaquina') !== 19) {
                         metaData.style = "background-color:#FFF59D !important;";
+                        return value + ' watts';
+                    } else {
+                        return '-';
                     }
-                    return value + ' watts';
                 },
                 field: {
                     xtype: 'numberfield'
@@ -225,7 +227,13 @@ Ext.onReady(function () {
         listeners: {
             edit: function (thisObj, record, item, index, e, eOpts) {
                 var cantPeriodo = storePeriodos.getById(record.record.data.idPeriodo).data.cant;
-                var totalConsumo = record.record.data.cantidad * record.record.data.potencia * record.record.data.tiempoUso * cantPeriodo;
+                var totalConsumo = 0;
+                if (record.record.get('idMaquina') === 19) {
+                    totalConsumo = record.record.data.cantidad * 14000 * record.record.data.tiempoUso * cantPeriodo;
+                    totalConsumo = totalConsumo / 2.54;
+                } else {
+                    totalConsumo = record.record.data.cantidad * record.record.data.potencia * record.record.data.tiempoUso * cantPeriodo;
+                }
                 totalConsumo = totalConsumo / 1000;
                 storeConsumoDispositivos.commitChanges();
                 record.record.set('kwhMes', totalConsumo);

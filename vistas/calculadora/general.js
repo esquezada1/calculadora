@@ -231,6 +231,7 @@ Ext.onReady(function () {
                         cls: 'itemMenu fase1',
                         text: 'CÁLCULO<br>DE CONSUMO',
                         handler: function () {
+                            fase = 1;
                             Ext.getCmp('panelCentral').setTitle('<center class="title-general">CÁLCULO DE CONSUMO</center>');
                             limpiarPanelCentral();
                             panelDerecha.show();
@@ -241,7 +242,6 @@ Ext.onReady(function () {
                             storeConsumoDispositivos.sorters.clear();
                             storeConsumoDispositivos.group('categoria');
                             btnAtras.hide();
-                            fase = 1;
                         }
                     },
                     {
@@ -250,6 +250,7 @@ Ext.onReady(function () {
                         text: 'ANÁLISIS DE<br>CONSUMIDORES',
                         handler: function () {
                             if (storeConsumoDispositivos.data.items.length > 0) {
+                                fase = 2;
                                 panelCentral.setTitle('<center class="title-general">ANÁLISIS DE CONSUMIDORES</center>');
                                 sumaTotal = 0;
                                 storeConsumoDispositivos.each(function (rec) {
@@ -267,7 +268,6 @@ Ext.onReady(function () {
                                 cargarDispositivoCasa(storeConsumoDispositivos.data.items[0]);
                                 panelDerecha.hide();
                                 btnAtras.show();
-                                fase = 2;
                             } else {
                                 mostrarNotificacion('Aún no se han agregado dispositivos.');
                             }
@@ -277,6 +277,7 @@ Ext.onReady(function () {
                         cls: 'itemMenu fase3',
                         text: 'CALCULO DE<br>AHORRO',
                         handler: function () {
+                            fase = 3;
                             Ext.getCmp('panelCentral').setTitle('<center class="title-general">CALCULO DE AHORRO</center>');
                             limpiarPanelCentral();
                             panelCentral.add(viewAhorro);
@@ -284,18 +285,17 @@ Ext.onReady(function () {
                             filtrarStores();
                             panelDerecha.hide();
                             btnSiguiente.show();
-                            fase = 3;
                         }
                     }, {
                         id: 'btnFase4',
                         cls: 'itemMenu fase4',
                         text: 'ANÁLISIS<br>PLANILLA',
                         handler: function () {
+                            fase = 4;
                             Ext.getCmp('panelCentral').setTitle('<center class="title-general">ANÁLISIS PLANILLA</center>');
                             limpiarPanelCentral();
                             panelDerecha.hide();
                             btnSiguiente.hide();
-                            fase = 4;
                         }
                     }
                 ]
