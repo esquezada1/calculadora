@@ -25,18 +25,59 @@ function limpiarPanelCentral() {
     }
 }
 
-function calcularParticipacion() {
-    var limit = storeConsumoDispositivos.data.items.length;
-    for (var i = 0; i < limit; i++) {
-        var record = storeConsumoDispositivos.data.items[i];
-        var participacion = (parseFloat(record.data.kwhMes) / parseFloat(sumaTotal));
-        participacion = participacion * 100;
-        record.set('participacion', participacion);
+function agruparDispositivos() {
+    var consumoIluminacion = 0;
+    var consumoAguaCaliente = 0;
+    storeConsumoDispositivos.each(function (rec) {
+        switch (rec.get('idCategoria')) {
+            case 2:
+                consumoIluminacion += rec.get('kwhMes');
+                break;
+            case 3:
+                consumoAguaCaliente += rec.get('kwhMes');
+                break;
+        }
+    });
+    if (consumoIluminacion !== 0) {
+        var rIluminacion = Ext.create('ConsumoModel', {
+            idMaquina: 23,
+            idCategoria: 4,
+            categoria: 'Otros',
+            cantidad: 0,
+            potencia: 0,
+            tiempoUso: 0,
+            idPeriodo: 1,
+            kwhMes: consumoIluminacion
+        });
+        storeConsumoDispositivos.insert(0, rIluminacion);
     }
+    if (consumoAguaCaliente !== 0) {
+        var rAguaCaliente = Ext.create('ConsumoModel', {
+            idMaquina: 24,
+            idCategoria: 4,
+            categoria: 'Otros',
+            cantidad: 0,
+            potencia: 0,
+            tiempoUso: 0,
+            idPeriodo: 1,
+            kwhMes: consumoAguaCaliente
+        });
+        storeConsumoDispositivos.add(rAguaCaliente);
+    }
+    storeConsumoDispositivos.filter(function (r) {
+        var value = r.get('idCategoria');
+        return (value === 1 || value === 4);
+    });
+}
+
+function calcularParticipacion() {
+    storeConsumoDispositivos.each(function (rec) {
+        var participacion = rec.get('kwhMes') / sumaTotal;
+        participacion = participacion * 100;
+        rec.set('participacion', participacion);
+    });
     storeConsumoFinal.removeAll();
     storeConsumoDispositivos.each(function (rec) {
-        var participacion = (parseFloat(rec.get('kwhMes'))) / parseFloat(sumaTotal);
-        participacion = participacion * 100;
         var r = Ext.create('ConsumoModelFinal', {
             idMaquina: rec.get('idMaquina'),
             cantidad: rec.get('cantidad'),
@@ -62,13 +103,14 @@ function cargarDispositivoCasa(record) {
     var srcImg = storeDispositivos.getById(record.get('idMaquina')).data.url;
     document.getElementById('dis-casa').src = srcImg;
     document.getElementById('tit-casa').innerHTML = formatoDispositivos(record.get('idMaquina'));
-    document.getElementById('cons-casa').innerHTML = record.data.kwhMes + ' KWh/MES';
+    document.getElementById('cons-casa').innerHTML = record.get('kwhMes').toFixed(2) + ' KWh/MES';
 }
 var mayorConsumo = 0;
 function filtrarStores() {
     var cont = 0;
     mayorConsumo = 0;
     storeConsumoDispositivos.each(function (rec) {
+        var consumoDis = rec.get('kwhMes').toFixed(2);
         switch (cont) {
             case 0:
                 storeConsejos1.filter({
@@ -77,7 +119,7 @@ function filtrarStores() {
                     value: rec.get('idMaquina')
                 });
                 document.getElementById('img-consumidor1').src = storeDispositivos.getById(rec.get('idMaquina')).get('url');
-                document.getElementById('consumoDis1').innerHTML = rec.get('kwhMes') + " KWH";
+                document.getElementById('consumoDis1').innerHTML = consumoDis + " KWH";
                 mayorConsumo += rec.get('kwhMes');
                 break;
             case 1:
@@ -87,7 +129,7 @@ function filtrarStores() {
                     value: rec.get('idMaquina')
                 });
                 document.getElementById('img-consumidor2').src = storeDispositivos.getById(rec.get('idMaquina')).get('url');
-                document.getElementById('consumoDis2').innerHTML = rec.get('kwhMes') + " KWH";
+                document.getElementById('consumoDis2').innerHTML = consumoDis + " KWH";
                 mayorConsumo += rec.get('kwhMes');
                 break;
             case 2:
@@ -97,7 +139,7 @@ function filtrarStores() {
                     value: rec.get('idMaquina')
                 });
                 document.getElementById('img-consumidor3').src = storeDispositivos.getById(rec.get('idMaquina')).get('url');
-                document.getElementById('consumoDis3').innerHTML = rec.get('kwhMes') + " KWH";
+                document.getElementById('consumoDis3').innerHTML = consumoDis + " KWH";
                 mayorConsumo += rec.get('kwhMes');
                 break;
             case 3:
@@ -107,7 +149,7 @@ function filtrarStores() {
                     value: rec.get('idMaquina')
                 });
                 document.getElementById('img-consumidor4').src = storeDispositivos.getById(rec.get('idMaquina')).get('url');
-                document.getElementById('consumoDis4').innerHTML = rec.get('kwhMes') + " KWH";
+                document.getElementById('consumoDis4').innerHTML = consumoDis + " KWH";
                 mayorConsumo += rec.get('kwhMes');
                 break;
         }
@@ -177,13 +219,13 @@ function aplicarConsejos(idGrid, index, check) {
             break;
     }
     storeConsejo.each(function (rec) {
-        if (rec.get('active') && rec.get('cambio')) {
-            storeConsejo.each(function (rec) {
-                if (!rec.get('cambio')) {
-                    rec.set('active', false);
-                }
-            });
-        }
+//        if (rec.get('active') && rec.get('cambio')) {
+//            storeConsejo.each(function (rec) {
+//                if (!rec.get('cambio')) {
+//                    rec.set('active', false);
+//                }
+//            });
+//        }
         if (rec.get('active')) {
             ahorro += parseInt(rec.get('ahorro'));
         }
@@ -207,4 +249,15 @@ function aplicarConsejos(idGrid, index, check) {
     optimizacionTotal = optimizacionTotal.toFixed(2);
     document.getElementById('optimizacionTotalDis').innerHTML = optimizacionTotal + " KWH";
     document.getElementById('ahorroTotalDis').innerHTML = ahorroTotal + "%";
+}
+
+function consumoTotal(){
+    var totalDispositivos = 0;
+    var totalConsumo = 0;
+    storeConsumoDispositivos.each(function (rec) {
+        totalDispositivos += rec.get('cantidad');
+        totalConsumo += rec.get('kwhMes');
+    });
+    document.getElementById('totalDispositivos').innerHTML = totalDispositivos + " Dispositivo(s)";
+    document.getElementById('totalConsumo').innerHTML = totalConsumo.toFixed(2) + " KWH/MES";
 }

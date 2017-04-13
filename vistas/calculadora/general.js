@@ -97,7 +97,6 @@ Ext.onReady(function () {
                 storeConsumoDispositivos.clearGrouping();
                 storeConsumoDispositivos.add(r);
                 storeConsumoDispositivos.group('categoria');
-//                gridConsumoDispositivos.editingPlugin.startEdit(0, 0);
                 gridConsumoDispositivos.getView().refresh();
             }
         }
@@ -106,8 +105,28 @@ Ext.onReady(function () {
     viewConsumo = Ext.create('Ext.panel.Panel', {
         id: 'viewConsumo',
         xtype: 'panel',
-        autoScroll: true,
-        items: [gridConsumoDispositivos]
+        items: [
+            {
+                margin: '0 0 5 0',
+                layout: 'hbox',
+                items: [{
+                        flex: 1,
+                        cls: 'consumoTotal',
+                        title: '<center class="titleAhorro"><strong style="color:#003F72;">DISPOSITIVOS</strong></center>',
+                        html: '<p class="valorTotal" id="totalDispositivos">0 Dispositivo(s)</p>'
+                    },
+                    {
+                        flex: 1,
+                        cls: 'consumoTotal',
+                        title: '<center class="titleAhorro"><strong style="color:#003F72;">CONSUMO TOTAL</strong></center>',
+                        html: '<p class="valorTotal" id="totalConsumo">0 KWH/MES</p>'
+                    }]
+            },
+            {
+                layout: 'fit',
+                autoScroll: true,
+                items: gridConsumoDispositivos
+            }]
     });
 
     viewSemaforo = Ext.create('Ext.panel.Panel', {
@@ -216,8 +235,11 @@ Ext.onReady(function () {
                             limpiarPanelCentral();
                             panelDerecha.show();
                             panelCentral.add(viewConsumo);
-                            storeConsumoDispositivos.group('categoria');
+                            storeConsumoDispositivos.removeAt(storeConsumoDispositivos.find('idMaquina', 23));
+                            storeConsumoDispositivos.removeAt(storeConsumoDispositivos.find('idMaquina', 24));
+                            storeConsumoDispositivos.clearFilter(true);
                             storeConsumoDispositivos.sorters.clear();
+                            storeConsumoDispositivos.group('categoria');
                             btnAtras.hide();
                             fase = 1;
                         }
@@ -234,6 +256,7 @@ Ext.onReady(function () {
                                     sumaTotal += rec.get('kwhMes');
                                 });
                                 limpiarPanelCentral();
+                                agruparDispositivos();
                                 calcularParticipacion();
                                 panelCentral.add(viewSemaforo);
                                 storeConsumoDispositivos.clearGrouping();
@@ -241,7 +264,7 @@ Ext.onReady(function () {
                                     property: 'kwhMes',
                                     direction: 'DESC'
                                 });
-                                cargarDispositivoCasa(storeConsumoFinal.data.items[0]);
+                                cargarDispositivoCasa(storeConsumoDispositivos.data.items[0]);
                                 panelDerecha.hide();
                                 btnAtras.show();
                                 fase = 2;

@@ -38,8 +38,8 @@ Ext.onReady(function () {
         [20, "Otro", 1, 'Electrodomésticos', 150, "img/dis/otro.png"],
         [21, "Otro", 1, 'Electrodomésticos', 150, "img/dis/otro.png"],
         [22, "Otro", 1, 'Electrodomésticos', 150, "img/dis/otro.png"],
-        [23, "Iluminación", 4, 'Otros', 0, "img/dis/iluminacion.png"],
-        [24, "Agua Caliente", 4, 'Otros', 0, "img/dis/aguaCaliente.png"],
+        [23, "Iluminación", 4, 'Otros', 10, "img/dis/iluminacion.png"],
+        [24, "Agua Caliente", 4, 'Otros', 10, "img/dis/aguaCaliente.png"],
         
     ];
 

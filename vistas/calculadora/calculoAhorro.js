@@ -46,6 +46,9 @@ Ext.onReady(function () {
         sorters: [{
                 property: 'cambio',
                 direction: 'DESC'
+            }, {
+                property: 'ahorro',
+                direction: 'DESC'
             }]
     });
 
@@ -54,6 +57,9 @@ Ext.onReady(function () {
         data: dataAhorro,
         sorters: [{
                 property: 'cambio',
+                direction: 'DESC'
+            }, {
+                property: 'ahorro',
                 direction: 'DESC'
             }]
     });
@@ -64,6 +70,9 @@ Ext.onReady(function () {
         sorters: [{
                 property: 'cambio',
                 direction: 'DESC'
+            }, {
+                property: 'ahorro',
+                direction: 'DESC'
             }]
     });
 
@@ -72,6 +81,9 @@ Ext.onReady(function () {
         data: dataAhorro,
         sorters: [{
                 property: 'cambio',
+                direction: 'DESC'
+            }, {
+                property: 'ahorro',
                 direction: 'DESC'
             }]
     });
