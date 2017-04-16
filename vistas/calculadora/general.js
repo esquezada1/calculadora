@@ -81,10 +81,10 @@ Ext.onReady(function () {
             element: 'el',
             click: function (dv) {
                 var record = dv.record;
-                var cantPeriodo = storePeriodos.getById(1).data.cant;
-                var tiempoUso = 10;
+                var cantPeriodo = storePeriodos.getById(record.get('idPeriodo')).get('cant');
+                var tiempoUso = record.get('tiempoUso');
                 var cantidad = 1;
-                var totalConsumo = cantidad * record.data.potencia * tiempoUso * cantPeriodo;
+                var totalConsumo = cantidad * record.get('potencia') * tiempoUso * cantPeriodo;
                 totalConsumo = totalConsumo / 1000;
                 var contDis = 1;
                 storeConsumoDispositivos.each(function (rec) {
@@ -100,12 +100,12 @@ Ext.onReady(function () {
                 var r = Ext.create('ConsumoModel', {
                     idMaquina: record.id,
                     nombreDis: nombreDis,
-                    idCategoria: record.data.idCategoria,
-                    categoria: record.data.categoria,
+                    idCategoria: record.get('idCategoria'),
+                    categoria: record.get('categoria'),
                     cantidad: cantidad,
-                    potencia: record.data.potencia,
+                    potencia: record.get('potencia'),
                     tiempoUso: tiempoUso,
-                    idPeriodo: 1,
+                    idPeriodo: record.get('idPeriodo'),
                     kwhMes: totalConsumo
                 });
                 storeConsumoDispositivos.clearGrouping();
@@ -138,7 +138,6 @@ Ext.onReady(function () {
             },
             {
                 layout: 'fit',
-                autoScroll: true,
                 items: gridConsumoDispositivos
             }]
     });
