@@ -6,7 +6,7 @@ Ext.onReady(function () {
             {name: 'idMaquina', type: 'int'},
             {name: 'nombreDis', type: 'string'},
             {name: 'cantidad', type: 'int'},
-            {name: 'potencia', type: 'int'},
+            {name: 'potencia', type: 'float'},
             {name: 'tiempoUso', type: 'int'},
             {name: 'idPeriodo', type: 'int'},
             {name: 'kwhMes', type: 'float'},
