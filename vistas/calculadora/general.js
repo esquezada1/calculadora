@@ -92,7 +92,11 @@ Ext.onReady(function () {
                         contDis++;
                     }
                 });
-                var nombreDis = record.get('name') + " " + contDis;
+                if (contDis === 1) {
+                    var nombreDis = record.get('name');
+                } else {
+                    var nombreDis = record.get('name') + " " + contDis;
+                }
                 var r = Ext.create('ConsumoModel', {
                     idMaquina: record.id,
                     nombreDis: nombreDis,
@@ -328,6 +332,7 @@ Ext.onReady(function () {
         exactMatch: true,
         caseSensitive: true
     });
+    consumoTotal();
 });
 
 

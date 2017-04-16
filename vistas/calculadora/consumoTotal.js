@@ -26,17 +26,17 @@ Ext.onReady(function () {
     });
 
     var dataConsumosDis = [
-        [1, "Televisor 1", 1, 'Electrodomésticos', 1, 90, 3, 3, 29.39],
-        [2, "Licuadora 1", 1, 'Electrodomésticos', 1, 600, 1, 2, 2.4],
-        [3, "Portátil 1 ", 1, 'Electrodomésticos', 1, 45, 4, 3, 0.72],
-        [4, "Cocina de inducción 1", 1, 'Electrodomésticos', 1, 2000, 90, 4, 90],
-        [5, "Lavadora 1", 1, 'Electrodomésticos', 1, 50.23, 3, 2, 0.6],
-        [6, "Refrigeradora 1", 1, 'Electrodomésticos', 1, 40.83, 24, 3, 29.39],
-        [8, "Plancha 1", 1, 'Electrodomésticos', 1, 1200, 4, 1, 4.8],
-        [13, "Horno Eléctrico 1", 1, 'Electrodomésticos', 1, 0.74, 1, 1, 2.96],
-        [16, "Fluorescente 1", 2, 'Iluminación', 1, 23, 5, 3, 3.22],
-        [18, "Ducha Eléctrica 1", 3, 'Agua Caliente', 1, 3300, 20, 1, 66],
-        [21, "Equipo de Sonido 1", 1, 'Electrodomésticos', 1, 100, 20, 1, 2]
+        [1, "Televisor", 1, 'Electrodomésticos', 1, 90, 3, 3, 29.39],
+        [2, "Licuadora", 1, 'Electrodomésticos', 1, 600, 1, 2, 2.4],
+        [3, "Portátil", 1, 'Electrodomésticos', 1, 45, 4, 3, 0.72],
+        [4, "Cocina de inducción", 1, 'Electrodomésticos', 1, 2000, 90, 4, 90],
+        [5, "Lavadora", 1, 'Electrodomésticos', 1, 50.23, 3, 2, 0.6],
+        [6, "Refrigeradora", 1, 'Electrodomésticos', 1, 40.83, 24, 3, 29.39],
+        [8, "Plancha", 1, 'Electrodomésticos', 1, 1200, 4, 1, 4.8],
+        [13, "Horno Eléctrico", 1, 'Electrodomésticos', 1, 0.74, 1, 1, 2.96],
+        [16, "Fluorescente", 2, 'Iluminación', 1, 23, 5, 3, 3.22],
+        [18, "Ducha Eléctrica", 3, 'Agua Caliente', 1, 3300, 20, 1, 66],
+        [21, "Equipo de Sonido", 1, 'Electrodomésticos', 1, 100, 20, 1, 2]
     ];
 
     storeConsumoDispositivos = Ext.create('Ext.data.Store', {
@@ -44,12 +44,8 @@ Ext.onReady(function () {
         groupField: 'categoria',
         data: dataConsumosDis,
         listeners: {
-            datachanged: function () {
-                consumoTotal();
-            },
-            update: function () {
-                consumoTotal();
-            }
+            datachanged: consumoTotal,
+            update: consumoTotal
         }
     });
 
