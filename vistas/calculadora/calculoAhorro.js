@@ -35,9 +35,9 @@ Ext.onReady(function () {
         {id: 17, idMaquina: 10, consejo: 'Instalar toldos ( carpas) en las ventanas ', ahorro: 30},
         {id: 18, idMaquina: 13, consejo: 'No abrir innecesariamente la puerta del horno ', ahorro: 20},
         {id: 19, idMaquina: 13, consejo: 'Se recomienda usar microondas', ahorro: 70},
-        {id: 20, idMaquina: 23, consejo: 'Cambiar focos incandecentes a led', ahorro: 30, cambio: true},
-        {id: 21, idMaquina: 23, consejo: 'Cambiar focos incandecentes a fluoroscentes', ahorro: 30, cambio: true},
-        {id: 22, idMaquina: 23, consejo: 'Cambiar de Fluorescentes a Led ', ahorro: 30, cambio: true}
+        {id: 20, idMaquina: 23, consejo: 'Cambiar focos incandecentes a led', ahorro: 90, cambio: true},
+        {id: 21, idMaquina: 23, consejo: 'Cambiar focos incandecentes a fluoroscentes', ahorro: 80, cambio: true},
+        {id: 22, idMaquina: 23, consejo: 'Cambiar de Fluorescentes a Led ', ahorro: 60, cambio: true}
     ];
 
     storeConsejos1 = Ext.create('Ext.data.Store', {
@@ -89,7 +89,7 @@ Ext.onReady(function () {
     });
 
     var columnsGrids = [
-        {header: '<center>Consejo</center>', dataIndex: 'consejo', width: 289,
+        {header: '<center>Optimización de consumo</center>', dataIndex: 'consejo', width: 289,
             renderer: function (value, metaData, record, rowIdx, colIdx, store) {
                 metaData.tdAttr = 'data-qtip=\"' + value + '\"';
                 var srcIcon = "";
@@ -109,7 +109,7 @@ Ext.onReady(function () {
             listeners: {
                 checkchange: function (comp, rowIndex, checked, eOpts, a, b, c) {
                     var gridId = comp.up('grid').getId();
-                    aplicarConsejos(gridId, rowIndex, checked);
+                    aplicarConsejos(gridId);
                 }
             }
         }
@@ -117,11 +117,11 @@ Ext.onReady(function () {
 
     var viewConfig = {
         loadingText: 'Cargando...',
-        emptyText: '<br><center>No hay consejos disponibles</center>'
+        emptyText: '<br><center>No tiene optimización de consumo</center>'
     };
 
     gridConsejos1 = Ext.create('Ext.panel.Panel', {
-        flex: 1,
+        width: '50%',
         height: heightConsejos,
         cls: 'panel-consejos',
         items: [
@@ -131,7 +131,7 @@ Ext.onReady(function () {
                         width: '20%',
                         height: heightGridConsejos,
                         xtype: 'panel',
-                        html: '<img class="img-consumidores" id="img-consumidor1">'
+                        html: '<img class="img-consumidores" id="img-consumidor1"><center id="nombre-consumidor1"></center>'
                     },
                     {
                         id: 'gridConsejos1',
@@ -143,7 +143,8 @@ Ext.onReady(function () {
                         columnLines: true,
                         cls: 'tablas-calculadora',
                         store: storeConsejos1,
-                        columns: columnsGrids
+                        columns: columnsGrids,
+                        viewConfig: viewConfig
                     }]
             },
             {
@@ -166,12 +167,11 @@ Ext.onReady(function () {
                         title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 85%;">PORCENTAJE DE<br>AHORRO</strong></center>',
                         html: '<p class="valorTotalDis" id="ahorroDis1">0%</p>'
                     }]
-            }],
-        viewConfig: viewConfig
+            }]
     });
 
     gridConsejos2 = Ext.create('Ext.panel.Panel', {
-        flex: 1,
+        width: '50%',
         height: heightConsejos,
         cls: 'panel-consejos',
         items: [
@@ -181,7 +181,7 @@ Ext.onReady(function () {
                         width: '20%',
                         height: heightGridConsejos,
                         xtype: 'panel',
-                        html: '<img class="img-consumidores" id="img-consumidor2">'
+                        html: '<img class="img-consumidores" id="img-consumidor2"><center id="nombre-consumidor2"></center>'
                     },
                     {
                         id: 'gridConsejos2',
@@ -193,7 +193,8 @@ Ext.onReady(function () {
                         columnLines: true,
                         cls: 'tablas-calculadora',
                         store: storeConsejos2,
-                        columns: columnsGrids
+                        columns: columnsGrids,
+                        viewConfig: viewConfig
                     }]
             },
             {
@@ -216,12 +217,11 @@ Ext.onReady(function () {
                         title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 85%;">PORCENTAJE DE<br>AHORRO</strong></center>',
                         html: '<p class="valorTotalDis" id="ahorroDis2">0%</p>'
                     }]
-            }],
-        viewConfig: viewConfig
+            }]
     });
 
     gridConsejos3 = Ext.create('Ext.panel.Panel', {
-        flex: 1,
+        width: '50%',
         height: heightConsejos,
         cls: 'panel-consejos',
         items: [
@@ -231,7 +231,7 @@ Ext.onReady(function () {
                         width: '20%',
                         height: heightGridConsejos,
                         xtype: 'panel',
-                        html: '<img class="img-consumidores" id="img-consumidor3">'
+                        html: '<img class="img-consumidores" id="img-consumidor3"><center id="nombre-consumidor3"></center>'
                     },
                     {
                         id: 'gridConsejos3',
@@ -243,7 +243,8 @@ Ext.onReady(function () {
                         columnLines: true,
                         cls: 'tablas-calculadora',
                         store: storeConsejos3,
-                        columns: columnsGrids
+                        columns: columnsGrids,
+                        viewConfig: viewConfig
                     }]
             },
             {
@@ -266,12 +267,11 @@ Ext.onReady(function () {
                         title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 85%;">PORCENTAJE DE<br>AHORRO</strong></center>',
                         html: '<p class="valorTotalDis" id="ahorroDis3">0%</p>'
                     }]
-            }],
-        viewConfig: viewConfig
+            }]
     });
 
     gridConsejos4 = Ext.create('Ext.panel.Panel', {
-        flex: 1,
+        width: '50%',
         height: heightConsejos,
         cls: 'panel-consejos',
         items: [
@@ -281,7 +281,7 @@ Ext.onReady(function () {
                         width: '20%',
                         height: heightGridConsejos,
                         xtype: 'panel',
-                        html: '<img class="img-consumidores" id="img-consumidor4">'
+                        html: '<img class="img-consumidores" id="img-consumidor4"><center id="nombre-consumidor4"></center>'
                     },
                     {
                         id: 'gridConsejos4',
@@ -293,7 +293,8 @@ Ext.onReady(function () {
                         columnLines: true,
                         cls: 'tablas-calculadora',
                         store: storeConsejos4,
-                        columns: columnsGrids
+                        columns: columnsGrids,
+                        viewConfig: viewConfig
                     }]
             },
             {
@@ -316,16 +317,7 @@ Ext.onReady(function () {
                         title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 85%;">PORCENTAJE DE<br>AHORRO</strong></center>',
                         html: '<p class="valorTotalDis" id="ahorroDis4">0%</p>'
                     }]
-            }],
-        viewConfig: viewConfig,
-        listeners: {
-            edit: function (thisObj, record, item, index, e, eOpts) {
-                console.log(record);
-            },
-            selectionchange: function () {
-                console.log('si');
-            }
-        }
+            }]
     });
 
     viewConsejos = Ext.create('Ext.panel.Panel', {

@@ -121,7 +121,7 @@ Ext.onReady(function () {
                 enableGroupingMenu: false
             }],
         columns: [
-            {header: "<center class='title-column'>Dispositivo</center>", width: 200, dataIndex: 'nombreDis', name: 'nombreDis',
+            {header: "<center class='title-column'>DISPOSITIVO</center>", width: 200, dataIndex: 'nombreDis', name: 'nombreDis',
                 hideable: false,
                 summaryType: 'count',
                 summaryRenderer: function (value, summaryData, dataIndex) {
@@ -129,12 +129,12 @@ Ext.onReady(function () {
                 }
             },
             {
-                header: '<center class="title-column">Categoria</center>',
+                header: '<center class="title-column">CATEGORÍA</center>',
                 width: 180,
                 sortable: true,
                 dataIndex: 'categoria'
             },
-            {header: "<center class='title-column'>Cantidad</center>", width: 130, dataIndex: 'cantidad', name: 'cantidad',
+            {header: "<center class='title-column'>CANTIDAD</center>", width: 130, dataIndex: 'cantidad', name: 'cantidad',
                 editor: {
                     xtype: 'textfield',
                     value: 1,
@@ -152,7 +152,7 @@ Ext.onReady(function () {
                     xtype: 'numberfield'
                 }
             },
-            {header: "<center class='title-column'>Potencia</center>", width: 120, dataIndex: 'potencia', name: 'potencia',
+            {header: "<center class='title-column'>POTENCIA</center>", width: 115, dataIndex: 'potencia', name: 'potencia',
                 editor: {
                     xtype: 'textfield',
                     value: 1,
@@ -170,7 +170,7 @@ Ext.onReady(function () {
                     xtype: 'numberfield'
                 }
             },
-            {header: "<center class='title-column'>Tiempo Uso</center>", width: 110, dataIndex: 'tiempoUso', name: 'tiempoUso',
+            {header: "<center class='title-column'>TIEMPO DE USO</center>", width: 125, dataIndex: 'tiempoUso', name: 'tiempoUso',
                 editor: {
                     xtype: 'textfield',
                     value: 1,
@@ -188,7 +188,7 @@ Ext.onReady(function () {
                     xtype: 'numberfield'
                 }
             },
-            {header: "<center class='title-column'>Periodo</center>", width: 120, dataIndex: 'idPeriodo', name: 'idPeriodo',
+            {header: "<center class='title-column'>PERÍODO</center>", width: 110, dataIndex: 'idPeriodo', name: 'idPeriodo',
                 renderer: formatoPeriodos,
                 editor: {
                     xtype: 'combobox',
@@ -198,7 +198,7 @@ Ext.onReady(function () {
                     valueField: 'id'
                 }
             },
-            {header: "<center class='title-column'>kWh(mes)</center>", width: 100, dataIndex: 'kwhMes', name: 'kwhMes',
+            {header: "<center class='title-column'>kWh/MES</center>", width: 100, dataIndex: 'kwhMes', name: 'kwhMes',
                 hideable: false,
                 summaryType: 'sum',
                 renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {

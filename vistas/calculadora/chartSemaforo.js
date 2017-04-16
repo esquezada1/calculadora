@@ -4,6 +4,7 @@ Ext.onReady(function () {
         extend: 'Ext.data.Model',
         fields: [
             {name: 'idMaquina', type: 'int'},
+            {name: 'nombreDis', type: 'string'},
             {name: 'cantidad', type: 'int'},
             {name: 'potencia', type: 'int'},
             {name: 'tiempoUso', type: 'int'},

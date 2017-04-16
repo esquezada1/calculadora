@@ -285,10 +285,10 @@ Ext.onReady(function () {
                     }, {
                         id: 'btnFase3',
                         cls: 'itemMenu fase3',
-                        text: 'CALCULO DE<br>AHORRO',
+                        text: 'CÁLCULO DE<br>AHORRO',
                         handler: function () {
                             fase = 3;
-                            Ext.getCmp('panelCentral').setTitle('<center class="title-general">CALCULO DE AHORRO</center>');
+                            Ext.getCmp('panelCentral').setTitle('<center class="title-general">CÁLCULO DE AHORRO</center>');
                             limpiarPanelCentral();
                             panelCentral.add(viewAhorro);
                             limpiarFiltros();

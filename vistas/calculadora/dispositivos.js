@@ -18,10 +18,10 @@ Ext.onReady(function () {
     var data = [
         [1, "Televisor", 1, 'Electrodomésticos', 100, "img/dis/televisor.png"],
         [2, "Licuadora", 1, 'Electrodomésticos', 600, "img/dis/licuadora.png"],
-        [3, "Portatil", 1, 'Electrodomésticos', 45, "img/dis/portatil.png"],
+        [3, "Portátil", 1, 'Electrodomésticos', 45, "img/dis/portatil.png"],
         [4, "Cocina de inducción", 1, 'Electrodomésticos', 4400, "img/dis/cocina.png"],
-        [5, "Lavadora", 1, 'Electrodomésticos', 321, "img/dis/lavadora.png"],
-        [6, "Refrigeradora", 1, 'Electrodomésticos', 150, "img/dis/refrigeradora.png"],
+        [5, "Lavadora", 1, 'Electrodomésticos', 321, "img/dis/lavadora.png", 40],
+        [6, "Refrigeradora", 1, 'Electrodomésticos', 150, "img/dis/refrigeradora.png", 60],
         [7, "Olla Arrocera", 1, 'Electrodomésticos', 700, "img/dis/olla.png"],
         [8, "Plancha", 1, 'Electrodomésticos', 1200, "img/dis/plancha.png"],
         [9, "Microondas", 1, 'Electrodomésticos', 1000, "img/dis/microondas.png"],
@@ -35,23 +35,23 @@ Ext.onReady(function () {
         [17, "Incandescente", 2, 'Iluminación', 40, "img/dis/incandescente.png"],
         [18, "Ducha Eléctrica", 3, 'Agua Caliente', 100, "img/dis/ducha.png"],
         [19, "Calefón a Gas", 3, 'Agua Caliente', 150, "img/dis/gas.png"],
-        [20, "Otro", 1, 'Electrodomésticos', 150, "img/dis/otro.png"],
-        [21, "Otro", 1, 'Electrodomésticos', 150, "img/dis/otro.png"],
+        [20, "Sanduchera", 1, 'Electrodomésticos', 150, "img/dis/sanduchera.png"],
+        [21, "Equipo de Sonido", 1, 'Electrodomésticos', 150, "img/dis/equipo-sonido.png"],
         [22, "Otro", 1, 'Electrodomésticos', 150, "img/dis/otro.png"],
         [23, "Iluminación", 4, 'Otros', 10, "img/dis/iluminacion.png"],
-        [24, "Agua Caliente", 4, 'Otros', 10, "img/dis/aguaCaliente.png"],
-        
+        [24, "Agua Caliente", 4, 'Otros', 10, "img/dis/aguaCaliente.png"]
     ];
 
     Ext.define('DispositivosModel', {
         extend: 'Ext.data.Model',
         fields: [
             {name: 'id', type: 'int'},
-            'name',
-            'idCategoria',
-            'categoria',
-            'potencia',
-            'url'
+            {name: 'name', type: 'string'},
+            {name: 'idCategoria', type: 'int'},
+            {name: 'categoria', type: 'string'},
+            {name: 'potencia', type: 'int'},
+            {name: 'url', type: 'string'},
+            {name: 'optimo', type: 'int'}
         ]
     });
 

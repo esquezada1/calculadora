@@ -82,6 +82,7 @@ function calcularParticipacion() {
     storeConsumoDispositivos.each(function (rec) {
         var r = Ext.create('ConsumoModelFinal', {
             idMaquina: rec.get('idMaquina'),
+            nombreDis: rec.get('nombreDis'),
             cantidad: rec.get('cantidad'),
             potencia: rec.get('potencia'),
             tiempoUso: rec.get('tiempoUso'),
@@ -109,54 +110,81 @@ function cargarDispositivoCasa(record) {
 }
 var mayorConsumo = 0;
 function filtrarStores() {
+    gridConsejos1.hide();
+    gridConsejos2.hide();
+    gridConsejos3.hide();
+    gridConsejos4.hide();
+    var storeDis, idConsumoDis, idGridDis, idImgDis, idNameDis;
     var cont = 0;
     mayorConsumo = 0;
     storeConsumoDispositivos.each(function (rec) {
         var consumoDis = rec.get('kwhMes').toFixed(2);
         switch (cont) {
             case 0:
+                gridConsejos1.show();
                 storeConsejos1.filter({
                     property: 'idMaquina',
                     exactMatch: true,
                     value: rec.get('idMaquina')
                 });
                 document.getElementById('img-consumidor1').src = storeDispositivos.getById(rec.get('idMaquina')).get('url');
+                document.getElementById('nombre-consumidor1').innerHTML = rec.get('nombreDis');
                 document.getElementById('consumoDis1').innerHTML = consumoDis + " KWH";
                 mayorConsumo += rec.get('kwhMes');
+                aplicarConsejos('gridConsejos1');
                 break;
             case 1:
+                gridConsejos2.show();
                 storeConsejos2.filter({
                     property: 'idMaquina',
                     exactMatch: true,
                     value: rec.get('idMaquina')
                 });
                 document.getElementById('img-consumidor2').src = storeDispositivos.getById(rec.get('idMaquina')).get('url');
+                document.getElementById('nombre-consumidor2').innerHTML = rec.get('nombreDis');
                 document.getElementById('consumoDis2').innerHTML = consumoDis + " KWH";
                 mayorConsumo += rec.get('kwhMes');
+                aplicarConsejos('gridConsejos2');
                 break;
             case 2:
+                gridConsejos3.show();
                 storeConsejos3.filter({
                     property: 'idMaquina',
                     exactMatch: true,
                     value: rec.get('idMaquina')
                 });
                 document.getElementById('img-consumidor3').src = storeDispositivos.getById(rec.get('idMaquina')).get('url');
+                document.getElementById('nombre-consumidor3').innerHTML = rec.get('nombreDis');
                 document.getElementById('consumoDis3').innerHTML = consumoDis + " KWH";
                 mayorConsumo += rec.get('kwhMes');
+                aplicarConsejos('gridConsejos3');
                 break;
             case 3:
+                gridConsejos4.show();
                 storeConsejos4.filter({
                     property: 'idMaquina',
                     exactMatch: true,
                     value: rec.get('idMaquina')
                 });
                 document.getElementById('img-consumidor4').src = storeDispositivos.getById(rec.get('idMaquina')).get('url');
+                document.getElementById('nombre-consumidor4').innerHTML = rec.get('nombreDis');
                 document.getElementById('consumoDis4').innerHTML = consumoDis + " KWH";
                 mayorConsumo += rec.get('kwhMes');
+                aplicarConsejos('gridConsejos4');
                 break;
         }
         cont++;
+//        storeDis.filter({
+//            property: 'idMaquina',
+//            exactMatch: true,
+//            value: rec.get('idMaquina')
+//        });
+//        document.getElementById(idImgDis).src = storeDispositivos.getById(rec.get('idMaquina')).get('url');
+//        document.getElementById(idNameDis).innerHTML = rec.get('nombreDis');
+//        document.getElementById(idConsumoDis).innerHTML = consumoDis + " KWH";
+//        aplicarConsejos(idGridDis);
     });
+
     mayorConsumo = mayorConsumo.toFixed(2);
     document.getElementById('consumoTotalDis').innerHTML = mayorConsumo + " KWH";
 }
@@ -188,7 +216,7 @@ function limpiarFiltros() {
     });
 }
 
-function aplicarConsejos(idGrid, index, check) {
+function aplicarConsejos(idGrid) {
     var optimizacion = 0;
     var ahorro = 0;
     var storeConsejo;
@@ -243,7 +271,13 @@ function aplicarConsejos(idGrid, index, check) {
     document.getElementById(idDivAhorro).innerHTML = ahorro + "%";
     var optimizacionTotal = 0;
     var ahorroTotal = 0;
-    for (var i = 0; i < 4; i++) {
+    var limit = 0;
+    if (storeConsumoFinal.data.items.length < 4) {
+        limit = storeConsumoFinal.data.items.length;
+    } else {
+        limit = 4;
+    }
+    for (var i = 0; i < limit; i++) {
         optimizacionTotal += storeConsumoFinal.data.items[i].get('kwhMes');
     }
     ahorroTotal = (1 - optimizacionTotal / mayorConsumo) * 100;
