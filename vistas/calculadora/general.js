@@ -78,14 +78,24 @@ Ext.onReady(function () {
         multiSelect: true,
         autoScroll: true,
         listeners: {
-            select: function (dv, record, item, index, e) {
+            element: 'el',
+            click: function (dv) {
+                var record = dv.record;
                 var cantPeriodo = storePeriodos.getById(1).data.cant;
                 var tiempoUso = 10;
                 var cantidad = 1;
                 var totalConsumo = cantidad * record.data.potencia * tiempoUso * cantPeriodo;
                 totalConsumo = totalConsumo / 1000;
+                var contDis = 1;
+                storeConsumoDispositivos.each(function (rec) {
+                    if (rec.get('idMaquina') === record.id) {
+                        contDis++;
+                    }
+                });
+                var nombreDis = record.get('name') + " " + contDis;
                 var r = Ext.create('ConsumoModel', {
                     idMaquina: record.id,
+                    nombreDis: nombreDis,
                     idCategoria: record.data.idCategoria,
                     categoria: record.data.categoria,
                     cantidad: cantidad,
@@ -236,8 +246,8 @@ Ext.onReady(function () {
                             limpiarPanelCentral();
                             panelDerecha.show();
                             panelCentral.add(viewConsumo);
-                            storeConsumoDispositivos.removeAt(storeConsumoDispositivos.find('idMaquina', 23));
-                            storeConsumoDispositivos.removeAt(storeConsumoDispositivos.find('idMaquina', 24));
+                            storeConsumoDispositivos.remove(storeConsumoDispositivos.getById('Iluminación'));
+                            storeConsumoDispositivos.remove(storeConsumoDispositivos.getById('Agua Caliente'));
                             storeConsumoDispositivos.clearFilter(true);
                             storeConsumoDispositivos.sorters.clear();
                             storeConsumoDispositivos.group('categoria');

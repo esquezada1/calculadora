@@ -41,6 +41,7 @@ function agruparDispositivos() {
     if (consumoIluminacion !== 0) {
         var rIluminacion = Ext.create('ConsumoModel', {
             idMaquina: 23,
+            nombreDis: 'Iluminación',
             idCategoria: 4,
             categoria: 'Otros',
             cantidad: 0,
@@ -54,6 +55,7 @@ function agruparDispositivos() {
     if (consumoAguaCaliente !== 0) {
         var rAguaCaliente = Ext.create('ConsumoModel', {
             idMaquina: 24,
+            nombreDis: 'Agua Caliente',
             idCategoria: 4,
             categoria: 'Otros',
             cantidad: 0,
@@ -102,7 +104,7 @@ function mostrarNotificacion(text) {
 function cargarDispositivoCasa(record) {
     var srcImg = storeDispositivos.getById(record.get('idMaquina')).data.url;
     document.getElementById('dis-casa').src = srcImg;
-    document.getElementById('tit-casa').innerHTML = formatoDispositivos(record.get('idMaquina'));
+    document.getElementById('tit-casa').innerHTML = record.get('nombreDis');
     document.getElementById('cons-casa').innerHTML = record.get('kwhMes').toFixed(2) + ' KWh/MES';
 }
 var mayorConsumo = 0;

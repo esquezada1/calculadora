@@ -72,9 +72,8 @@ Ext.onReady(function () {
                     trackMouse: true,
                     style: 'background-color: white !important; color: black !important;',
                     renderer: function (storeItem, item) {
-                        var consumo = storeItem.get('kwhMes').toFixed(2);
-                        var urlImg = storeDispositivos.getById(storeItem.get('idMaquina')).data.url;
-                        this.setTitle('<center><strong>' + formatoDispositivos(storeItem.get('idMaquina')).toUpperCase() + '</strong><center>');
+                        var urlImg = storeDispositivos.getById(storeItem.get('idMaquina')).get('url');
+                        this.setTitle('<center><strong>' + storeItem.get('nombreDis').toUpperCase() + '</strong><center>');
                         var conten = '<center>';
                         conten += '<img src="' + urlImg + '" width="45" height="45">';
                         conten += '</center>';
@@ -111,7 +110,7 @@ Ext.onReady(function () {
     });
 
     selectItemChart = function (storeItem) {
-        var name = storeItem.get('participacion'),
+        var name = storeItem.get('nombreDis'),
                 series = chartSemaforo.series.get(0),
                 i, items, l;
 
@@ -119,7 +118,7 @@ Ext.onReady(function () {
         series.unHighlightItem();
         series.cleanHighlights();
         for (i = 0, items = series.items, l = items.length; i < l; i++) {
-            if (name == items[i].storeItem.get('participacion')) {
+            if (name == items[i].storeItem.get('nombreDis')) {
                 series.highlightItem(items[i]);
                 break;
             }

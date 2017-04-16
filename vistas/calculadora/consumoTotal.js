@@ -10,9 +10,10 @@ var storePeriodos;
 Ext.onReady(function () {
     Ext.define('ConsumoModel', {
         extend: 'Ext.data.Model',
-        idProperty: 'idMaquina',
+        idProperty: 'nombreDis',
         fields: [
             {name: 'idMaquina', type: 'int'},
+            {name: 'nombreDis', type: 'string'},
             {name: 'idCategoria', type: 'int'},
             {name: 'categoria', type: 'string'},
             {name: 'cantidad', type: 'int'},
@@ -120,8 +121,7 @@ Ext.onReady(function () {
                 enableGroupingMenu: false
             }],
         columns: [
-            {header: "<center class='title-column'>Dispositivo</center>", width: 200, dataIndex: 'idMaquina', name: 'idMaquina',
-                renderer: formatoDispositivos, filter: {type: 'list', store: storeDispositivos},
+            {header: "<center class='title-column'>Dispositivo</center>", width: 200, dataIndex: 'nombreDis', name: 'nombreDis',
                 hideable: false,
                 summaryType: 'count',
                 summaryRenderer: function (value, summaryData, dataIndex) {
