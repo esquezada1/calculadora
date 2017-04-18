@@ -43,7 +43,7 @@ and open the template in the editor.
             }
         </script>-->
     </head>
-    <body>
+    <body oncontextmenu="return false">
         <header></header>
         <nav></nav>
         <footer>            

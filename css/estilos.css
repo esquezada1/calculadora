@@ -60,6 +60,18 @@ body{
     color: #999;
 }
 
+.ventana-ayuda{
+    padding: 1% !important;
+    border-width: 3px !important;
+    border-color: #EAAB00 !important;
+}
+
+.ventana-ayuda .x-window-header{
+    border-width: 3px !important;
+    border-color: #EAAB00 !important;
+    background-color: #003F72 !important;
+}
+
 .x-grid-group-hd-collapsible .x-grid-group-title {
     background : none !important;
     background-image: none !important;
@@ -144,6 +156,19 @@ body{
     vertical-align: middle;
     width: 32px !important;
     height: 50px;
+}
+
+.icon-ayuda {
+    background-image: url(../img/help.png) !important;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+#menuContextDis{
+    width: 80px !important;
 }
 
 .btnNextFase{

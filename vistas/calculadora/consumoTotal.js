@@ -121,6 +121,74 @@ Ext.onReady(function () {
                     storeConsumoDispositivos.removeAll();
                     gridConsumoDispositivos.getView().refresh();
                 }
+            },
+            {
+                xtype: 'button',
+                iconCls: 'icon-ayuda',
+                text: 'Instrucciones',
+                handler: function () {
+                    var conten = '<P ALIGN=CENTER STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES"><B>Instrucciones de cómo usar la calculadora </B></SPAN>'
+                            + '</P>'
+                            + '<OL>'
+                            + '	<LI><P STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES"><B>Calculo'
+                            + '	de consumo </B></SPAN>'
+                            + '	</P>'
+                            + '</OL>'
+                            + '<P STYLE="margin-bottom: 0.11in"><IMG SRC="img/ayuda/inst1.png" NAME="Imagen 16" ALIGN=BOTTOM WIDTH=100 HEIGHT=19 BORDER=0>'
+                            + '  <SPAN LANG="es-ES">Se refiere a que solo puede modificar las'
+                            + 'casillas amarillas </SPAN>'
+                            + '</P>'
+                            + '<P ALIGN=JUSTIFY STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES">Se'
+                            + 'calcula el consumo total mensual (kWh/mes) según los'
+                            + 'electrodomésticos o cualquier otro dispositivo que se posee en el'
+                            + 'hogar. Aparecerá por defecto en la tabla un ejemplo del consumo'
+                            + 'promedio de los dispositivos más comunes.</SPAN></P>'
+                            + '<UL>'
+                            + '	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES">Los'
+                            + '	dispositivos electrónicos están agrupados por categorías como'
+                            + '	electrodomésticos, iluminación y agua caliente sanitaria. Si desea'
+                            + '	un cálculo más detallado del consumo de cada una de las categorías'
+                            + '	dar click el botón  '
+                            + '	<IMG SRC="img/ayuda/inst2.png" NAME="Imagen 4" ALIGN=BOTTOM WIDTH=135 HEIGHT=17 BORDER=0>.'
+                            + '	</SPAN>'
+                            + '	</P>'
+                            + '	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES">Para'
+                            + '	adaptar los datos a su realidad, dar click en la imagen de los'
+                            + '	dispositivos para agregar otro a la tabla, y solo cambie la cantidad'
+                            + '	del conjunto de dispositivos, la potencia, uso del tiempo y período.</SPAN></P>'
+                            + '	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES">Si'
+                            + '	desea eliminar un dispositivo de la tabla haga click en la '
+                            + '	<IMG SRC="img/ayuda/inst3.png" NAME="Imagen 2" ALIGN=BOTTOM WIDTH=28 HEIGHT=22 BORDER=0>'
+                            + '	o desea volver a llenarla para un nuevo cálculo haga click en  '
+                            + '	<IMG SRC="img/ayuda/inst4.png" NAME="Imagen 3" ALIGN=BOTTOM WIDTH=82 HEIGHT=16 BORDER=0>'
+                            + '	. </SPAN>'
+                            + '	</P>'
+                            + '	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES">En'
+                            + '	la casilla tiempo de uso, se refiere al tiempo que el dispositivo'
+                            + '	está encendido. </SPAN>'
+                            + '	</P>'
+                            + '	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES">En'
+                            + '	la casilla período se puede seleccionar minutos por día, horas al'
+                            + '	día, horas a la semana u horas al mes. (Ejemplo.: 15 minutos al'
+                            + '	día, 2 horas al día, 48 horas a la semana, 100 horas al mes). </SPAN>'
+                            + '	</P>'
+                            + '	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES">En'
+                            + '	la casilla Potencia, se refiere al consumo de energía por hora'
+                            + '	(Watts). Si necesita adaptarlo a sus necesidades, mire en los'
+                            + '	laterales o debajo de su dispositivo se encuentran los datos de'
+                            + '	placa del consumo de cada uno de ellos, por ejemplo, 20W o 250W. </SPAN>'
+                            + '	</P>'
+                            + '	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES">'
+                            + '	Para conocer la forma en que se obtiene la potencia de cada dipositivo,'
+                            + '	se debe realizar clic derecho sobre cualquiera de estos ubicados en la parte derecha'
+                            + '	y luego seleccionar la opción ayuda.'
+                            + '	</SPAN>'
+                            + '	</P>'
+                            + '</UL>';
+                    abrirVentanaAyudaDis();
+                    ventanaAyudaDis.setTitle("Instrucciones");
+                    ventanaAyudaDis.body.update(conten);
+                }
             }
         ],
         features: [

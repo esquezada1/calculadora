@@ -4,6 +4,7 @@ var sumaTotal = 0;
 var btnSiguiente, btnAtras, fase = 1;
 var panelDerecha, panelCentral;
 var viewConsumo, viewSemaforo, viewAhorro;
+var ventanaAyudaDis;
 Ext.require([
     'Ext.data.*',
     'Ext.util.*',
@@ -75,43 +76,68 @@ Ext.onReady(function () {
         id: 'maquinas',
         itemSelector: 'div.phone',
         overItemCls: 'phone-hover',
-        multiSelect: true,
+        multiSelect: false,
         autoScroll: true,
         listeners: {
-            element: 'el',
-            click: function (dv) {
-                var record = dv.record;
-                var cantPeriodo = storePeriodos.getById(record.get('idPeriodo')).get('cant');
-                var tiempoUso = record.get('tiempoUso');
-                var cantidad = 1;
-                var totalConsumo = cantidad * record.get('potencia') * tiempoUso * cantPeriodo;
-                totalConsumo = totalConsumo / 1000;
-                var contDis = 1;
-                storeConsumoDispositivos.each(function (rec) {
-                    if (rec.get('idMaquina') === record.id) {
-                        contDis++;
+            click: {
+                element: 'el', //bind to the underlying el property on the panel
+                fn: function (dv) {
+                    var record = dv.record;
+                    var cantPeriodo = storePeriodos.getById(record.get('idPeriodo')).get('cant');
+                    var tiempoUso = record.get('tiempoUso');
+                    var cantidad = 1;
+                    var totalConsumo = cantidad * record.get('potencia') * tiempoUso * cantPeriodo;
+                    totalConsumo = totalConsumo / 1000;
+                    var contDis = 1;
+                    storeConsumoDispositivos.each(function (rec) {
+                        if (rec.get('idMaquina') === record.id) {
+                            contDis++;
+                        }
+                    });
+                    if (contDis === 1) {
+                        var nombreDis = record.get('name');
+                    } else {
+                        var nombreDis = record.get('name') + " " + contDis;
                     }
-                });
-                if (contDis === 1) {
-                    var nombreDis = record.get('name');
-                } else {
-                    var nombreDis = record.get('name') + " " + contDis;
+                    var r = Ext.create('ConsumoModel', {
+                        idMaquina: record.id,
+                        nombreDis: nombreDis,
+                        idCategoria: record.get('idCategoria'),
+                        categoria: record.get('categoria'),
+                        cantidad: cantidad,
+                        potencia: record.get('potencia'),
+                        tiempoUso: tiempoUso,
+                        idPeriodo: record.get('idPeriodo'),
+                        kwhMes: totalConsumo
+                    });
+                    storeConsumoDispositivos.clearGrouping();
+                    storeConsumoDispositivos.add(r);
+                    storeConsumoDispositivos.group('categoria');
+                    gridConsumoDispositivos.getView().refresh();
                 }
-                var r = Ext.create('ConsumoModel', {
-                    idMaquina: record.id,
-                    nombreDis: nombreDis,
-                    idCategoria: record.get('idCategoria'),
-                    categoria: record.get('categoria'),
-                    cantidad: cantidad,
-                    potencia: record.get('potencia'),
-                    tiempoUso: tiempoUso,
-                    idPeriodo: record.get('idPeriodo'),
-                    kwhMes: totalConsumo
-                });
-                storeConsumoDispositivos.clearGrouping();
-                storeConsumoDispositivos.add(r);
-                storeConsumoDispositivos.group('categoria');
-                gridConsumoDispositivos.getView().refresh();
+            },
+            contextmenu: {
+                element: 'el', //bind to the underlying body property on the panel
+                fn: function (e) {
+                    var record = e.record;
+                    var contextMenu = Ext.create('Ext.menu.Menu', {
+                        id: 'menuContextDis',
+                        items: [
+                            {
+                                iconCls: 'icon-ayuda',
+                                text: 'Ayuda',
+                                handler: function () {
+                                    abrirVentanaAyudaDis();
+                                    ventanaAyudaDis.setTitle("Potencia de " + record.get('name'));
+                                    ventanaAyudaDis.body.update(record.get('ayuda'));
+                                    Ext.destroy(contextMenu);
+                                }
+                            }
+                        ]
+                    });
+                    e.stopEvent();
+                    contextMenu.showAt(e.getXY());
+                }
             }
         }
     });
@@ -334,4 +360,54 @@ Ext.onReady(function () {
     consumoTotal();
 });
 
-
+function abrirVentanaAyudaDis() {
+    if (!ventanaAyudaDis) {
+        ventanaAyudaDis = Ext.create('Ext.window.Window', {
+            layout: 'fit',
+            title: 'Potencia de Refrigerador',
+            iconCls: 'icon-ayuda',
+            resizable: true,
+            width: 800,
+            height: 500,
+            closable: false,
+            plain: false,
+            autoScroll: true,
+            cls: 'ventana-ayuda',
+//            items: formReportGeneralVentana,
+            tools: [{
+//                    type: 'help',
+//                    tooltip: '<b>Atención!!!</b><br>Los campos marcados con asterisco(*), <br> son obligatorios.</b>'
+//                }, {
+                    type: 'restore',
+                    id: 'btn-restore-general',
+                    hidden: true,
+                    tooltip: '<b>Expandir</b>',
+                    handler: function (evt, toolEl, owner, tool) {
+                        var window = owner.up('window');
+                        window.expand();
+                        window.setWidth(800);
+                        this.hide();
+                        this.nextSibling().show();
+                    }
+                }, {
+                    type: 'minimize',
+                    tooltip: '<b>Minimizar</b>',
+                    handler: function (evt, toolEl, owner, tool) {
+                        var window = owner.up('window');
+                        window.collapse();
+                        window.setWidth(340);
+                        this.hide();
+                        this.previousSibling().show();
+                    }
+                }, {
+                    type: 'close',
+                    tooltip: '<b>Cerrar</b>',
+                    handler: function (evt, toolEl, owner, tool) {
+                        ventanaAyudaDis.hide();
+                    }
+                }
+            ]
+        });
+    }
+    ventanaAyudaDis.show();
+}
