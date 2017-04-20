@@ -127,64 +127,7 @@ Ext.onReady(function () {
                 iconCls: 'icon-ayuda',
                 text: 'Instrucciones',
                 handler: function () {
-                    var conten = '<P ALIGN=CENTER STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES"><B>Instrucciones de cómo usar la calculadora </B></SPAN>'
-                            + '</P>'
-                            + '<OL>'
-                            + '	<LI><P STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES"><B>Calculo'
-                            + '	de consumo </B></SPAN>'
-                            + '	</P>'
-                            + '</OL>'
-                            + '<P STYLE="margin-bottom: 0.11in"><IMG SRC="img/ayuda/inst1.png" NAME="Imagen 16" ALIGN=BOTTOM WIDTH=100 HEIGHT=19 BORDER=0>'
-                            + '  <SPAN LANG="es-ES">Se refiere a que solo puede modificar las'
-                            + 'casillas amarillas </SPAN>'
-                            + '</P>'
-                            + '<P ALIGN=JUSTIFY STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES">Se'
-                            + 'calcula el consumo total mensual (kWh/mes) según los'
-                            + 'electrodomésticos o cualquier otro dispositivo que se posee en el'
-                            + 'hogar. Aparecerá por defecto en la tabla un ejemplo del consumo'
-                            + 'promedio de los dispositivos más comunes.</SPAN></P>'
-                            + '<UL>'
-                            + '	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES">Los'
-                            + '	dispositivos electrónicos están agrupados por categorías como'
-                            + '	electrodomésticos, iluminación y agua caliente sanitaria. Si desea'
-                            + '	un cálculo más detallado del consumo de cada una de las categorías'
-                            + '	dar click el botón  '
-                            + '	<IMG SRC="img/ayuda/inst2.png" NAME="Imagen 4" ALIGN=BOTTOM WIDTH=135 HEIGHT=17 BORDER=0>.'
-                            + '	</SPAN>'
-                            + '	</P>'
-                            + '	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES">Para'
-                            + '	adaptar los datos a su realidad, dar click en la imagen de los'
-                            + '	dispositivos para agregar otro a la tabla, y solo cambie la cantidad'
-                            + '	del conjunto de dispositivos, la potencia, uso del tiempo y período.</SPAN></P>'
-                            + '	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES">Si'
-                            + '	desea eliminar un dispositivo de la tabla haga click en la '
-                            + '	<IMG SRC="img/ayuda/inst3.png" NAME="Imagen 2" ALIGN=BOTTOM WIDTH=28 HEIGHT=22 BORDER=0>'
-                            + '	o desea volver a llenarla para un nuevo cálculo haga click en  '
-                            + '	<IMG SRC="img/ayuda/inst4.png" NAME="Imagen 3" ALIGN=BOTTOM WIDTH=82 HEIGHT=16 BORDER=0>'
-                            + '	. </SPAN>'
-                            + '	</P>'
-                            + '	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES">En'
-                            + '	la casilla tiempo de uso, se refiere al tiempo que el dispositivo'
-                            + '	está encendido. </SPAN>'
-                            + '	</P>'
-                            + '	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES">En'
-                            + '	la casilla período se puede seleccionar minutos por día, horas al'
-                            + '	día, horas a la semana u horas al mes. (Ejemplo.: 15 minutos al'
-                            + '	día, 2 horas al día, 48 horas a la semana, 100 horas al mes). </SPAN>'
-                            + '	</P>'
-                            + '	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES">En'
-                            + '	la casilla Potencia, se refiere al consumo de energía por hora'
-                            + '	(Watts). Si necesita adaptarlo a sus necesidades, mire en los'
-                            + '	laterales o debajo de su dispositivo se encuentran los datos de'
-                            + '	placa del consumo de cada uno de ellos, por ejemplo, 20W o 250W. </SPAN>'
-                            + '	</P>'
-                            + '	<LI><P ALIGN=JUSTIFY STYLE="margin-bottom: 0.11in"><SPAN LANG="es-ES">'
-                            + '	Para conocer la forma en que se obtiene la potencia de cada dipositivo,'
-                            + '	se debe realizar clic derecho sobre cualquiera de estos ubicados en la parte derecha'
-                            + '	y luego seleccionar la opción ayuda.'
-                            + '	</SPAN>'
-                            + '	</P>'
-                            + '</UL>';
+                    var conten = '<P ALIGN=CENTER STYLE="margin-right: -0.04in; margin-bottom: 0.11in"><FONT COLOR="#ff0000"><FONT FACE="Arial, serif"><SPAN LANG="es-ES"><B>Cálculo de consumo</B></SPAN></FONT></FONT></P> <P ALIGN=JUSTIFY STYLE="margin-right: -0.04in; margin-bottom: 0.11in"> <FONT FACE="Arial, serif"><SPAN LANG="es-ES">Se calcula el consumo total mensual (kWh/mes) según los electrodomésticos o cualquier otro dispositivo que se posee en el hogar. Aparecerá por defecto en la tabla un ejemplo del consumo promedio de los dispositivos más comunes.</SPAN></FONT></P> <P ALIGN=CENTER STYLE="margin-right: -0.04in; margin-bottom: 0.11in"><IMG SRC="img/ayuda/instru1.png" NAME="Imagen 3" ALIGN=BOTTOM WIDTH=426 HEIGHT=211 BORDER=0></P> <P STYLE="margin-right: -0.04in; margin-bottom: 0.11in"><IMG SRC="img/ayuda/instru2.png" NAME="Imagen 7" ALIGN=BOTTOM WIDTH=108 HEIGHT=18 BORDER=0><FONT FACE="Arial, serif"><SPAN LANG="es-ES">Se refiere a que solo se puede editar las casillas amarillas.</SPAN></FONT></P> <UL> <LI><P ALIGN=JUSTIFY STYLE="margin-right: -0.2in; margin-bottom: 0.11in"> <FONT FACE="Arial, serif"><SPAN LANG="es-ES">Los dispositivos electrónicos están agrupados por categorías como electrodomésticos, iluminación y agua caliente sanitaria. Si desea un cálculo más detallado del consumo de cada una de las categorías dar click en el botón<IMG SRC="img/ayuda/instru3.png" NAME="Imagen 9" ALIGN=BOTTOM WIDTH=98 HEIGHT=19 BORDER=0></SPAN></FONT></P> <LI><P ALIGN=JUSTIFY STYLE="margin-right: -0.04in; margin-bottom: 0in"> <FONT FACE="Arial, serif"><SPAN LANG="es-ES">Para adaptar los datos a su realidad, dar click en la imagen de los dispositivos para agregar otro a la tabla, y solo cambie la cantidad del conjunto de dispositivos, la potencia, uso del tiempo y período. </SPAN></FONT> </P> <LI><P ALIGN=JUSTIFY STYLE="margin-right: -0.04in; margin-top: 0.17in; margin-bottom: 0in"> <FONT FACE="Arial, serif"><SPAN LANG="es-ES">Si desea eliminar un dispositivo de la tabla haga click en la <IMG SRC="img/ayuda/instru4.png" NAME="Imagen 13" ALIGN=BOTTOM WIDTH=25 HEIGHT=17 BORDER=0>o si desea volver a llenarla para un nuevo cálculo haga click en <IMG SRC="img/ayuda/instru5.png" NAME="Imagen 14" ALIGN=BOTTOM WIDTH=82 HEIGHT=16 BORDER=0> </SPAN></FONT> </P> <LI><P ALIGN=JUSTIFY STYLE="margin-right: -0.04in; margin-top: 0.17in; margin-bottom: 0in"> <FONT FACE="Arial, serif"><SPAN LANG="es-ES">En la casilla tiempo de uso, se refiere al tiempo que el dispositivo está encendido.</SPAN></FONT></P> <LI><P ALIGN=JUSTIFY STYLE="margin-right: -0.04in; margin-bottom: 0in"><A NAME="_GoBack"></A> <FONT FACE="Arial, serif"><SPAN LANG="es-ES">En la casilla período se puede seleccionar minutos por día, horas al día, horas a la semana u horas al mes (Ejemplo: 15 minutos al día, 2 horas al día, 48 horas a la semana u 100 horas al mes). </SPAN></FONT> </P> <LI><P ALIGN=JUSTIFY STYLE="margin-right: -0.04in; margin-bottom: 0.11in"> <FONT FACE="Arial, serif"><SPAN LANG="es-ES">En la casilla Potencia, se refiere al consumo de energía por hora(Watts). Si necesita adaptarlo a sus necesidades, mire en los laterales o debajo de su dispositivo y encontrará los datos de placa del consumo de cada uno de ellos (Ejemplo: 20W o 250W). </SPAN></FONT> </P> <LI><P ALIGN=JUSTIFY STYLE="margin-right: -0.04in; margin-bottom: 0.11in"> <FONT FACE="Arial, serif"><SPAN LANG="es-ES">Para conocer de forma más detallada de cómo se obtiene la potencia de consumo (Watts), dar click en <IMG SRC="img/ayuda/instru6.png" NAME="Imagen 15" ALIGN=BOTTOM WIDTH=23 HEIGHT=18 BORDER=0> que se encuentra ubicado junto a la potencia en Watts en la tabla, o dar click derecho sobre cualquiera de las imágenes de los dispositivos y luego seleccionar la opción ayuda. </SPAN></FONT> </P> </UL> <P STYLE="margin-left: 0.3in; margin-right: -0.04in; margin-bottom: 0.11in"> <IMG SRC="img/ayuda/instru7.png" NAME="Imagen 16" ALIGN=BOTTOM WIDTH=118 HEIGHT=109 BORDER=0></P> <P STYLE="margin-right: -0.04in; margin-bottom: 0.11in"><BR><BR> </P>';
                     abrirVentanaAyudaDis();
                     ventanaAyudaDis.setTitle("Instrucciones");
                     ventanaAyudaDis.body.update(conten);
@@ -240,7 +183,11 @@ Ext.onReady(function () {
                 renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
                     if (record.get('idMaquina') !== 19) {
                         metaData.style = "background-color:#FFF59D !important;";
-                        return value + ' watts';
+                        if (record.get('idMaquina') !== 22) {
+                            return value + ' watts <img src="img/help.png" onclick="ayuda(' + record.get('idMaquina') + ');" style="cursor: pointer; width:13px !important; padding: 0px; marin: 0px;">';
+                        } else {
+                            return value + ' watts';
+                        }
                     } else {
                         return '-';
                     }

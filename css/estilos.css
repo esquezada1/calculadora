@@ -64,6 +64,7 @@ body{
     padding: 1% !important;
     border-width: 3px !important;
     border-color: #EAAB00 !important;
+    z-index: 100000 !important;
 }
 
 .ventana-ayuda .x-window-header{

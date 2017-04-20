@@ -120,23 +120,25 @@ Ext.onReady(function () {
                 element: 'el', //bind to the underlying body property on the panel
                 fn: function (e) {
                     var record = e.record;
-                    var contextMenu = Ext.create('Ext.menu.Menu', {
-                        id: 'menuContextDis',
-                        items: [
-                            {
-                                iconCls: 'icon-ayuda',
-                                text: 'Ayuda',
-                                handler: function () {
-                                    abrirVentanaAyudaDis();
-                                    ventanaAyudaDis.setTitle("Potencia de " + record.get('name'));
-                                    ventanaAyudaDis.body.update(record.get('ayuda'));
-                                    Ext.destroy(contextMenu);
+                    if (record.id !== 22) {
+                        var contextMenu = Ext.create('Ext.menu.Menu', {
+                            id: 'menuContextDis',
+                            items: [
+                                {
+                                    iconCls: 'icon-ayuda',
+                                    text: 'Ayuda',
+                                    handler: function () {
+                                        abrirVentanaAyudaDis();
+                                        ventanaAyudaDis.setTitle("Potencia de " + record.get('name'));
+                                        ventanaAyudaDis.body.update(record.get('ayuda'));
+                                        Ext.destroy(contextMenu);
+                                    }
                                 }
-                            }
-                        ]
-                    });
-                    e.stopEvent();
-                    contextMenu.showAt(e.getXY());
+                            ]
+                        });
+                        e.stopEvent();
+                        contextMenu.showAt(e.getXY());
+                    }
                 }
             }
         }
@@ -410,4 +412,11 @@ function abrirVentanaAyudaDis() {
         });
     }
     ventanaAyudaDis.show();
+}
+
+function ayuda(idDis) {
+    var record = storeDispositivos.getById(idDis);
+    abrirVentanaAyudaDis();
+    ventanaAyudaDis.setTitle("Potencia de " + record.get('name'));
+    ventanaAyudaDis.body.update(record.get('ayuda'));
 }
