@@ -33,6 +33,7 @@ and open the template in the editor.
         <script src="vistas/calculadora/casa.js" type="text/javascript"></script>
         <script src="vistas/calculadora/calculoAhorro.js" type="text/javascript"></script>
         <script src="vistas/calculadora/ahorroTotal.js" type="text/javascript"></script>
+        <script src="vistas/calculadora/panelesAhorro.js" type="text/javascript"></script>
         <script src="vistas/calculadora/general.js" type="text/javascript"></script>
         <script src="js/funciones.js" type="text/javascript"></script>
         <!--<script type="text/javascript" src="vistas/grid/newPanel.js"></script>

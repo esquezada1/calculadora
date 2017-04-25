@@ -1,4 +1,4 @@
-var consejosAhorro, panelesSolares, gridConsejos, storeConsejos1, storeConsejos2, storeConsejos3, storeConsejos4;
+var consejosAhorro, gridConsejos, storeConsejos1, storeConsejos2, storeConsejos3, storeConsejos4;
 var ahorroTotal;
 
 Ext.onReady(function () {
@@ -339,11 +339,5 @@ Ext.onReady(function () {
         cls: 'tabs-ahorro',
         title: 'Consejos de Ahorro',
         items: [ahorroTotal, viewConsejos]
-    });
-
-    panelesSolares = Ext.create('Ext.panel.Panel', {
-        cls: 'tabs-ahorro',
-        title: 'Paneles Solares',
-        html: 'Paneles Solares'
     });
 });
