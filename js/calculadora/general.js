@@ -186,7 +186,7 @@ Ext.onReady(function () {
                 return newTab.title != 'P2';
             }
         },
-        items: [consejosAhorro, panelesSolares]
+        items: [consejosAhorro, panelesSolares, colectorSolar]
     });
 
     panelDerecha = Ext.create('Ext.panel.Panel', {

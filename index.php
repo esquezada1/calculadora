@@ -26,15 +26,16 @@ and open the template in the editor.
         <script type="text/javascript" src="http://code.highcharts.com/modules/funnel.js?<?php echo $version ?>"></script> 
         <script type="text/javascript" src="http://code.highcharts.com/modules/solid-gauge.js?<?php echo $version ?>"></script>
         <script type="text/javascript" src="http://code.highcharts.com/highcharts-3d.js?<?php echo $version ?>"></script>
-        <!--<script type="text/javascript" src="vistas/grid/maps.js"></script>-->
-        <script src="vistas/calculadora/dispositivos.js" type="text/javascript"></script>
-        <script src="vistas/calculadora/consumoTotal.js" type="text/javascript"></script>
-        <script src="vistas/calculadora/chartSemaforo.js" type="text/javascript"></script>
-        <script src="vistas/calculadora/casa.js" type="text/javascript"></script>
-        <script src="vistas/calculadora/calculoAhorro.js" type="text/javascript"></script>
-        <script src="vistas/calculadora/ahorroTotal.js" type="text/javascript"></script>
-        <script src="vistas/calculadora/panelesAhorro.js" type="text/javascript"></script>
-        <script src="vistas/calculadora/general.js" type="text/javascript"></script>
+        <!--Lógica de la calculadora-->
+        <script src="js/calculadora/dispositivos.js" type="text/javascript"></script>
+        <script src="js/calculadora/fase1/consumoTotal.js" type="text/javascript"></script>
+        <script src="js/calculadora/fase2/chartSemaforo.js" type="text/javascript"></script>
+        <script src="js/calculadora/fase2/casa.js" type="text/javascript"></script>   
+        <script src="js/calculadora/fase3/calculoAhorro.js" type="text/javascript"></script>
+        <script src="js/calculadora/fase3/ahorroTotal.js" type="text/javascript"></script>
+        <script src="js/calculadora/fase3/panelesAhorro.js" type="text/javascript"></script>
+        <script src="js/calculadora/fase3/colectorAhorro.js" type="text/javascript"></script>
+        <script src="js/calculadora/general.js" type="text/javascript"></script>
         <script src="js/funciones.js" type="text/javascript"></script>
         <!--<script type="text/javascript" src="vistas/grid/newPanel.js"></script>
         <script type="text/javascript" language="Javascript">
