@@ -26,9 +26,6 @@ ahorroTotal = Ext.create('Ext.panel.Panel', {
         {
             layout: 'hbox',
             items: [consumoMayores, optimizacionConsumo, porcentajeAhorroTotal]
-        }, {
-            style: 'background-color: rgba(255, 255, 255, 0.9) !important;',
-            html: '<img style="padding-top:2px" width="15" height="15" src="img/cambio.png"> Cambio a dispositivo de etiqueta A  |  <img style="padding-top:2px" width="15" height="15" src="img/consejo.png"> Criterio de optimización '
         }
     ]
 });

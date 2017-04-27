@@ -273,6 +273,10 @@ body{
     height: 30px;
 }
 
+.labels-paneles{
+    vertical-align: middle;
+}
+
 .x-tab{
     background-color: #003F72 !important;
     border-color: #D5D8DC !important;

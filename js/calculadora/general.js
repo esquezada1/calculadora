@@ -15,7 +15,6 @@ Ext.require([
     'Ext.toolbar.*',
     'Ext.slider.Multi'
 ]);
-
 Ext.onReady(function () {
     btnAtras = Ext.create('Ext.Button', {
         text: '<',
@@ -143,7 +142,6 @@ Ext.onReady(function () {
             }
         }
     });
-
     viewConsumo = Ext.create('Ext.panel.Panel', {
         id: 'viewConsumo',
         xtype: 'panel',
@@ -169,7 +167,6 @@ Ext.onReady(function () {
                 items: gridConsumoDispositivos
             }]
     });
-
     viewSemaforo = Ext.create('Ext.panel.Panel', {
         id: 'viewSemaforo',
         autoScroll: true,
@@ -177,18 +174,21 @@ Ext.onReady(function () {
         bodyStyle: 'background: rgba(255, 255, 255, 0.7) !important',
         items: [casaSemaforo, chartSemaforo]
     });
-
-    viewAhorro = Ext.create('Ext.tab.Panel', {
-        width: 600,
-        bodyPadding: 10,
-        listeners: {
-            beforetabchange: function (tabs, newTab, oldTab) {
-                return newTab.title != 'P2';
-            }
-        },
-        items: [consejosAhorro, panelesSolares, colectorSolar]
+    viewAhorro = Ext.create('Ext.panel.Panel', {
+        id: 'viewAhorro',
+        items: [ahorroTotal, {
+                xtype: 'tabpanel',
+                tabBar: {
+                    layout: {pack: 'center'}
+                },
+                margin: '7 0 0 0',
+                listeners: {
+                    beforetabchange: function (tabs, newTab, oldTab) {
+                        return newTab.title != 'P2';
+                    }
+                },
+                items: [consejosAhorro, panelesSolares, colectorSolar]}],
     });
-
     panelDerecha = Ext.create('Ext.panel.Panel', {
         id: 'panelDerecha',
         region: 'east',
@@ -224,7 +224,6 @@ Ext.onReady(function () {
             dataview]
     }
     );
-
     panelCentral = Ext.create('Ext.panel.Panel', {
         id: 'panelCentral',
         title: '<center class="title-general">CÁLCULO DE CONSUMO</center>',
@@ -241,7 +240,6 @@ Ext.onReady(function () {
             viewConsumo
         ]
     });
-
     Ext.create('Ext.container.Viewport', {
         id: 'myContainer',
         renderTo: Ext.getBody(),
@@ -361,7 +359,6 @@ Ext.onReady(function () {
     });
     consumoTotal();
 });
-
 function abrirVentanaAyudaDis() {
     if (!ventanaAyudaDis) {
         ventanaAyudaDis = Ext.create('Ext.window.Window', {

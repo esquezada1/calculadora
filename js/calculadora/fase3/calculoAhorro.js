@@ -2,7 +2,7 @@ var consejosAhorro, gridConsejos, storeConsejos1, storeConsejos2, storeConsejos3
 var ahorroTotal;
 
 Ext.onReady(function () {
-    var heightConsejos = 235, heightGridConsejos = 155;
+    var heightConsejos = 255, heightGridConsejos = 175;
     Ext.define('AhorroModel', {
         extend: 'Ext.data.Model',
         fields: [
@@ -321,23 +321,28 @@ Ext.onReady(function () {
     });
 
     viewConsejos = Ext.create('Ext.panel.Panel', {
-        defaults: {
-            margin: '5 5 5 5'
-        },
-        height: 250,
-        autoScroll: true,
         items: [{
-                layout: 'hbox',
-                items: [gridConsejos1, gridConsejos2]
+                style: 'background-color: rgba(255, 255, 255, 0.9) !important;',
+                html: '<img style="padding-top:2px" width="15" height="15" src="img/cambio.png"> Cambio a dispositivo de etiqueta A  |  <img style="padding-top:2px" width="15" height="15" src="img/consejo.png"> Criterio de optimización '
             }, {
-                layout: 'hbox',
-                items: [gridConsejos3, gridConsejos4]
+                defaults: {
+                    margin: '0 5 5 2'
+                },
+                height: 260,
+                autoScroll: true,
+                items: [{
+                        layout: 'hbox',
+                        items: [gridConsejos1, gridConsejos2]
+                    }, {
+                        layout: 'hbox',
+                        items: [gridConsejos3, gridConsejos4]
+                    }]
             }]
     });
 
     consejosAhorro = Ext.create('Ext.panel.Panel', {
         cls: 'tabs-ahorro',
         title: 'Consejos de Ahorro',
-        items: [ahorroTotal, viewConsejos]
+        items: [viewConsejos]
     });
 });

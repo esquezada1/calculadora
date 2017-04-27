@@ -2,6 +2,7 @@ var chartSemaforo, casaSemaforo, selectItemChart, storeConsumoFinal;
 Ext.onReady(function () {
     Ext.define('ConsumoModelFinal', {
         extend: 'Ext.data.Model',
+        idProperty: 'nombreDis',
         fields: [
             {name: 'idMaquina', type: 'int'},
             {name: 'nombreDis', type: 'string'},
