@@ -49,13 +49,13 @@ Ext.onReady(function () {
                                 '<div class="x-boundlist-item">{numPersonas}</div>',
                                 '</tpl>'),
                         listeners: {select: function (combo, record, eOpts) {
-                                formularioColector.down('[name=numPersonas]').clearValue();
-                                storeColector.clearFilter(true);
-                                storeColector.filter({
-                                    property: 'idPersonas',
-                                    exactMatch: true,
-                                    value: formularioColector.down('[name=numeroPersonas]').getValue()
-                                });
+                                var idPersonas = formularioColector.down('[name=numeroPersonas]').getValue();
+                                var record = storeColector.getById(idPersonas);
+                                document.getElementById('capacidadTanque').innerHTML = record.get('capacidad')+' Litros';
+                                document.getElementById('inversionColector').innerHTML = '$ '+record.get('precio');
+                                document.getElementById('tiempoVidaColector').innerHTML = record.get('tiempoVida')+' año(s)';
+//                                document.getElementById('tiempoAmortizacionColector').innerHTML = record.get('capacidad')+' Litros';
+                                document.getElementById('areaInstalacion').innerHTML = record.get('areaInstalacion')+' m&#178';
                             }}
                     }
                 ]
