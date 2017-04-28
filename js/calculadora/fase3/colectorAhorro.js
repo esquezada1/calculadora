@@ -78,12 +78,7 @@ Ext.onReady(function () {
                     },
                     {
                         flex: 2,
-                        html: '<center><b id="consumoColectorSust">0 kWh</b></center>',
-                        listeners: {
-                            function() {
-                                consumoColectorSust("Agua Caliente");
-                            }
-                        }
+                        html: '<center id="consumoColectorSust" style="font-weight: normal !important!">0 kWh</center>'
                     }]
             },
             {
@@ -97,7 +92,7 @@ Ext.onReady(function () {
                     },
                     {
                         flex: 2,
-                        html: '<center><b id="precioColectorSust">$ 0.00</b></center>'
+                        html: '<center style="font-weight: normal" id="precioColectorSust">$ 0.00</center>'
                     }]
             }
         ]
