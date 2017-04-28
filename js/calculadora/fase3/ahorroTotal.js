@@ -22,6 +22,7 @@ porcentajeAhorroTotal = Ext.create('Ext.panel.Panel', {
 });
 
 ahorroTotal = Ext.create('Ext.panel.Panel', {
+    width: '100%',
     items: [
         {
             layout: 'hbox',

@@ -212,6 +212,7 @@ function limpiarFiltros() {
     });
 }
 
+var mayorConsumoAhorro = 0;
 function aplicarConsejos(idGrid) {
     var optimizacion = 0;
     var ahorro = 0;
@@ -281,6 +282,7 @@ function aplicarConsejos(idGrid) {
     optimizacionTotal = optimizacionTotal.toFixed(2);
     document.getElementById('optimizacionTotalDis').innerHTML = optimizacionTotal + " KWH";
     document.getElementById('ahorroTotalDis').innerHTML = ahorroTotal + "%";
+    mayorConsumoAhorro = optimizacionTotal;
 }
 
 function consumoTotal() {
@@ -293,5 +295,35 @@ function consumoTotal() {
     if (fase === 1) {
         document.getElementById('totalDispositivos').innerHTML = totalDispositivos + " Dispositivo(s)";
         document.getElementById('totalConsumo').innerHTML = totalConsumo.toFixed(2) + " KWH/MES";
+    }
+}
+
+function calcularCosto(kwh) {
+    var banderaConsumo = parseFloat(kwh);
+    var costo = 0;
+    storeCostos.each(function (rec) {
+        var newCosto = 0;
+        var newConsumo = rec.get('kwhMax') - rec.get('kwhMin') + 1;
+        banderaConsumo -= newConsumo;
+        if (banderaConsumo > 0) {
+            newCosto = (newConsumo * rec.get('costo'));
+            costo += newCosto;
+        } else {
+            newCosto = (kwh * rec.get('costo'));
+            costo += newCosto;
+            return false;
+        }
+        kwh -= newConsumo;
+    });
+    costo = costo.toFixed(2);
+    return parseFloat(costo);
+}
+
+function esPar(val) {
+    if (val % 2 === 0)
+    {
+        return true;
+    } else {
+        return false;
     }
 }

@@ -11,7 +11,8 @@ Ext.onReady(function () {
             {name: 'tiempoUso', type: 'int'},
             {name: 'idPeriodo', type: 'int'},
             {name: 'kwhMes', type: 'float'},
-            {name: 'participacion', type: 'float'}
+            {name: 'participacion', type: 'float'},
+            {name: 'excluir', type: 'bool'}
         ]
     });
 
