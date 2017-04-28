@@ -1,5 +1,6 @@
 var colectorSolar, formularioColector, detalleColector;
 var storeColector;
+
 Ext.onReady(function () {
     storeColector = Ext.create('Ext.data.Store', {
         fields: [
@@ -38,8 +39,7 @@ Ext.onReady(function () {
                         store: storeColector,
                         displayField: 'numPersonas',
                         valueField: 'id',
-                        fieldLabel: '<b>Cantidad de personas </b>',
-                        labelStyle: 'width:150px;',
+                        fieldLabel: '<b>Cantidad de personas que viven en el hogar</b>',
                         value: 2,
                         flex: 1,
                         listConfig: {
@@ -60,6 +60,45 @@ Ext.onReady(function () {
                             }}
                     }
                 ]
+            },
+            {
+              xtype: 'panel',
+                layout: 'hbox',
+                padding: '10',
+                html:'<br>'
+            },
+            {
+                xtype: 'panel',
+                layout: 'hbox',
+                cls: 'panel-valores',
+                margin: '5 0 0 0',
+                items: [{
+                        flex: 1,
+                        html: '<center><b>Consumo a sustituir en el hogar</b></center>'
+                    },
+                    {
+                        flex: 2,
+                        html: '<center><b id="consumoColectorSust">0 kWh</b></center>',
+                        listeners: {
+                            function() {
+                                consumoColectorSust("Agua Caliente");
+                            }
+                        }
+                    }]
+            },
+            {
+                xtype: 'panel',
+                layout: 'hbox',
+                cls: 'panel-valores',
+                margin: '5 0 0 0',
+                items: [{
+                        flex: 1,
+                        html: '<center><b>Precio del consumo a sustituir</b></center>'
+                    },
+                    {
+                        flex: 2,
+                        html: '<center><b id="precioColectorSust">$ 0.00</b></center>'
+                    }]
             }
         ]
     });
@@ -71,6 +110,7 @@ Ext.onReady(function () {
         items: []
     });
     colectorSolar = Ext.create('Ext.panel.Panel', {
+        id: 'tabColector',
         cls: 'tabs-ahorro',
         title: 'Colector Solar',
         layout: 'hbox',
