@@ -341,6 +341,7 @@ Ext.onReady(function () {
     });
 
     consejosAhorro = Ext.create('Ext.panel.Panel', {
+        id: 'tabConsejos',
         cls: 'tabs-ahorro',
         title: 'Consejos de Ahorro',
         items: [viewConsejos]

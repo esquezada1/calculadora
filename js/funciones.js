@@ -319,8 +319,8 @@ function calcularCosto(kwh) {
     return parseFloat(costo);
 }
 
-function consumoColectorSust(id) {
-    var record = storeConsumoFinal.getById(id);
+function consumoColectorSust() {
+    var record = storeConsumoFinal.getById(24);
     document.getElementById('consumoColectorSust').innerHTML = record.get('kwhMes') + ' kWh';
 }
 

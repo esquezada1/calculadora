@@ -414,6 +414,7 @@ Ext.onReady(function () {
             }]
     });
     panelesSolares = Ext.create('Ext.panel.Panel', {
+        id: 'tabPaneles',
         cls: 'tabs-ahorro',
         title: 'Paneles Solares',
         layout: 'hbox',

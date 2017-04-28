@@ -183,7 +183,15 @@ Ext.onReady(function () {
         margin: '7 0 0 0',
         listeners: {
             beforetabchange: function (tabs, newTab, oldTab) {
-                return newTab.title != 'P2';
+                switch (newTab.id) {
+                    case 'tabConsejos':
+                        break;
+                    case 'tabPaneles':
+                        break;
+                    case 'tabColector':
+                        consumoColectorSust();
+                        break;
+                }
             }
         },
         items: [consejosAhorro, panelesSolares, colectorSolar]
