@@ -22,11 +22,11 @@ Ext.onReady(function () {
 
     formularioColector = Ext.create('Ext.form.FieldSet', {
         cls: 'tabs-ahorro',
-        title: 'Datos',
+        title: '<h3 style="color:#003F72;"> DATOS </h3>',
         flex: 1,
         height: 300,
         layout: 'anchor',
-        padding: '20 10 10 5',
+        padding: '15 10 10 5',
         items: [
             {
                 xtype: 'panel',
@@ -38,7 +38,7 @@ Ext.onReady(function () {
                         store: storeColector,
                         displayField: 'numPersonas',
                         valueField: 'id',
-                        fieldLabel: '<b>Cantidad de personas que viven en el hogar</b>',
+                        fieldLabel: '<span class="clsCaracteristicas"><b>Cantidad de personas que viven en el hogar</b></span',
                         value: 2,
                         flex: 1,
                         listConfig: {
@@ -51,11 +51,16 @@ Ext.onReady(function () {
                         listeners: {select: function (combo, record, eOpts) {
                                 var idPersonas = formularioColector.down('[name=numeroPersonas]').getValue();
                                 var record = storeColector.getById(idPersonas);
-                                document.getElementById('capacidadTanque').innerHTML = record.get('capacidad')+' Litros';
-                                document.getElementById('inversionColector').innerHTML = '$ '+record.get('precio');
-                                document.getElementById('tiempoVidaColector').innerHTML = record.get('tiempoVida')+' año(s)';
-//                                document.getElementById('tiempoAmortizacionColector').innerHTML = record.get('capacidad')+' Litros';
-                                document.getElementById('areaInstalacion').innerHTML = record.get('areaInstalacion')+' m&#178';
+                                var consumo = storeConsumoFinal.getById('Agua Caliente');
+                                var costoMayoresConsumidores = calcularCosto(mayorConsumo);
+                                var costoMayoresConsumidoresAhorro = calcularCosto(mayorConsumo - consumo.get('kwhMes'));
+                                var costoAhorro = costoMayoresConsumidores - costoMayoresConsumidoresAhorro;
+                                var amortizacion = 1500 / (costoAhorro * 12);
+                                document.getElementById('capacidadTanque').innerHTML = record.get('capacidad') + ' Litros';
+                                document.getElementById('inversionColector').innerHTML = '$ ' + record.get('precio');
+                                document.getElementById('tiempoVidaColector').innerHTML = record.get('tiempoVida') + ' año(s)';
+                                document.getElementById('tiempoAmortizacionColector').innerHTML = (Math.round(amortizacion * 100) / 100) + ' año(s)';
+                                document.getElementById('areaInstalacion').innerHTML = record.get('areaInstalacion') + ' m&#178';
                             }}
                     }
                 ]
@@ -63,120 +68,165 @@ Ext.onReady(function () {
             {
                 xtype: 'panel',
                 layout: 'hbox',
-                padding: '15 10 15 10',
+                padding: '10 10 10 10',
                 html: '<br></br>'
             },
             {
                 xtype: 'panel',
                 layout: 'hbox',
                 cls: 'panel-valores',
-                margin: '5 0 0 0',
+                margin: '5 0 5 0',                
+                padding: '3 20 3 20',
                 items: [{
-                        flex: 1,
-                        html: '<center><b>Consumo a sustituir en el hogar</b></center>'
+                        width: '70%',
+                        html: '<span class="clsCaracteristicas"><b>Consumo a sustituir en el hogar</b></span>'
                     },
                     {
-                        flex: 2,
-                        html: '<center id="consumoColectorSust" style="font-weight: normal !important!">0 kWh</center>'
+                        width: '30%',
+                        html: '<center id="consumoColectorSust" class="clsValores">0 kWh</center>'
                     }]
             },
             {
                 xtype: 'panel',
                 layout: 'hbox',
                 cls: 'panel-valores',
-                margin: '5 0 0 0',
+                margin: '5 0 5 0',
+                padding: '3 20 3 20',
                 items: [{
-                        flex: 1,
-                        html: '<center><b>Precio del consumo a sustituir</b></center>'
+                        width: '70%',
+                        html: '<span class="clsCaracteristicas"><b>Precio del consumo a sustituir</b></span>'
                     },
                     {
-                        flex: 2,
-                        html: '<center style="font-weight: normal" id="precioColectorSust">$ 0.00</center>'
+                        width: '30%',
+                        html: '<center class="clsValores" id="precioColectorSust">$ 0.00</center>'
                     }]
+            },
+            {
+                xtype: 'panel',
+                layout: 'hbox',
+                padding: '20 5 5 5',
+                html: '<br></br>'
+            },
+            {
+                xtype: 'button',
+                cls: 'btnSugerencia',
+                iconCls: 'icon-info',
+                text: 'Sugerencias para el colector solar',
+                handler: function () {
+                    var conten = '<P ALIGN=CENTER STYLE="margin-right: -0.04in; margin-bottom: 0.11in">\n\
+                                    <FONT COLOR="#ff0000">\n\
+                                        <FONT FACE="Arial, serif">\n\
+                                            <SPAN LANG="es-ES"><B>Sugerencias para el colector solar</B></SPAN>\n\
+                                        </FONT>\n\
+                                    </FONT>\n\
+                                </P> \n\
+                                <P ALIGN=CENTER STYLE="margin-right: -0.04in; margin-bottom: 0.11in">\n\
+                                    <IMG SRC="img/panelSolar.png" NAME="Colector Solar" ALIGN=BOTTOM WIDTH=426 HEIGHT=211 BORDER=0>\n\
+                                </P> \n\
+                                <UL>\n\
+                                    <LI>\n\
+                                        <P ALIGN=JUSTIFY STYLE="margin-right: -0.2in; margin-bottom: 0.11in">\n\
+                                            <FONT FACE="Arial, serif">\n\
+                                                <SPAN LANG="es-ES">Se debe evitar sombras sobre los colectores solares ya que esto limita la produccion de energia</SPAN>\n\
+                                            </FONT>\n\
+                                        </P>\n\
+                                    </LI>\n\
+                                    <LI>\n\
+                                        <P ALIGN=JUSTIFY STYLE="margin-right: -0.04in; margin-bottom: 0in">\n\
+                                            <FONT FACE="Arial, serif">\n\
+                                                <SPAN LANG="es-ES">Los colectores solares se instalan en estructuras especiales, preferiblemente en una estructura \n metalica o de cemento para que soporte el peso del colector</SPAN>\n\
+                                            </FONT>\n\
+                                        </P>\n\
+                                    </LI>\n\
+                                </UL>\n\
+                                <BR><BR>';
+                    abrirVentanaAyudaDis();
+                    ventanaAyudaDis.setTitle("Sugerencias");
+                    ventanaAyudaDis.body.update(conten);
+                }
             }
         ]
     });
     detalleColector = Ext.create('Ext.form.FieldSet', {
         cls: 'tabs-ahorro',
-        title: 'Caracteristicas del Sistema',
+        title: '<h3 style="color:#003F72;"> CARACTERÍSTICAS DEL SISTEMA </h3>',
         flex: 1,
         height: 300,
         layout: 'anchor',
-        padding: '20 10 10 5',
+        padding: '15 10 10 5',
         items: [{
+                flex: 1,
+                padding: '0 0 10 0',
+                html: '<center><img src="img/panelSolar.png" style="width:40%; height: 80px;"></center>'
+            }, {
                 xtype: 'panel',
                 layout: 'hbox',
-                items: [{
-                        flex: 1,
-                        padding: '20 0 20 0',
-                        html: '<img src="img/panelSolar.png" style="width:90%; height: 150px;">'
-                    },
+                items: [
                     {
-                        flex: 2,
+                        flex: 1,
                         defaults: {
                             margin: '3 0 3 0'
                         },
-                        padding: '10 0 0 0',
+                        padding: '0 20 0 20',
                         items: [{
                                 xtype: 'panel',
                                 layout: 'hbox',
                                 cls: 'panel-valores',
                                 items: [{
-                                        width: '50%',
-                                        html: '<center><b>Capacidad del tanque</b></center>'
+                                        width: '70%',
+                                        html: '<span class="clsCaracteristicas"><b>Capacidad del tanque</b></span>'
                                     },
                                     {
-                                        width: '50%',
-                                        html: '<center id="capacidadTanque">0 Litros</center>'
+                                        width: '30%',
+                                        html: '<center id="capacidadTanque" class="clsValores">0 Litros</center>'
                                     }]
                             }, {
                                 xtype: 'panel',
                                 layout: 'hbox',
                                 cls: 'panel-valores',
                                 items: [{
-                                        width: '50%',
-                                        html: '<center><b>Inversión</b></center>'
+                                        width: '70%',
+                                        html: '<span class="clsCaracteristicas"><b>Inversión</b></span>'
                                     },
                                     {
-                                        width: '50%',
-                                        height: 34,
-                                        html: '<center id="inversionColector">$ 0.00</center>'
+                                        width: '30%',
+                                        html: '<center id="inversionColector" class="clsValores">$ 0.00</center>'
                                     }]
                             }, {
                                 xtype: 'panel',
                                 layout: 'hbox',
                                 cls: 'panel-valores',
                                 items: [{
-                                        width: '50%',
-                                        html: '<center><b>Tiempo de vida del sistema</b></center>'
+                                        width: '70%',
+                                        html: '<span class="clsCaracteristicas"><b>Tiempo de vida del sistema</b></span>'
                                     },
                                     {
-                                        width: '50%',
-                                        html: '<center id="tiempoVidaColector">0 año(s)</center>'
+                                        width: '30%',
+                                        html: '<center id="tiempoVidaColector" class="clsValores">0 año(s)</center>'
                                     }]
                             }, {
                                 xtype: 'panel',
                                 layout: 'hbox',
                                 cls: 'panel-valores',
                                 items: [{
-                                        width: '50%',
-                                        html: '<center><b>Tiempo de amortización</b></center>'
+                                        width: '70%',
+                                        html: '<span class="clsCaracteristicas"><b>Tiempo de amortización</b></span>'
                                     },
                                     {
-                                        width: '50%',
-                                        html: '<center id="tiempoAmortizacionColector">0 año(s)</center>'
+                                        width: '30%',
+                                        html: '<center id="tiempoAmortizacionColector" class="clsValores">0 año(s)</center>'
                                     }]
                             }, {
                                 xtype: 'panel',
                                 layout: 'hbox',
                                 cls: 'panel-valores',
                                 items: [{
-                                        width: '50%',
-                                        html: '<center><b>Área necesaria para instalación</b></center>'
+                                        width: '70%',
+                                        html: '<span class="clsCaracteristicas"><b>Área necesaria para instalación</b></span>'
                                     },
                                     {
-                                        width: '50%',
-                                        html: '<center id="areaInstalacion">0 m&#178</center>'
+                                        width: '30%',
+                                        html: '<center id="areaInstalacion" class="clsValores">0 m&#178</center>'
                                     }]
                             }]
                     }]
