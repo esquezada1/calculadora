@@ -174,20 +174,19 @@ Ext.onReady(function () {
         bodyStyle: 'background: rgba(255, 255, 255, 0.7) !important',
         items: [casaSemaforo, chartSemaforo]
     });
-    viewAhorro = Ext.create('Ext.panel.Panel', {
+    viewAhorro = Ext.create('Ext.tab.Panel', {
         id: 'viewAhorro',
-        items: [ahorroTotal, {
-                xtype: 'tabpanel',
-                tabBar: {
-                    layout: {pack: 'center'}
-                },
-                margin: '7 0 0 0',
-                listeners: {
-                    beforetabchange: function (tabs, newTab, oldTab) {
-                        return newTab.title != 'P2';
-                    }
-                },
-                items: [consejosAhorro, panelesSolares, colectorSolar]}],
+        tabBar: {
+            layout: {pack: 'center'}
+        },
+        tbar: [ahorroTotal],
+        margin: '7 0 0 0',
+        listeners: {
+            beforetabchange: function (tabs, newTab, oldTab) {
+                return newTab.title != 'P2';
+            }
+        },
+        items: [consejosAhorro, panelesSolares, colectorSolar]
     });
     panelDerecha = Ext.create('Ext.panel.Panel', {
         id: 'panelDerecha',

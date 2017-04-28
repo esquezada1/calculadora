@@ -277,6 +277,14 @@ body{
     vertical-align: middle;
 }
 
+.panel-valores{
+    border-style: solid !important;
+    padding: 0px;
+    margin: 0px !important;
+    border-width: 1px;
+    border-color: #D5D8DC !important;
+}
+
 .x-tab{
     background-color: #003F72 !important;
     border-color: #D5D8DC !important;
