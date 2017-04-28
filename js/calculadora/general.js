@@ -182,7 +182,7 @@ Ext.onReady(function () {
         tbar: [ahorroTotal],
         margin: '7 0 0 0',
         listeners: {
-            beforetabchange: function (tabs, newTab, oldTab) {
+            tabchange: function (tabs, newTab, oldTab) {
                 switch (newTab.id) {
                     case 'tabConsejos':
                         break;
