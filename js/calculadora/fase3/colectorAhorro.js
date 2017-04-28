@@ -24,14 +24,13 @@ Ext.onReady(function () {
         cls: 'tabs-ahorro',
         title: 'Datos',
         flex: 1,
+        height: 300,
         layout: 'anchor',
+        padding: '20 10 10 5',
         items: [
             {
                 xtype: 'panel',
                 layout: 'hbox',
-                defaults: {
-                    padding: '0 5 5 5'
-                },
                 items: [
                     {
                         name: 'numeroPersonas',
@@ -62,10 +61,10 @@ Ext.onReady(function () {
                 ]
             },
             {
-              xtype: 'panel',
+                xtype: 'panel',
                 layout: 'hbox',
-                padding: '10',
-                html:'<br>'
+                padding: '15 10 15 10',
+                html: '<br></br>'
             },
             {
                 xtype: 'panel',
@@ -101,8 +100,87 @@ Ext.onReady(function () {
         cls: 'tabs-ahorro',
         title: 'Caracteristicas del Sistema',
         flex: 1,
+        height: 300,
         layout: 'anchor',
-        items: []
+        padding: '20 10 10 5',
+        items: [{
+                xtype: 'panel',
+                layout: 'hbox',
+                items: [{
+                        flex: 1,
+                        padding: '20 0 20 0',
+                        html: '<img src="img/panelSolar.png" style="width:90%; height: 150px;">'
+                    },
+                    {
+                        flex: 2,
+                        defaults: {
+                            margin: '3 0 3 0'
+                        },
+                        padding: '10 0 0 0',
+                        items: [{
+                                xtype: 'panel',
+                                layout: 'hbox',
+                                cls: 'panel-valores',
+                                items: [{
+                                        width: '50%',
+                                        html: '<center><b>Capacidad del tanque</b></center>'
+                                    },
+                                    {
+                                        width: '50%',
+                                        html: '<center id="capacidadTanque">0 Litros</center>'
+                                    }]
+                            }, {
+                                xtype: 'panel',
+                                layout: 'hbox',
+                                cls: 'panel-valores',
+                                items: [{
+                                        width: '50%',
+                                        html: '<center><b>Inversión</b></center>'
+                                    },
+                                    {
+                                        width: '50%',
+                                        height: 34,
+                                        html: '<center id="inversionColector">$ 0.00</center>'
+                                    }]
+                            }, {
+                                xtype: 'panel',
+                                layout: 'hbox',
+                                cls: 'panel-valores',
+                                items: [{
+                                        width: '50%',
+                                        html: '<center><b>Tiempo de vida del sistema</b></center>'
+                                    },
+                                    {
+                                        width: '50%',
+                                        html: '<center id="tiempoVidaColector">0 año(s)</center>'
+                                    }]
+                            }, {
+                                xtype: 'panel',
+                                layout: 'hbox',
+                                cls: 'panel-valores',
+                                items: [{
+                                        width: '50%',
+                                        html: '<center><b>Tiempo de amortización</b></center>'
+                                    },
+                                    {
+                                        width: '50%',
+                                        html: '<center id="tiempoAmortizacionColector">0 año(s)</center>'
+                                    }]
+                            }, {
+                                xtype: 'panel',
+                                layout: 'hbox',
+                                cls: 'panel-valores',
+                                items: [{
+                                        width: '50%',
+                                        html: '<center><b>Área necesaria para instalación</b></center>'
+                                    },
+                                    {
+                                        width: '50%',
+                                        html: '<center id="areaInstalacion">0 m&#178</center>'
+                                    }]
+                            }]
+                    }]
+            }]
     });
     colectorSolar = Ext.create('Ext.panel.Panel', {
         id: 'tabColector',
