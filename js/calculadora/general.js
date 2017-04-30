@@ -185,11 +185,21 @@ Ext.onReady(function () {
             tabchange: function (tabs, newTab, oldTab) {
                 switch (newTab.id) {
                     case 'tabConsejos':
+                        var ahorro = getPorcentajeAhorro(consejosAhorro, mayorConsumo);
+                        cambiarTotales(mayorConsumo, mayorConsumoAhorro, ahorro);
                         break;
                     case 'tabPaneles':
+                        if (formularioPaneles.down('[name=checkStore]').getValue()) {
+                            crearStoreMayoresConsumidores(storeConsumoFinal);
+                        } else {
+                            crearStoreMayoresConsumidores(storeConsumoDispositivos);
+                        }
+                        cambiarTotalesPaneles();
                         break;
                     case 'tabColector':
                         consumoColectorSust();
+                        var ahorro = getPorcentajeAhorro(colectorAhorro, mayorConsumo);
+                        cambiarTotales(mayorConsumo, colectorAhorro, ahorro);
                         break;
                 }
             }

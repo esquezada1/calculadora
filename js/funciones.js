@@ -277,12 +277,35 @@ function aplicarConsejos(idGrid) {
     for (var i = 0; i < limit; i++) {
         optimizacionTotal += storeConsumoFinal.data.items[i].get('kwhMes');
     }
-    ahorroTotal = (1 - optimizacionTotal / mayorConsumo) * 100;
-    ahorroTotal = ahorroTotal.toFixed(2);
+    ahorroTotal = getPorcentajeAhorro(optimizacionTotal, mayorConsumo);
     optimizacionTotal = optimizacionTotal.toFixed(2);
-    document.getElementById('optimizacionTotalDis').innerHTML = optimizacionTotal + " KWH";
-    document.getElementById('ahorroTotalDis').innerHTML = ahorroTotal + "%";
+    cambiarTotales(mayorConsumo, optimizacionTotal, ahorroTotal);
     mayorConsumoAhorro = optimizacionTotal;
+    consejosAhorro = mayorConsumo - optimizacionTotal;
+}
+
+function getPorcentajeAhorro(optimizacion, total) {
+    var ahorro = parseFloat(optimizacion)/ parseFloat(total);
+    console.log(parseFloat(optimizacion) + '/' + parseFloat(total) + ' = ' + ahorro);
+//    console.log(ahorro + ' - ' + 1 + ' = ');
+//    ahorro = ahorro - 1;
+//    console.log(ahorro);
+    console.log(ahorro + ' * ' + 100 + ' = ');
+    ahorro = ahorro * 100;
+    console.log(ahorro);
+    console.log(ahorro + ' - ' + 100 + ' = ');
+//    ahorro = 100 - ahorro;
+    console.log(ahorro);
+    ahorro = ahorro.toFixed(2);
+    console.log('2 Decimales: ' + ahorro);
+
+    return parseFloat(ahorro);
+}
+
+function cambiarTotales(consumoTotalDis, optimizacionTotalDis, ahorroTotalDis) {
+    document.getElementById('consumoTotalDis').innerHTML = consumoTotalDis + " KWH";
+    document.getElementById('optimizacionTotalDis').innerHTML = optimizacionTotalDis + " KWH";
+    document.getElementById('ahorroTotalDis').innerHTML = ahorroTotalDis + "%";
 }
 
 function consumoTotal() {
@@ -325,7 +348,48 @@ function consumoColectorSust() {
     var costoMayoresConsumidores = calcularCosto(mayorConsumo);
     var costoMayoresConsumidoresAhorro = calcularCosto(mayorConsumo - record.get('kwhMes'));
     var costoAhorro = costoMayoresConsumidores - costoMayoresConsumidoresAhorro;
-    document.getElementById('precioColectorSust').innerHTML = '$ '+ Math.round(costoAhorro * 100) / 100;
+    document.getElementById('precioColectorSust').innerHTML = '$ ' + Math.round(costoAhorro * 100) / 100;
+    colectorAhorro = record.get('kwhMes');
+}
+
+function crearStoreMayoresConsumidores(store) {
+    var cont = 0;
+    storeMayoresConsumidores.removeAll();
+    store.each(function (rec) {
+        if (cont < 4) {
+            if (rec.id !== 'Agua Caliente') {
+                var r = Ext.create('ConsumoModelFinal', {
+                    idMaquina: rec.get('idMaquina'),
+                    nombreDis: rec.get('nombreDis'),
+                    cantidad: rec.get('cantidad'),
+                    potencia: rec.get('potencia'),
+                    tiempoUso: rec.get('tiempoUso'),
+                    idPeriodo: rec.get('idPeriodo'),
+                    kwhMes: rec.get('kwhMes'),
+                    participacion: rec.get('participacion')
+                });
+            }
+            storeMayoresConsumidores.add(r);
+        } else {
+            return false;
+        }
+        cont++;
+    });
+    storeMayoresConsumidores.setSorters({
+        property: 'participacion',
+        direction: 'DESC'
+    });
+    Ext.getCmp('gridPaneles').getView().refresh();
+}
+
+function cambiarTotalesPaneles() {
+    if (formularioPaneles.down('[name=checkStore]').getValue()) {
+        var ahorro = getPorcentajeAhorro(panelesAhorro, mayorConsumoAhorro);
+        cambiarTotales(mayorConsumoAhorro, panelesAhorro, ahorro);
+    } else {
+        var ahorro = getPorcentajeAhorro(panelesAhorro, mayorConsumo);
+        cambiarTotales(mayorConsumo, panelesAhorro, ahorro);
+    }
 }
 
 function esPar(val) {

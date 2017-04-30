@@ -1,5 +1,5 @@
 var consejosAhorro, gridConsejos, storeConsejos1, storeConsejos2, storeConsejos3, storeConsejos4;
-var ahorroTotal;
+var ahorroTotal, consejosAhorro = 0;
 
 Ext.onReady(function () {
     var heightConsejos = 255, heightGridConsejos = 175;

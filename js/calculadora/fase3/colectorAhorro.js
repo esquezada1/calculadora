@@ -1,4 +1,4 @@
-var colectorSolar, formularioColector, detalleColector;
+var colectorSolar, formularioColector, detalleColector, colectorAhorro = 0;
 var storeColector;
 
 Ext.onReady(function () {
@@ -22,32 +22,37 @@ Ext.onReady(function () {
 
     formularioColector = Ext.create('Ext.form.FieldSet', {
         cls: 'tabs-ahorro',
-        title: '<h3 style="color:#003F72;"> DATOS </h3>',
+        title: '<b style="color:#003F72;"> DATOS </b>',
         flex: 1,
-        height: 300,
+        height: 270,
         layout: 'anchor',
-        padding: '15 10 10 5',
+        padding: 15,
         items: [
             {
                 xtype: 'panel',
                 layout: 'hbox',
                 items: [
                     {
+                        width: '70%',
+                        html: '<span class="clsCaracteristicas"><b>Cantidad de personas que viven en el hogar</b></span>'
+                    },
+                    {
                         name: 'numeroPersonas',
                         xtype: 'combobox',
                         store: storeColector,
                         displayField: 'numPersonas',
                         valueField: 'id',
-                        fieldLabel: '<span class="clsCaracteristicas"><b>Cantidad de personas que viven en el hogar</b></span',
-                        value: 2,
-                        flex: 1,
-                        listConfig: {
-                            minWidth: 150
-                        },
+                        width: '27%',
+                        value: 1,
                         tpl: Ext.create('Ext.XTemplate',
                                 '<tpl for=".">',
-                                '<div class="x-boundlist-item">{numPersonas}</div>',
+                                '<div class="x-boundlist-item">{numPersonas} personas</div>',
                                 '</tpl>'),
+                        displayTpl: Ext.create('Ext.XTemplate',
+                                '<tpl for=".">',
+                                '{numPersonas} personas',
+                                '</tpl>'
+                                ),
                         listeners: {select: function (combo, record, eOpts) {
                                 var idPersonas = formularioColector.down('[name=numeroPersonas]').getValue();
                                 var record = storeColector.getById(idPersonas);
@@ -75,7 +80,7 @@ Ext.onReady(function () {
                 xtype: 'panel',
                 layout: 'hbox',
                 cls: 'panel-valores',
-                margin: '5 0 5 0',                
+                margin: '5 0 5 0',
                 padding: '3 20 3 20',
                 items: [{
                         width: '70%',
@@ -149,11 +154,11 @@ Ext.onReady(function () {
     });
     detalleColector = Ext.create('Ext.form.FieldSet', {
         cls: 'tabs-ahorro',
-        title: '<h3 style="color:#003F72;"> CARACTERÍSTICAS DEL SISTEMA </h3>',
+        title: '<b style="color:#003F72;"> CARACTERÍSTICAS DEL SISTEMA </b>',
         flex: 1,
-        height: 300,
+        height: 270,
         layout: 'anchor',
-        padding: '15 10 10 5',
+        padding: '0 10 5 5',
         items: [{
                 flex: 1,
                 padding: '0 0 10 0',

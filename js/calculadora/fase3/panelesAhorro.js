@@ -1,6 +1,10 @@
-var panelesSolares, formularioPaneles, detallePaneles;
-var storeRegiones, storeProvincias, storeCostos;
+var panelesSolares, formularioPaneles, detallePaneles, panelesAhorro = 0;
+var storeMayoresConsumidores, storeRegiones, storeProvincias, storeCostos;
 Ext.onReady(function () {
+    storeMayoresConsumidores = Ext.create('Ext.data.Store', {
+        model: 'ConsumoModelFinal'
+    });
+
     storeCostos = Ext.create('Ext.data.Store', {
         fields: [
             {name: 'id', type: 'int'},
@@ -72,11 +76,14 @@ Ext.onReady(function () {
         ]
     });
     formularioPaneles = Ext.create('Ext.form.FieldSet', {
-        cls: 'panel-consejos',
-        title: '<b>Datos</b>',
+        cls: 'tabs-ahorro',
+        title: '<b style="color:#003F72;"> DATOS </b>',
         flex: 1,
         layout: 'anchor',
-        height: 240,
+        height: 270,
+        defaults: {
+            margin: '7 0 5 0'
+        },
         items: [
             {
                 xtype: 'panel',
@@ -104,7 +111,7 @@ Ext.onReady(function () {
                                 '<div class="x-boundlist-item">{name}</div>',
                                 '</tpl>'),
                         listeners: {
-                            select: function (combo, record, eOpts) { 
+                            select: function (combo, record, eOpts) {
                                 Ext.getCmp('checkDisPaneles').disable();
                                 formularioPaneles.down('[name=comboProvincias]').clearValue();
                                 storeProvincias.clearFilter(true);
@@ -154,13 +161,11 @@ Ext.onReady(function () {
                         listeners: {
                             change: function (store, check) {
                                 if (check) {
-                                    Ext.getCmp('gridPaneles').reconfigure(storeConsumoFinal);
+                                    crearStoreMayoresConsumidores(storeConsumoFinal);
                                 } else {
-                                    Ext.getCmp('gridPaneles').reconfigure(storeConsumoDispositivos);
+                                    crearStoreMayoresConsumidores(storeConsumoDispositivos);
                                 }
-                                Ext.getCmp('gridPaneles').getStore().each(function (rec) {
-                                    rec.set('excluir', false);
-                                });
+                                cambiarTotalesPaneles();
                                 document.getElementById('consumoSust').innerHTML = '0 kWh';
                                 document.getElementById('precioSust').innerHTML = '$ 0.00';
                             }
@@ -171,12 +176,12 @@ Ext.onReady(function () {
                 xtype: 'panel',
                 layout: 'hbox',
                 items: [{
-                        flex: 1,
+                        width: '32%',
                         cls: 'labels-paneles',
                         html: '<center><b>Seleccione el consumo a sustituir en el hogar</b></center>'
                     },
                     {
-                        flex: 2,
+                        width: '68%',
                         xtype: 'grid',
                         id: 'gridPaneles',
                         hideHeaders: true,
@@ -247,7 +252,7 @@ Ext.onReady(function () {
                                                     panel300 = panel300 - panel150;
                                                     panel300 = panel300 / 2;
                                                 }
-                                                mensajeNumPaneles = panel150 + ' Panel(es) de 150W<br>' + panel300 + ' Panel(es) de 300W';
+                                                mensajeNumPaneles = panel150 + ' Panel(es) de 150W, ' + panel300 + ' Panel(es) de 300W';
                                             }
                                             /////////INVERSION EN PANELES/////////
                                             var costoPanel150 = 207.9 * panel150;
@@ -265,26 +270,23 @@ Ext.onReady(function () {
                                             /////////AREA//////
                                             areaTotal = (panel150 * 1) + (panel300 * 2);
                                         }
-                                        document.getElementById('consumoSust').innerHTML = valorExcluir + ' kWh';
+                                        document.getElementById('consumoSust').innerHTML = valorExcluir.toFixed(2) + ' kWh';
                                         document.getElementById('precioSust').innerHTML = '$ ' + costoAhorro.toFixed(2);
                                         document.getElementById('potenciaNeces').innerHTML = potenciaNecesaria.toFixed(2) + ' Wattios';
                                         document.getElementById('panelesNeces').innerHTML = mensajeNumPaneles;
                                         document.getElementById('inversion').innerHTML = '$ ' + costoInversion.toFixed(2);
                                         document.getElementById('tiempoAmort').innerHTML = tiempoAmortizacion.toFixed(2) + ' años';
                                         document.getElementById('areaTotal').innerHTML = areaTotal + ' m&#178';
+                                        panelesAhorro = valorExcluir;
+                                        cambiarTotalesPaneles();
                                     }
                                 }}
                         ],
-                        store: storeConsumoFinal,
+                        store: storeMayoresConsumidores,
                         viewConfig: {
                             hideHeaders: true,
                             loadingText: 'Cargando...',
-                            emptyText: '<br><center>No hay datos que Mostrar</center>',
-                            getRowClass: function (record, index) {
-                                if (index > 3) {
-                                    this.getView().getRow(index).style.display = 'none';
-                                }
-                            }
+                            emptyText: '<br><center>No hay datos que Mostrar</center>'
                         }
                     }]
             }, {
@@ -293,11 +295,11 @@ Ext.onReady(function () {
                 cls: 'panel-valores',
                 margin: '5 0 0 0',
                 items: [{
-                        flex: 1,
+                        width: '39%',
                         html: '<center><b>Consumo a sustituir en el hogar</b></center>'
                     },
                     {
-                        flex: 2,
+                        width: '60%',
                         html: '<center><b id="consumoSust">0 kWh</b></center>'
                     }]
             }, {
@@ -305,30 +307,86 @@ Ext.onReady(function () {
                 layout: 'hbox',
                 cls: 'panel-valores',
                 items: [{
-                        flex: 1,
+                        width: '39%',
                         html: '<center><b>Precio del consumo a sustituir</b></center>'
                     },
                     {
-                        flex: 2,
+                        width: '60%',
                         html: '<center><b id="precioSust">$ 0.00</b></center>'
                     }]
+            },
+            {
+                html: '<br>'
+            },
+            {
+                xtype: 'button',
+                padding: '10 0 0 0',
+                cls: 'btnSugerencia',
+                iconCls: 'icon-info',
+                text: 'Sugerencias para el panel solar',
+                handler: function () {
+                    var conten = '<P ALIGN=CENTER STYLE="margin-right: -0.04in; margin-bottom: 0.11in">\n\
+                                    <FONT COLOR="#ff0000">\n\
+                                        <FONT FACE="Arial, serif">\n\
+                                            <SPAN LANG="es-ES"><B>Sugerencias para el panel solar</B></SPAN>\n\
+                                        </FONT>\n\
+                                    </FONT>\n\
+                                </P> \n\
+                                <P ALIGN=CENTER STYLE="margin-right: -0.04in; margin-bottom: 0.11in">\n\
+                                    <IMG SRC="img/casa-verde.png" NAME="Panel Solar" ALIGN=BOTTOM WIDTH=426 HEIGHT=211 BORDER=0>\n\
+                                </P> \n\
+                                <UL>\n\
+                                    <LI>\n\
+                                        <P ALIGN=JUSTIFY STYLE="margin-right: -0.2in; margin-bottom: 0.11in">\n\
+                                            <FONT FACE="Arial, serif">\n\
+                                                <SPAN LANG="es-ES">Se debe evitar sombras sobre los paneles solares ya que esto limita la produccion de energia y puede acortar la vida util de los paneles</SPAN>\n\
+                                            </FONT>\n\
+                                        </P>\n\
+                                    </LI>\n\
+                                    <LI>\n\
+                                        <P ALIGN=JUSTIFY STYLE="margin-right: -0.04in; margin-bottom: 0in">\n\
+                                            <FONT FACE="Arial, serif">\n\
+                                                <SPAN LANG="es-ES">Dependiendo de la estructura del techo puede ser necesario reforzar su estructura para que soporte el peso de los paneles</SPAN>\n\
+                                            </FONT>\n\
+                                        </P>\n\
+                                    </LI>\n\
+\n\                                 <LI>\n\
+                                        <P ALIGN=JUSTIFY STYLE="margin-right: -0.04in; margin-bottom: 0in">\n\
+                                            <FONT FACE="Arial, serif">\n\
+                                                <SPAN LANG="es-ES">Los paneles solares se instalan en estructuras especiales, preferiblemente de aluminio</SPAN>\n\
+                                            </FONT>\n\
+                                        </P>\n\
+                                    </LI>\n\
+\n\                                 <LI>\n\
+                                        <P ALIGN=JUSTIFY STYLE="margin-right: -0.04in; margin-bottom: 0in">\n\
+                                            <FONT FACE="Arial, serif">\n\
+                                                <SPAN LANG="es-ES">Es necesario  una distancia minima del techo para facilitar el enfriamiento del panel</SPAN>\n\
+                                            </FONT>\n\
+                                        </P>\n\
+                                    </LI>\n\
+                                </UL>\n\
+                                <BR><BR>';
+                    abrirVentanaAyudaDis();
+                    ventanaAyudaDis.setTitle("Sugerencias");
+                    ventanaAyudaDis.body.update(conten);
+                }
             }
         ]
     });
     detallePaneles = Ext.create('Ext.form.FieldSet', {
-        cls: 'panel-consejos',
-        title: '<b>Caracteristicas del Sistema</b>',
+        cls: 'tabs-ahorro',
+        title: '<b style="color:#003F72;"> CARACTERÍSTICAS DEL SISTEMA </b>',
         flex: 1,
         layout: 'anchor',
         margin: '0 0 0 5',
-        height: 240,
+        height: 270,
         items: [{
                 xtype: 'panel',
-                layout: 'hbox',
                 items: [{
                         flex: 1,
-                        padding: '10 0 10 0',
-                        html: '<img src="img/casa-verde.png" style="width:100%; height: 170px;">'
+                        padding: '3 10 0 10',
+                        style: 'text-align: center;',
+                        html: '<img src="img/casa-verde.png" style="width:62%; height: 80px;">'
                     },
                     {
                         flex: 2,
@@ -341,73 +399,72 @@ Ext.onReady(function () {
                                 layout: 'hbox',
                                 cls: 'panel-valores',
                                 items: [{
-                                        width: '50%',
-                                        html: '<center><b>Total Potencia necesaria</b></center>'
+                                        width: '47%',
+                                        html: '<b class="clsCaracteristicas">Total Potencia necesaria</b>'
                                     },
                                     {
-                                        width: '50%',
-                                        html: '<center id="potenciaNeces">0 Wattios</center>'
+                                        width: '53%',
+                                        html: '<center id="potenciaNeces" class="clsValores">0 Wattios</center>'
                                     }]
                             }, {
                                 xtype: 'panel',
                                 layout: 'hbox',
                                 cls: 'panel-valores',
                                 items: [{
-                                        width: '50%',
-                                        html: '<center><b>Numeros de paneles necesarios</b></center>'
+                                        width: '47%',
+                                        html: '<b class="clsCaracteristicas">Numeros de paneles necesarios</b>'
                                     },
                                     {
-                                        width: '50%',
-                                        height: 34,
-                                        html: '<center id="panelesNeces">0 Panel(es)</center>'
+                                        width: '53%',
+                                        html: '<center id="panelesNeces" class="clsValores">0 Panel(es)</center>'
                                     }]
                             }, {
                                 xtype: 'panel',
                                 layout: 'hbox',
                                 cls: 'panel-valores',
                                 items: [{
-                                        width: '50%',
-                                        html: '<center><b>Inversion</b></center>'
+                                        width: '47%',
+                                        html: '<b class="clsCaracteristicas">Inversion</b>'
                                     },
                                     {
-                                        width: '50%',
-                                        html: '<center id="inversion">$ 0.00</center>'
+                                        width: '53%',
+                                        html: '<center id="inversion" class="clsValores">$ 0.00</center>'
                                     }]
                             }, {
                                 xtype: 'panel',
                                 layout: 'hbox',
                                 cls: 'panel-valores',
                                 items: [{
-                                        width: '50%',
-                                        html: '<center><b>Tiempo de vida del sistema</b></center>'
+                                        width: '47%',
+                                        html: '<b class="clsCaracteristicas">Tiempo de vida del sistema</b>'
                                     },
                                     {
-                                        width: '50%',
-                                        html: '<center id="tiempoVida">30 años</center>'
+                                        width: '53%',
+                                        html: '<center id="tiempoVida" class="clsValores">30 años</center>'
                                     }]
                             }, {
                                 xtype: 'panel',
                                 layout: 'hbox',
                                 cls: 'panel-valores',
                                 items: [{
-                                        width: '50%',
-                                        html: '<center><b>Tiempo de amortización</b></center>'
+                                        width: '47%',
+                                        html: '<b class="clsCaracteristicas">Tiempo de amortización</b>'
                                     },
                                     {
-                                        width: '50%',
-                                        html: '<center id="tiempoAmort">0 años</center>'
+                                        width: '53%',
+                                        html: '<center id="tiempoAmort" class="clsValores">0 años</center>'
                                     }]
                             }, {
                                 xtype: 'panel',
                                 layout: 'hbox',
                                 cls: 'panel-valores',
                                 items: [{
-                                        width: '50%',
-                                        html: '<center><b>Área necesaria para instalación</b></center>'
+                                        width: '47%',
+                                        html: '<b class="clsCaracteristicas">Área necesaria para instalación</b>'
                                     },
                                     {
-                                        width: '50%',
-                                        html: '<center id="areaTotal">0 m&#178</center>'
+                                        width: '53%',
+                                        html: '<center id="areaTotal" class="clsValores">0 m&#178</center>'
                                     }]
                             }]
                     }]

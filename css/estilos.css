@@ -338,7 +338,7 @@ body{
 }
 
 .tabs-ahorro{
-    background-color: rgba(251, 252, 252, 0.8);
+    background-color: rgba(251, 252, 252, 0.8) !important;
 }
 
 .clsCaracteristicas b{
