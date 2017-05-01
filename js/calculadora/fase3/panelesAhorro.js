@@ -189,7 +189,7 @@ Ext.onReady(function () {
                         columns: [
                             {header: '<center><b>Dispositivo</b><center>', width: 170, sortable: false, dataIndex: 'nombreDis'},
                             {header: '<center><b>Consumo</b><center>', width: 120, sortable: false, dataIndex: 'kwhMes', renderer: function (value) {
-                                    return value + ' kWh';
+                                    return value.toFixed(2) + ' kWh';
                                 }},
                             {header: '<center>Check</b><center>', width: 50, xtype: 'checkcolumn', sortable: false, dataIndex: 'excluir', menuDisabled: true, disabled: true, id: 'checkDisPaneles',
                                 listeners: {
@@ -266,7 +266,7 @@ Ext.onReady(function () {
                                             }
                                             /////////AMORTIZACION/////////////
                                             tiempoAmortizacion = costoAhorro * 12;
-                                            tiempoAmortizacion = 1500 / tiempoAmortizacion;
+                                            tiempoAmortizacion = costoInversion / tiempoAmortizacion;
                                             /////////AREA//////
                                             areaTotal = (panel150 * 1) + (panel300 * 2);
                                         }
@@ -306,6 +306,7 @@ Ext.onReady(function () {
                 xtype: 'panel',
                 layout: 'hbox',
                 cls: 'panel-valores',
+                margin: '0 0 10 0',
                 items: [{
                         width: '39%',
                         html: '<center><b>Precio del consumo a sustituir</b></center>'
@@ -314,9 +315,6 @@ Ext.onReady(function () {
                         width: '60%',
                         html: '<center><b id="precioSust">$ 0.00</b></center>'
                     }]
-            },
-            {
-                html: '<br>'
             },
             {
                 xtype: 'button',

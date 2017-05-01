@@ -60,7 +60,7 @@ Ext.onReady(function () {
                                 var costoMayoresConsumidores = calcularCosto(mayorConsumo);
                                 var costoMayoresConsumidoresAhorro = calcularCosto(mayorConsumo - consumo.get('kwhMes'));
                                 var costoAhorro = costoMayoresConsumidores - costoMayoresConsumidoresAhorro;
-                                var amortizacion = 1500 / (costoAhorro * 12);
+                                var amortizacion = record.get('precio') / (costoAhorro * 12);
                                 document.getElementById('capacidadTanque').innerHTML = record.get('capacidad') + ' Litros';
                                 document.getElementById('inversionColector').innerHTML = '$ ' + record.get('precio');
                                 document.getElementById('tiempoVidaColector').innerHTML = record.get('tiempoVida') + ' año(s)';

@@ -1,4 +1,4 @@
-var consejosAhorro, gridConsejos, storeConsejos1, storeConsejos2, storeConsejos3, storeConsejos4;
+var calculoAhorro, gridConsejos, storeConsejos1, storeConsejos2, storeConsejos3, storeConsejos4;
 var ahorroTotal, consejosAhorro = 0;
 
 Ext.onReady(function () {
@@ -9,7 +9,7 @@ Ext.onReady(function () {
             {name: 'id', type: 'int'},
             {name: 'idMaquina', type: 'int'},
             {name: 'consejo', type: 'string'},
-            {name: 'ahorro', type: 'int'},
+            {name: 'ahorro', type: 'float'},
             {name: 'cambio', type: 'bool'},
             {name: 'active', type: 'bool'}
         ]
@@ -340,7 +340,7 @@ Ext.onReady(function () {
             }]
     });
 
-    consejosAhorro = Ext.create('Ext.panel.Panel', {
+    calculoAhorro = Ext.create('Ext.panel.Panel', {
         id: 'tabConsejos',
         cls: 'tabs-ahorro',
         title: 'Consejos de Ahorro',

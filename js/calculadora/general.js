@@ -186,7 +186,7 @@ Ext.onReady(function () {
                 switch (newTab.id) {
                     case 'tabConsejos':
                         var ahorro = getPorcentajeAhorro(consejosAhorro, mayorConsumo);
-                        cambiarTotales(mayorConsumo, mayorConsumoAhorro, ahorro);
+                        cambiarTotales(mayorConsumo, mayorConsumo - consejosAhorro, ahorro);
                         break;
                     case 'tabPaneles':
                         if (formularioPaneles.down('[name=checkStore]').getValue()) {
@@ -199,12 +199,12 @@ Ext.onReady(function () {
                     case 'tabColector':
                         consumoColectorSust();
                         var ahorro = getPorcentajeAhorro(colectorAhorro, mayorConsumo);
-                        cambiarTotales(mayorConsumo, colectorAhorro, ahorro);
+                        cambiarTotales(mayorConsumo, mayorConsumo - colectorAhorro, ahorro);
                         break;
                 }
             }
         },
-        items: [consejosAhorro, panelesSolares, colectorSolar]
+        items: [calculoAhorro, panelesSolares, colectorSolar]
     });
     panelDerecha = Ext.create('Ext.panel.Panel', {
         id: 'panelDerecha',
@@ -334,11 +334,13 @@ Ext.onReady(function () {
                         text: 'CÁLCULO DE<br>AHORRO',
                         handler: function () {
                             fase = 3;
+                            viewAhorro.child('#tabColector').tab.hide();
                             Ext.getCmp('panelCentral').setTitle('<center class="title-general">CÁLCULO DE AHORRO</center>');
                             limpiarPanelCentral();
                             panelCentral.add(viewAhorro);
                             limpiarFiltros();
                             filtrarStores();
+                            viewAhorro.setActiveTab(calculoAhorro);
                             panelDerecha.hide();
                             btnSiguiente.show();
                         }

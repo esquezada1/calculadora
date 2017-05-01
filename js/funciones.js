@@ -106,7 +106,7 @@ function cargarDispositivoCasa(record) {
     var srcImg = storeDispositivos.getById(record.get('idMaquina')).data.url;
     document.getElementById('dis-casa').src = srcImg;
     document.getElementById('tit-casa').innerHTML = record.get('nombreDis');
-    document.getElementById('cons-casa').innerHTML = record.get('kwhMes').toFixed(2) + ' KWh/MES';
+    document.getElementById('cons-casa').innerHTML = record.get('kwhMes').toFixed(2) + ' kWh/mes';
 }
 var mayorConsumo = 0;
 function filtrarStores() {
@@ -117,7 +117,7 @@ function filtrarStores() {
     var storeDis, idConsumoDis, idGridDis, idImgDis, idNameDis;
     var cont = 0;
     mayorConsumo = 0;
-    storeConsumoDispositivos.each(function (rec) {
+    storeConsumoFinal.each(function (rec) {
         var consumoDis = rec.get('kwhMes').toFixed(2);
         switch (cont) {
             case 0:
@@ -128,6 +128,9 @@ function filtrarStores() {
                 idConsumoDis = 'consumoDis1';
                 idGridDis = 'gridConsejos1';
                 mayorConsumo += rec.get('kwhMes');
+                if (rec.get('idMaquina') === 24) {
+                    viewAhorro.child('#tabColector').tab.show();
+                }
                 break;
             case 1:
                 gridConsejos2.show();
@@ -137,6 +140,9 @@ function filtrarStores() {
                 idConsumoDis = 'consumoDis2';
                 idGridDis = 'gridConsejos2';
                 mayorConsumo += rec.get('kwhMes');
+                if (rec.get('idMaquina') === 24) {
+                    viewAhorro.child('#tabColector').tab.show();
+                }
                 break;
             case 2:
                 gridConsejos3.show();
@@ -146,6 +152,9 @@ function filtrarStores() {
                 idConsumoDis = 'consumoDis3';
                 idGridDis = 'gridConsejos3';
                 mayorConsumo += rec.get('kwhMes');
+                if (rec.get('idMaquina') === 24) {
+                    viewAhorro.child('#tabColector').tab.show();
+                }
                 break;
             case 3:
                 gridConsejos4.show();
@@ -155,6 +164,9 @@ function filtrarStores() {
                 idConsumoDis = 'consumoDis4';
                 idGridDis = 'gridConsejos4';
                 mayorConsumo += rec.get('kwhMes');
+                if (rec.get('idMaquina') === 24) {
+                    viewAhorro.child('#tabColector').tab.show();
+                }
                 break;
         }
         var urlImagenDis = storeDispositivos.getById(rec.get('idMaquina')).get('url');
@@ -171,14 +183,18 @@ function filtrarStores() {
                 value: false
             });
         }
+        console.log(rec.get('nombreDis'));
         document.getElementById(idImgDis).src = urlImagenDis;
         document.getElementById(idNameDis).innerHTML = rec.get('nombreDis');
-        document.getElementById(idConsumoDis).innerHTML = consumoDis + " KWH";
+        document.getElementById(idConsumoDis).innerHTML = consumoDis + " kWh";
         aplicarConsejos(idGridDis);
+        if (cont === 3) {
+            return false;
+        }
         cont++;
     });
     mayorConsumo = mayorConsumo.toFixed(2);
-    document.getElementById('consumoTotalDis').innerHTML = mayorConsumo + " KWH";
+    document.getElementById('consumoTotalDis').innerHTML = mayorConsumo + " kWh";
 }
 
 function limpiarFiltros() {
@@ -254,7 +270,7 @@ function aplicarConsejos(idGrid) {
 //            });
 //        }
         if (rec.get('active')) {
-            ahorro += parseInt(rec.get('ahorro'));
+            ahorro += parseFloat(rec.get('ahorro'));
         }
     });
     var record = storeConsumoDispositivos.data.items[numDis];
@@ -263,8 +279,9 @@ function aplicarConsejos(idGrid) {
     optimizacion = optimizacion / 100;
     optimizacion = optimizacion * record.get('kwhMes');
     recordFinal.set('kwhMes', optimizacion);
+    var ahorroDis = record.get('kwhMes') - optimizacion;
     optimizacion = optimizacion.toFixed(2);
-    document.getElementById(idDivOptimizacion).innerHTML = optimizacion + " KWH";
+    document.getElementById(idDivOptimizacion).innerHTML = ahorroDis.toFixed(2) + " kWh";
     document.getElementById(idDivAhorro).innerHTML = ahorro + "%";
     var optimizacionTotal = 0;
     var ahorroTotal = 0;
@@ -277,34 +294,26 @@ function aplicarConsejos(idGrid) {
     for (var i = 0; i < limit; i++) {
         optimizacionTotal += storeConsumoFinal.data.items[i].get('kwhMes');
     }
-    ahorroTotal = getPorcentajeAhorro(optimizacionTotal, mayorConsumo);
-    optimizacionTotal = optimizacionTotal.toFixed(2);
-    cambiarTotales(mayorConsumo, optimizacionTotal, ahorroTotal);
-    mayorConsumoAhorro = optimizacionTotal;
     consejosAhorro = mayorConsumo - optimizacionTotal;
+    ahorroTotal = getPorcentajeAhorro(consejosAhorro, mayorConsumo);
+//    optimizacionTotal = optimizacionTotal.toFixed(2);
+    cambiarTotales(mayorConsumo, mayorConsumo - consejosAhorro, ahorroTotal);
+    mayorConsumoAhorro = optimizacionTotal;
 }
 
 function getPorcentajeAhorro(optimizacion, total) {
-    var ahorro = parseFloat(optimizacion)/ parseFloat(total);
-    console.log(parseFloat(optimizacion) + '/' + parseFloat(total) + ' = ' + ahorro);
-//    console.log(ahorro + ' - ' + 1 + ' = ');
-//    ahorro = ahorro - 1;
-//    console.log(ahorro);
-    console.log(ahorro + ' * ' + 100 + ' = ');
+    var ahorro = parseFloat(optimizacion) / parseFloat(total);
     ahorro = ahorro * 100;
-    console.log(ahorro);
-    console.log(ahorro + ' - ' + 100 + ' = ');
-//    ahorro = 100 - ahorro;
-    console.log(ahorro);
     ahorro = ahorro.toFixed(2);
-    console.log('2 Decimales: ' + ahorro);
-
     return parseFloat(ahorro);
 }
 
 function cambiarTotales(consumoTotalDis, optimizacionTotalDis, ahorroTotalDis) {
-    document.getElementById('consumoTotalDis').innerHTML = consumoTotalDis + " KWH";
-    document.getElementById('optimizacionTotalDis').innerHTML = optimizacionTotalDis + " KWH";
+    consumoTotalDis = parseFloat(consumoTotalDis).toFixed(2);
+    optimizacionTotalDis = parseFloat(optimizacionTotalDis).toFixed(2)
+    ahorroTotalDis = parseFloat(ahorroTotalDis).toFixed(2)
+    document.getElementById('consumoTotalDis').innerHTML = consumoTotalDis + " kWh";
+    document.getElementById('optimizacionTotalDis').innerHTML = optimizacionTotalDis + " kWh";
     document.getElementById('ahorroTotalDis').innerHTML = ahorroTotalDis + "%";
 }
 
@@ -317,7 +326,7 @@ function consumoTotal() {
     });
     if (fase === 1) {
         document.getElementById('totalDispositivos').innerHTML = totalDispositivos + " Dispositivo(s)";
-        document.getElementById('totalConsumo').innerHTML = totalConsumo.toFixed(2) + " KWH/MES";
+        document.getElementById('totalConsumo').innerHTML = totalConsumo.toFixed(2) + " kWh/mes";
     }
 }
 
@@ -357,7 +366,7 @@ function crearStoreMayoresConsumidores(store) {
     storeMayoresConsumidores.removeAll();
     store.each(function (rec) {
         if (cont < 4) {
-            if (rec.id !== 'Agua Caliente') {
+            if (rec.id !== 'Agua Caliente' && rec.get('kwhMes') !== 0) {
                 var r = Ext.create('ConsumoModelFinal', {
                     idMaquina: rec.get('idMaquina'),
                     nombreDis: rec.get('nombreDis'),
@@ -385,10 +394,10 @@ function crearStoreMayoresConsumidores(store) {
 function cambiarTotalesPaneles() {
     if (formularioPaneles.down('[name=checkStore]').getValue()) {
         var ahorro = getPorcentajeAhorro(panelesAhorro, mayorConsumoAhorro);
-        cambiarTotales(mayorConsumoAhorro, panelesAhorro, ahorro);
+        cambiarTotales(mayorConsumoAhorro, mayorConsumoAhorro - panelesAhorro, ahorro);
     } else {
         var ahorro = getPorcentajeAhorro(panelesAhorro, mayorConsumo);
-        cambiarTotales(mayorConsumo, panelesAhorro, ahorro);
+        cambiarTotales(mayorConsumo, mayorConsumo - panelesAhorro, ahorro);
     }
 }
 
@@ -398,5 +407,11 @@ function esPar(val) {
         return true;
     } else {
         return false;
+    }
+}
+
+function comprobarTiempoUso(periodo, record) {
+    if (periodo.get('max') < record.get('tiempoUso')) {
+        record.set('tiempoUso', periodo.get('max'));
     }
 }

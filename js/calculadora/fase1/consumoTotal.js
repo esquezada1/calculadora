@@ -54,13 +54,14 @@ Ext.onReady(function () {
         fields: [
             {name: 'id', type: 'int'},
             {name: 'name', type: 'string'},
-            {name: 'cant', type: 'float'}
+            {name: 'cant', type: 'float'},
+            {name: 'max', type: 'int'}
         ],
         data: [
-            {id: 1, name: 'Horas/Mes', cant: 1},
-            {id: 2, name: 'Horas/Semana', cant: 4},
-            {id: 3, name: 'Horas/Día', cant: 30},
-            {id: 4, name: 'Minutos/Día', cant: 0.5}
+            {id: 1, name: 'Horas/Mes', cant: 1, max: 720},
+            {id: 2, name: 'Horas/Semana', cant: 4, max: 168},
+            {id: 3, name: 'Horas/Día', cant: 30, max: 24},
+            {id: 4, name: 'Minutos/Día', cant: 0.5, max: 1440}
         ]
     });
 
@@ -225,7 +226,7 @@ Ext.onReady(function () {
                     valueField: 'id'
                 }
             },
-            {header: "<center class='title-column'>kWh/MES</center>", width: 100, dataIndex: 'kwhMes', name: 'kwhMes',
+            {header: "<center class='title-column'>kWh/mes</center>", width: 100, dataIndex: 'kwhMes', name: 'kwhMes',
                 hideable: false,
                 summaryType: 'sum',
                 renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
@@ -253,15 +254,35 @@ Ext.onReady(function () {
         ],
         listeners: {
             edit: function (thisObj, record, item, index, e, eOpts) {
-                var cantPeriodo = storePeriodos.getById(record.record.data.idPeriodo).data.cant;
+                var cantPeriodo = storePeriodos.getById(record.record.get('idPeriodo'));
                 var totalConsumo = 0;
-                if (record.record.get('idMaquina') === 19) {
-                    totalConsumo = record.record.data.cantidad * 14000 * record.record.data.tiempoUso * cantPeriodo;
+                comprobarTiempoUso(cantPeriodo, record.record);
+                if (record.record.get('idMaquina') === 1) {
+                    var standByTv = 0;
+                    if (record.record.get('idPeriodo') === 4) {
+                        standByTv = (cantPeriodo.get('max') - record.record.get('tiempoUso')) / 60;
+                        standByTv = standByTv * record.record.get('cantidad') * 3 * 30;
+                    } else {
+                        standByTv = cantPeriodo.get('max') - record.record.get('tiempoUso');
+                        standByTv = standByTv * record.record.get('cantidad') * 3 * cantPeriodo.get('cant');
+                    }
+                    standByTv = standByTv / 1000;
+                    totalConsumo = record.record.get('cantidad') * record.record.get('potencia') * record.record.get('tiempoUso') * cantPeriodo.get('cant');
+                    totalConsumo = totalConsumo / 1000;
+                    totalConsumo = totalConsumo + standByTv;
+                    var ahorro = getPorcentajeAhorro(standByTv, totalConsumo);
+                    storeConsejos1.getById(2).set('ahorro', ahorro.toFixed(2));
+                    storeConsejos2.getById(2).set('ahorro', ahorro.toFixed(2));
+                    storeConsejos3.getById(2).set('ahorro', ahorro.toFixed(2));
+                    storeConsejos4.getById(2).set('ahorro', ahorro.toFixed(2));
+                } else if (record.record.get('idMaquina') === 19) {
+                    totalConsumo = record.record.get('cantidad') * 14000 * record.record.get('tiempoUso') * cantPeriodo.get('cant');
                     totalConsumo = totalConsumo / 2.54;
+                    totalConsumo = totalConsumo / 1000;
                 } else {
-                    totalConsumo = record.record.data.cantidad * record.record.data.potencia * record.record.data.tiempoUso * cantPeriodo;
+                    totalConsumo = record.record.get('cantidad') * record.record.get('potencia') * record.record.get('tiempoUso') * cantPeriodo.get('cant');
+                    totalConsumo = totalConsumo / 1000;
                 }
-                totalConsumo = totalConsumo / 1000;
                 storeConsumoDispositivos.commitChanges();
                 record.record.set('kwhMes', totalConsumo);
                 gridConsumoDispositivos.getView().refresh();
