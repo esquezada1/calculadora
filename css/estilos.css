@@ -311,7 +311,15 @@ body{
     border-color: #D6DBDF !important;
     border-radius: 5px;
 }
-
+.panel-planilla{
+    background: rgba(234, 171, 0, 0.6) !important;
+    border-style: solid !important;
+    padding: 3px;
+    margin: 0px !important;
+    border-width: 1px;
+    border-color: #D6DBDF !important;
+    border-radius: 5px;
+}
 .x-tab{
     background-color: #003F72 !important;
     border-color: #D5D8DC !important;

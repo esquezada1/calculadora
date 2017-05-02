@@ -35,6 +35,7 @@ and open the template in the editor.
         <script src="js/calculadora/fase3/ahorroTotal.js" type="text/javascript"></script>
         <script src="js/calculadora/fase3/panelesAhorro.js" type="text/javascript"></script>
         <script src="js/calculadora/fase3/colectorAhorro.js" type="text/javascript"></script>
+        <script src="js/calculadora/fase4/analisisPlanilla.js" type="text/javascript"></script>
         <script src="js/calculadora/general.js" type="text/javascript"></script>
         <script src="js/funciones.js" type="text/javascript"></script>
         <!--<script type="text/javascript" src="vistas/grid/newPanel.js"></script>
