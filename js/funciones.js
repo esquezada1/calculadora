@@ -115,7 +115,7 @@ function filtrarStores() {
     gridConsejos3.hide();
     gridConsejos4.hide();
     viewAhorro.child('#tabColector').tab.hide();
-    var storeDis, idConsumoDis, idGridDis, idImgDis, idNameDis;
+    var storeDis, idConsumoDis, idEmisionDis, idGridDis, idImgDis, idNameDis;
     var cont = 0, banderaPanel = false;
     mayorConsumo = 0;
     storeConsumoFinal.each(function (rec) {
@@ -129,6 +129,7 @@ function filtrarStores() {
                     idImgDis = 'img-consumidor1';
                     idNameDis = 'nombre-consumidor1';
                     idConsumoDis = 'consumoDis1';
+                    idEmisionDis = 'emisionDis1';
                     idGridDis = 'gridConsejos1';
                     break;
                 case 1:
@@ -137,6 +138,7 @@ function filtrarStores() {
                     idImgDis = 'img-consumidor2';
                     idNameDis = 'nombre-consumidor2';
                     idConsumoDis = 'consumoDis2';
+                    idEmisionDis = 'emisionDis2';
                     idGridDis = 'gridConsejos2';
                     break;
                 case 2:
@@ -145,6 +147,7 @@ function filtrarStores() {
                     idImgDis = 'img-consumidor3';
                     idNameDis = 'nombre-consumidor3';
                     idConsumoDis = 'consumoDis3';
+                    idEmisionDis = 'emisionDis3';
                     idGridDis = 'gridConsejos3';
                     break;
                 case 3:
@@ -153,6 +156,7 @@ function filtrarStores() {
                     idImgDis = 'img-consumidor4';
                     idNameDis = 'nombre-consumidor4';
                     idConsumoDis = 'consumoDis4';
+                    idEmisionDis = 'emisionDis4';
                     idGridDis = 'gridConsejos4';
                     break;
             }
@@ -173,6 +177,7 @@ function filtrarStores() {
             document.getElementById(idImgDis).src = urlImagenDis;
             document.getElementById(idNameDis).innerHTML = rec.get('nombreDis');
             document.getElementById(idConsumoDis).innerHTML = consumoDis + " kWh";
+            document.getElementById(idEmisionDis).innerHTML = emisionCO2(consumoDis) + " kg de CO<sub>2</sub>";
             aplicarConsejos(idGridDis);
             if (cont === 3) {
                 return false;
@@ -226,31 +231,35 @@ function aplicarConsejos(idGrid) {
     var optimizacion = 0;
     var ahorro = 0;
     var storeConsejo;
-    var idDivAhorro, idDivOptimizacion;
+    var idDivAhorro, idDivOptimizacion, idDivOptEmision;
     var numDis;
     switch (idGrid) {
         case 'gridConsejos1':
             storeConsejo = storeConsejos1;
             idDivAhorro = 'ahorroDis1';
-            idDivOptimizacion = 'optimizacionDis1';
+            idDivOptEmision = 'emisionOptDis1';
+            idDivOptimizacion = 'consumoOptDis1';
             numDis = 0;
             break;
         case 'gridConsejos2':
             storeConsejo = storeConsejos2;
             idDivAhorro = 'ahorroDis2';
-            idDivOptimizacion = 'optimizacionDis2';
+            idDivOptEmision = 'emisionOptDis2';
+            idDivOptimizacion = 'consumoOptDis2';
             numDis = 1;
             break;
         case 'gridConsejos3':
             storeConsejo = storeConsejos3;
             idDivAhorro = 'ahorroDis3';
-            idDivOptimizacion = 'optimizacionDis3';
+            idDivOptEmision = 'emisionOptDis3';
+            idDivOptimizacion = 'consumoOptDis3';
             numDis = 2;
             break;
         case 'gridConsejos4':
             storeConsejo = storeConsejos4;
             idDivAhorro = 'ahorroDis4';
-            idDivOptimizacion = 'optimizacionDis4';
+            idDivOptEmision = 'emisionOptDis4';
+            idDivOptimizacion = 'consumoOptDis4';
             numDis = 3;
             break;
     }
@@ -272,9 +281,11 @@ function aplicarConsejos(idGrid) {
     optimizacion = optimizacion / 100;
     optimizacion = optimizacion * record.get('kwhMes');
     var ahorroDis = record.get('kwhMes') - optimizacion;
+    ahorroDis = record.get('kwhMes') - ahorroDis;
     optimizacion = optimizacion.toFixed(2);
     recordFinal.set('kwhMes', optimizacion);
     document.getElementById(idDivOptimizacion).innerHTML = ahorroDis.toFixed(2) + " kWh";
+    document.getElementById(idDivOptEmision).innerHTML = emisionCO2(ahorroDis) + " kg de CO<sub>2</sub>";
     document.getElementById(idDivAhorro).innerHTML = ahorro + "%";
     var optimizacionTotal = 0;
     var ahorroTotal = 0;

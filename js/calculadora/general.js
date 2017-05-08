@@ -3,7 +3,7 @@ Ext.Loader.setPath('Ext.ux.DataView', '../ux/DataView/');
 var sumaTotal = 0;
 var btnSiguiente, btnAtras, fase = 1;
 var panelDerecha, panelCentral;
-var viewConsumo, viewSemaforo, viewAhorro, viewPlanilla;
+var viewConsumo, viewSemaforo, viewAhorro, viewResultados;
 var ventanaAyudaDis;
 Ext.require([
     'Ext.data.*',
@@ -217,16 +217,12 @@ Ext.onReady(function () {
         items: [calculoAhorro, panelesSolares, colectorSolar]
     });
 
-    viewPlanilla = Ext.create('Ext.panel.Panel', {
-        id: 'viewPlanilla',
+    viewResultados = Ext.create('Ext.panel.Panel', {
+        id: 'viewResultados',
         autoScroll: true,
+        margin: '20 0 0 0',
         bodyStyle: 'background: rgba(255, 255, 255, 0.7) !important',
-        items: [barraPlanilla,
-            {
-                layout: 'hbox',
-                padding: '20 5 0 5',
-                items: [planillaNormal, planillaOptimizada]
-            }]
+        items: [barraResultados, resultados]
     });
 
     panelDerecha = Ext.create('Ext.panel.Panel', {
@@ -386,7 +382,7 @@ Ext.onReady(function () {
                                 fase = 4;
                                 Ext.getCmp('panelCentral').setTitle('<center class="title-general">ANÁLISIS PLANILLA</center>');
                                 limpiarPanelCentral();
-                                panelCentral.add(viewPlanilla);
+                                panelCentral.add(viewResultados);
                                 panelDerecha.hide();
                                 btnSiguiente.hide();
                             } else {

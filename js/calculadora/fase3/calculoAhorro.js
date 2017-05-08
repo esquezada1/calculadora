@@ -1,8 +1,8 @@
 var calculoAhorro, gridConsejos, storeConsejos1, storeConsejos2, storeConsejos3, storeConsejos4;
-var ahorroTotal, consejosAhorro = 0;
+var ahorroTotal, consejosAhorro = 0, widthConsumoDis = '40%', widthOptDis = '40%', withPorcentaje = '19%',withValoresDis = '50%';
 
 Ext.onReady(function () {
-    var heightConsejos = 250, heightGridConsejos = 170;
+    var heightConsejos = 250, heightGridConsejos = 170, heightValores = 46;
     Ext.define('AhorroModel', {
         extend: 'Ext.data.Model',
         fields: [
@@ -150,22 +150,53 @@ Ext.onReady(function () {
             {
                 layout: 'hbox',
                 items: [{
-                        width: '20%',
+                        width: widthConsumoDis,
                         cls: 'consumoTotalDis',
-                        title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 85%;">COSUMO DEL<br>DISPOSITIVO</strong></center>',
-                        html: '<p class="valorTotalDis" id="consumoDis1">0KWH</p>'
+                        layout: 'hbox',
+                        title: '<center class="titleAhorroDis" style="color:#003F72; font-size: 85%; border-bottom-width: 1px !important;border: #1E3C87 solid thin;"><strong>CONSUMO DEL DISPOSITIVO</strong></center>',
+                        items: [{
+                                flex: 1,
+                                height: heightValores,
+                                cls: 'valorTotalDis',
+                                style: 'border-right-width: 1px !important;',
+                                title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 60%;">CONSUMO</strong></center>',
+                                html: '<p class="valoresDis" id="consumoDis1">0KWH</p>'
+                            }, {
+                                flex: 1,
+                                height: heightValores,
+                                style: 'border-right-width: 0px !important;',
+                                cls: 'valorTotalDis',
+                                title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 60%;">EMISIONES</strong></center>',
+                                html: '<p class="valoresDis" id="emisionDis1">0 kg de CO<sub>2</sub></p>'
+                            }]
                     },
                     {
-                        width: '56%',
+                        width: widthOptDis,
                         cls: 'consumoTotalDis',
-                        title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 95%;">OPTIMIZACIÓN DEL CONSUMO</strong></center>',
-                        html: '<p class="valorTotalDis" id="optimizacionDis1">0KWH</p>'
+                        layout: 'hbox',
+                        title: '<center class="titleAhorroDis" style="color:#003F72; font-size: 85%; border-bottom-width: 1px !important;border: #1E3C87 solid thin;"><strong>OPTIMIZACIÓN DEL CONSUMO</strong></center>',
+                        items: [{
+                                flex: 1,
+                                height: heightValores,
+                                cls: 'valorTotalDis',
+                                style: 'border-right-width: 1px !important;',
+                                title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 60%;">CONSUMO</strong></center>',
+                                html: '<p class="valoresDis" id="consumoOptDis1">0KWH</p>'
+                            }, {
+                                flex: 1,
+                                height: heightValores,
+                                style: 'border-right-width: 0px !important;',
+                                cls: 'valorTotalDis',
+                                title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 60%;">EMISIONES</strong></center>',
+                                html: '<p class="valoresDis" id="emisionOptDis1">0 kg de CO<sub>2</sub></p>'
+                            }]
                     },
                     {
-                        width: '23%',
+                        width: withPorcentaje,
+                        height: 71,
                         cls: 'consumoTotalDis',
                         title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 85%;">PORCENTAJE DE<br>AHORRO</strong></center>',
-                        html: '<p class="valorTotalDis" id="ahorroDis1">0%</p>'
+                        html: '<p class="valoresDis" id="ahorroDis1">0%</p>'
                     }]
             }]
     });
@@ -200,22 +231,53 @@ Ext.onReady(function () {
             {
                 layout: 'hbox',
                 items: [{
-                        width: '20%',
+                        width: widthConsumoDis,
                         cls: 'consumoTotalDis',
-                        title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 85%;">COSUMO DEL<br>DISPOSITIVO</strong></center>',
-                        html: '<p class="valorTotalDis" id="consumoDis2">0KWH</p>'
+                        layout: 'hbox',
+                        title: '<center class="titleAhorroDis" style="color:#003F72; font-size: 85%; border-bottom-width: 1px !important;border: #1E3C87 solid thin;"><strong>CONSUMO DEL DISPOSITIVO</strong></center>',
+                        items: [{
+                                flex: 1,
+                                height: heightValores,
+                                cls: 'valorTotalDis',
+                                style: 'border-right-width: 1px !important;',
+                                title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 60%;">CONSUMO</strong></center>',
+                                html: '<p class="valoresDis" id="consumoDis2">0KWH</p>'
+                            }, {
+                                flex: 1,
+                                height: heightValores,
+                                style: 'border-right-width: 0px !important;',
+                                cls: 'valorTotalDis',
+                                title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 60%;">EMISIONES</strong></center>',
+                                html: '<p class="valoresDis" id="emisionDis2">0 kg de CO<sub>2</sub></p>'
+                            }]
                     },
                     {
-                        width: '56%',
+                        width: widthOptDis,
                         cls: 'consumoTotalDis',
-                        title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 95%;">OPTIMIZACIÓN DEL CONSUMO</strong></center>',
-                        html: '<p class="valorTotalDis" id="optimizacionDis2">0KWH</p>'
+                        layout: 'hbox',
+                        title: '<center class="titleAhorroDis" style="color:#003F72; font-size: 85%; border-bottom-width: 1px !important;border: #1E3C87 solid thin;"><strong>OPTIMIZACIÓN DEL CONSUMO</strong></center>',
+                        items: [{
+                                flex: 1,
+                                height: heightValores,
+                                cls: 'valorTotalDis',
+                                style: 'border-right-width: 1px !important;',
+                                title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 60%;">CONSUMO</strong></center>',
+                                html: '<p class="valoresDis" id="consumoOptDis2">0KWH</p>'
+                            }, {
+                                flex: 1,
+                                height: heightValores,
+                                style: 'border-right-width: 0px !important;',
+                                cls: 'valorTotalDis',
+                                title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 60%;">EMISIONES</strong></center>',
+                                html: '<p class="valoresDis" id="emisionOptDis2">0 kg de CO<sub>2</sub></p>'
+                            }]
                     },
                     {
-                        width: '23%',
+                        width: withPorcentaje,
+                        height: 71,
                         cls: 'consumoTotalDis',
                         title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 85%;">PORCENTAJE DE<br>AHORRO</strong></center>',
-                        html: '<p class="valorTotalDis" id="ahorroDis2">0%</p>'
+                        html: '<p class="valoresDis" id="ahorroDis2">0%</p>'
                     }]
             }]
     });
@@ -250,22 +312,53 @@ Ext.onReady(function () {
             {
                 layout: 'hbox',
                 items: [{
-                        width: '20%',
+                        width: widthConsumoDis,
                         cls: 'consumoTotalDis',
-                        title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 85%;">COSUMO DEL<br>DISPOSITIVO</strong></center>',
-                        html: '<p class="valorTotalDis" id="consumoDis3">0KWH</p>'
+                        layout: 'hbox',
+                        title: '<center class="titleAhorroDis" style="color:#003F72; font-size: 85%; border-bottom-width: 1px !important;border: #1E3C87 solid thin;"><strong>CONSUMO DEL DISPOSITIVO</strong></center>',
+                        items: [{
+                                flex: 1,
+                                height: heightValores,
+                                cls: 'valorTotalDis',
+                                style: 'border-right-width: 1px !important;',
+                                title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 60%;">CONSUMO</strong></center>',
+                                html: '<p class="valoresDis" id="consumoDis3">0KWH</p>'
+                            }, {
+                                flex: 1,
+                                height: heightValores,
+                                style: 'border-right-width: 0px !important;',
+                                cls: 'valorTotalDis',
+                                title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 60%;">EMISIONES</strong></center>',
+                                html: '<p class="valoresDis" id="emisionDis3">0 kg de CO<sub>2</sub></p>'
+                            }]
                     },
                     {
-                        width: '56%',
+                        width: widthOptDis,
                         cls: 'consumoTotalDis',
-                        title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 95%;">OPTIMIZACIÓN DEL CONSUMO</strong></center>',
-                        html: '<p class="valorTotalDis" id="optimizacionDis3">0KWH</p>'
+                        layout: 'hbox',
+                        title: '<center class="titleAhorroDis" style="color:#003F72; font-size: 85%; border-bottom-width: 1px !important;border: #1E3C87 solid thin;"><strong>OPTIMIZACIÓN DEL CONSUMO</strong></center>',
+                        items: [{
+                                flex: 1,
+                                height: heightValores,
+                                cls: 'valorTotalDis',
+                                style: 'border-right-width: 1px !important;',
+                                title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 60%;">CONSUMO</strong></center>',
+                                html: '<p class="valoresDis" id="consumoOptDis3">0KWH</p>'
+                            }, {
+                                flex: 1,
+                                height: heightValores,
+                                style: 'border-right-width: 0px !important;',
+                                cls: 'valorTotalDis',
+                                title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 60%;">EMISIONES</strong></center>',
+                                html: '<p class="valoresDis" id="emisionOptDis3">0 kg de CO<sub>2</sub></p>'
+                            }]
                     },
                     {
-                        width: '23%',
+                        width: withPorcentaje,
+                        height: 71,
                         cls: 'consumoTotalDis',
                         title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 85%;">PORCENTAJE DE<br>AHORRO</strong></center>',
-                        html: '<p class="valorTotalDis" id="ahorroDis3">0%</p>'
+                        html: '<p class="valoresDis" id="ahorroDis3">0%</p>'
                     }]
             }]
     });
@@ -300,22 +393,53 @@ Ext.onReady(function () {
             {
                 layout: 'hbox',
                 items: [{
-                        width: '20%',
+                        width: widthConsumoDis,
                         cls: 'consumoTotalDis',
-                        title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 85%;">COSUMO DEL<br>DISPOSITIVO</strong></center>',
-                        html: '<p class="valorTotalDis" id="consumoDis4">0KWH</p>'
+                        layout: 'hbox',
+                        title: '<center class="titleAhorroDis" style="color:#003F72; font-size: 85%; border-bottom-width: 1px !important;border: #1E3C87 solid thin;"><strong>CONSUMO DEL DISPOSITIVO</strong></center>',
+                        items: [{
+                                flex: 1,
+                                height: heightValores,
+                                cls: 'valorTotalDis',
+                                style: 'border-right-width: 1px !important;',
+                                title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 60%;">CONSUMO</strong></center>',
+                                html: '<p class="valoresDis" id="consumoDis4">0KWH</p>'
+                            }, {
+                                flex: 1,
+                                height: heightValores,
+                                style: 'border-right-width: 0px !important;',
+                                cls: 'valorTotalDis',
+                                title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 60%;">EMISIONES</strong></center>',
+                                html: '<p class="valoresDis" id="emisionDis4">0 kg de CO<sub>2</sub></p>'
+                            }]
                     },
                     {
-                        width: '56%',
+                        width: widthOptDis,
                         cls: 'consumoTotalDis',
-                        title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 95%;">OPTIMIZACIÓN DEL CONSUMO</strong></center>',
-                        html: '<p class="valorTotalDis" id="optimizacionDis4">0KWH</p>'
+                        layout: 'hbox',
+                        title: '<center class="titleAhorroDis" style="color:#003F72; font-size: 85%; border-bottom-width: 1px !important;border: #1E3C87 solid thin;"><strong>OPTIMIZACIÓN DEL CONSUMO</strong></center>',
+                        items: [{
+                                flex: 1,
+                                height: heightValores,
+                                cls: 'valorTotalDis',
+                                style: 'border-right-width: 1px !important;',
+                                title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 60%;">CONSUMO</strong></center>',
+                                html: '<p class="valoresDis" id="consumoOptDis4">0KWH</p>'
+                            }, {
+                                flex: 1,
+                                height: heightValores,
+                                style: 'border-right-width: 0px !important;',
+                                cls: 'valorTotalDis',
+                                title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 60%;">EMISIONES</strong></center>',
+                                html: '<p class="valoresDis" id="emisionOptDis4">0 kg de CO<sub>2</sub></p>'
+                            }]
                     },
                     {
-                        width: '23%',
+                        width: withPorcentaje,
+                        height: 71,
                         cls: 'consumoTotalDis',
                         title: '<center class="titleAhorroDis"><strong style="color:#003F72; font-size: 85%;">PORCENTAJE DE<br>AHORRO</strong></center>',
-                        html: '<p class="valorTotalDis" id="ahorroDis4">0%</p>'
+                        html: '<p class="valoresDis" id="ahorroDis4">0%</p>'
                     }]
             }]
     });
