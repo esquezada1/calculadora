@@ -279,8 +279,13 @@ body{
 .valorTotal{
     padding: 0.1em;
     margin: 0;
-    font-size: 180% !important;
+    font-size: 160% !important;
     color:#7B241C;
+}
+
+.titDetalle{
+    font-size:90%; 
+    color:#003F72;
 }
 
 .consumoTotalDis{
@@ -356,6 +361,20 @@ body{
 
 .clsValores{
     color: #34495E;
+}
+
+sub{
+    font-size: 50%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.barraDetalle{
+    border-top-width: 2px;
+    border-bottom-width: 0px;
+    border-right-width: 1px !important;
+    border-left-width: 1px !important;
+    border: #1E3C87 solid thin;
 }
 
 @media (max-width: 1280px){

@@ -113,6 +113,7 @@ Ext.onReady(function () {
                     storeConsumoDispositivos.add(r);
                     storeConsumoDispositivos.group('categoria');
                     gridConsumoDispositivos.getView().refresh();
+                    sumaTotal = 0;
                 }
             },
             contextmenu: {
@@ -147,19 +148,28 @@ Ext.onReady(function () {
         xtype: 'panel',
         items: [
             {
-                margin: '0 0 5 0',
+                margin: '20 0 5 0',
                 layout: 'hbox',
                 items: [{
                         flex: 1,
+                        height: 68,
                         cls: 'consumoTotal',
                         title: '<center class="titleAhorro"><strong style="color:#003F72;">DISPOSITIVOS</strong></center>',
                         html: '<p class="valorTotal" id="totalDispositivos">0 Dispositivo(s)</p>'
                     },
                     {
                         flex: 1,
+                        height: 68,
                         cls: 'consumoTotal',
                         title: '<center class="titleAhorro"><strong style="color:#003F72;">CONSUMO TOTAL</strong></center>',
                         html: '<p class="valorTotal" id="totalConsumo">0 KWH/MES</p>'
+                    },
+                    {
+                        flex: 1,
+                        height: 68,
+                        cls: 'consumoTotal',
+                        title: '<center class="titleAhorro"><strong style="color:#003F72;">EMISIONES DE CO<sub>2</sub></strong></center>',
+                        html: '<p class="valorTotal" id="totalEmisiones">0 kg de CO<sub>2</sub></p>'
                     }]
             },
             {
@@ -186,7 +196,7 @@ Ext.onReady(function () {
                 switch (newTab.id) {
                     case 'tabConsejos':
                         var ahorro = getPorcentajeAhorro(consejosAhorro, mayorConsumo);
-                        cambiarTotales(mayorConsumo, mayorConsumo - consejosAhorro, ahorro);
+                        cambiarTotales(mayorConsumo, emisionCO2(mayorConsumo), mayorConsumo - consejosAhorro, emisionCO2(mayorConsumo - consejosAhorro), ahorro);
                         break;
                     case 'tabPaneles':
                         if (formularioPaneles.down('[name=checkStore]').getValue()) {
@@ -199,7 +209,7 @@ Ext.onReady(function () {
                     case 'tabColector':
                         consumoColectorSust();
                         var ahorro = getPorcentajeAhorro(colectorAhorro, mayorConsumo);
-                        cambiarTotales(mayorConsumo, mayorConsumo - colectorAhorro, ahorro);
+                        cambiarTotales(mayorConsumo, emisionCO2(mayorConsumo), mayorConsumo - colectorAhorro, emisionCO2(mayorConsumo - colectorAhorro), ahorro);
                         break;
                 }
             }
@@ -258,7 +268,7 @@ Ext.onReady(function () {
         id: 'panelCentral',
         title: '<center class="title-general">CÁLCULO DE CONSUMO</center>',
         region: 'center',
-        bodyStyle: "background: rgba(255, 255, 255, 0.5) !important; padding: 3%;",
+        bodyStyle: "background: rgba(255, 255, 255, 0.5) !important; padding: 1% 3% 2% 3%;",
         width: '100% !important',
         buttons: [
             btnAtras
@@ -346,28 +356,42 @@ Ext.onReady(function () {
                         cls: 'itemMenu fase3',
                         text: 'CÁLCULO DE<br>AHORRO',
                         handler: function () {
-                            fase = 3;
-                            viewAhorro.child('#tabColector').tab.hide();
-                            Ext.getCmp('panelCentral').setTitle('<center class="title-general">CÁLCULO DE AHORRO</center>');
-                            limpiarPanelCentral();
-                            panelCentral.add(viewAhorro);
-                            limpiarFiltros();
-                            filtrarStores();
-                            viewAhorro.setActiveTab(calculoAhorro);
-                            panelDerecha.hide();
-                            btnSiguiente.show();
+                            if (storeConsumoDispositivos.data.items.length > 0) {
+                                if (sumaTotal === 0) {
+                                    document.getElementById("btnFase2").click();
+                                }
+                                fase = 3;
+                                viewAhorro.child('#tabColector').tab.hide();
+                                Ext.getCmp('panelCentral').setTitle('<center class="title-general">CÁLCULO DE AHORRO</center>');
+                                limpiarPanelCentral();
+                                panelCentral.add(viewAhorro);
+                                limpiarFiltros();
+                                filtrarStores();
+                                viewAhorro.setActiveTab(calculoAhorro);
+                                panelDerecha.hide();
+                                btnSiguiente.show();
+                            } else {
+                                mostrarNotificacion('Aún no se han agregado dispositivos.');
+                            }
                         }
                     }, {
                         id: 'btnFase4',
                         cls: 'itemMenu fase4',
                         text: 'ANÁLISIS<br>PLANILLA',
                         handler: function () {
-                            fase = 4;
-                            Ext.getCmp('panelCentral').setTitle('<center class="title-general">ANÁLISIS PLANILLA</center>');
-                            limpiarPanelCentral();
-                            panelCentral.add(viewPlanilla);
-                            panelDerecha.hide();
-                            btnSiguiente.hide();
+                            if (storeConsumoDispositivos.data.items.length > 0) {
+                                if (sumaTotal === 0) {
+                                    document.getElementById("btnFase2").click();
+                                }
+                                fase = 4;
+                                Ext.getCmp('panelCentral').setTitle('<center class="title-general">ANÁLISIS PLANILLA</center>');
+                                limpiarPanelCentral();
+                                panelCentral.add(viewPlanilla);
+                                panelDerecha.hide();
+                                btnSiguiente.hide();
+                            } else {
+                                mostrarNotificacion('Aún no se han agregado dispositivos.');
+                            }
                         }
                     }
                 ]

@@ -26,7 +26,7 @@ Ext.onReady(function () {
             {id: 10, kwhMin: 1001, kwhMax: 1500, costo: 0.1709},
             {id: 11, kwhMin: 1501, kwhMax: 2500, costo: 0.2752},
             {id: 12, kwhMin: 2501, kwhMax: 3500, costo: 0.436},
-            {id: 13, kwhMin: 3501, kwhMax: 0, costo: 0.6812}
+            {id: 13, kwhMin: 3501, kwhMax: 100000, costo: 0.6812}
         ]
     });
     storeRegiones = Ext.create('Ext.data.Store', {
@@ -80,9 +80,9 @@ Ext.onReady(function () {
         title: '<b style="color:#003F72;"> DATOS </b>',
         flex: 1,
         layout: 'anchor',
-        height: 270,
+        height: 265,
         defaults: {
-            margin: '7 0 5 0'
+            margin: '2 0 2 0'
         },
         items: [
             {
@@ -102,7 +102,7 @@ Ext.onReady(function () {
                         fieldLabel: '<b>REGIÓN</b>',
                         labelStyle: 'width:60px;',
                         value: 2,
-                        width: '27%',
+                        flex: 1,
                         listConfig: {
                             minWidth: 150
                         },
@@ -132,7 +132,7 @@ Ext.onReady(function () {
                         emptyText: 'Seleccionar Provincia...',
                         fieldLabel: '<b>PROVINCIA</b>',
                         labelStyle: 'width:80px;',
-                        width: '49%',
+                        flex: 2,
                         filters: [{
                                 property: 'idRegion',
                                 exactMatch: true,
@@ -148,26 +148,6 @@ Ext.onReady(function () {
                         listeners: {
                             select: function (combo, record, eOpts) {
                                 Ext.getCmp('checkDisPaneles').enable();
-                            }
-                        }
-                    },
-                    {
-                        xtype: 'checkbox',
-                        name: 'checkStore',
-                        boxLabel: 'Utilizar consejos de ahorro',
-                        checked: true,
-                        width: '24%',
-                        height: 40,
-                        listeners: {
-                            change: function (store, check) {
-                                if (check) {
-                                    crearStoreMayoresConsumidores(storeConsumoFinal);
-                                } else {
-                                    crearStoreMayoresConsumidores(storeConsumoDispositivos);
-                                }
-                                cambiarTotalesPaneles();
-                                document.getElementById('consumoSust').innerHTML = '0 kWh';
-                                document.getElementById('precioSust').innerHTML = '$ 0.00';
                             }
                         }
                     }
@@ -230,7 +210,7 @@ Ext.onReady(function () {
                                                 costoMayoresConsumidoresAhorro = calcularCosto(mayorConsumo - consumoSustituir);
                                             }
                                             costoAhorro = costoMayoresConsumidores - costoMayoresConsumidoresAhorro;
-
+                                            costoAhorro = getPorcentajeAhorro(costoAhorro, costoMayoresConsumidores);
                                             ////////CARACTERISTICAS DEL SISTEMA/////
                                             potenciaNecesaria = (consumoSustituir / 30) * 1000;
                                             potenciaNecesaria = potenciaNecesaria / hsp;
@@ -271,7 +251,7 @@ Ext.onReady(function () {
                                             areaTotal = (panel150 * 1) + (panel300 * 2);
                                         }
                                         document.getElementById('consumoSust').innerHTML = valorExcluir.toFixed(2) + ' kWh';
-                                        document.getElementById('precioSust').innerHTML = '$ ' + costoAhorro.toFixed(2);
+                                        document.getElementById('precioSust').innerHTML = costoAhorro.toFixed(2) + ' %';
                                         document.getElementById('potenciaNeces').innerHTML = potenciaNecesaria.toFixed(2) + ' Wattios';
                                         document.getElementById('panelesNeces').innerHTML = mensajeNumPaneles;
                                         document.getElementById('inversion').innerHTML = '$ ' + costoInversion.toFixed(2);
@@ -309,16 +289,33 @@ Ext.onReady(function () {
                 margin: '0 0 10 0',
                 items: [{
                         width: '39%',
-                        html: '<center><b>Precio del consumo a sustituir</b></center>'
+                        html: '<center><b>Porcentaje de ahorro al consumidor</b></center>'
                     },
                     {
                         width: '60%',
-                        html: '<center><b id="precioSust">$ 0.00</b></center>'
+                        html: '<center><b id="precioSust">0.00 %</b></center>'
                     }]
             },
             {
+                xtype: 'checkbox',
+                name: 'checkStore',
+                boxLabel: 'Utilizar consejos de ahorro',
+                checked: true,
+                listeners: {
+                    change: function (store, check) {
+                        if (check) {
+                            crearStoreMayoresConsumidores(storeConsumoFinal);
+                        } else {
+                            crearStoreMayoresConsumidores(storeConsumoDispositivos);
+                        }
+                        cambiarTotalesPaneles();
+                        document.getElementById('consumoSust').innerHTML = '0 kWh';
+                        document.getElementById('precioSust').innerHTML = '0.00%';
+                    }
+                }
+            },
+            {
                 xtype: 'button',
-                padding: '10 0 0 0',
                 cls: 'btnSugerencia',
                 iconCls: 'icon-info',
                 text: 'Sugerencias para el panel solar',

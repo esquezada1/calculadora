@@ -245,6 +245,7 @@ Ext.onReady(function () {
                         icon: 'img/delete.png',
                         tooltip: 'Eliminar de la Tabla',
                         handler: function (grid, rowIndex, colIndex) {
+                            sumaTotal = 0;
                             grid.getStore().removeAt(rowIndex);
                             gridConsumoDispositivos.getView().refresh();
                         },
@@ -286,6 +287,7 @@ Ext.onReady(function () {
                 storeConsumoDispositivos.commitChanges();
                 record.record.set('kwhMes', totalConsumo);
                 gridConsumoDispositivos.getView().refresh();
+                sumaTotal = 0;
             },
             groupclick: function () {
                 gridConsumoDispositivos.getView().refresh();

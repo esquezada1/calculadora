@@ -2,7 +2,7 @@ var calculoAhorro, gridConsejos, storeConsejos1, storeConsejos2, storeConsejos3,
 var ahorroTotal, consejosAhorro = 0;
 
 Ext.onReady(function () {
-    var heightConsejos = 255, heightGridConsejos = 175;
+    var heightConsejos = 250, heightGridConsejos = 170;
     Ext.define('AhorroModel', {
         extend: 'Ext.data.Model',
         fields: [

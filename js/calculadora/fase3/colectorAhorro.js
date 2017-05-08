@@ -99,11 +99,11 @@ Ext.onReady(function () {
                 padding: '3 20 3 20',
                 items: [{
                         width: '70%',
-                        html: '<span class="clsCaracteristicas"><b>Precio del consumo a sustituir</b></span>'
+                        html: '<span class="clsCaracteristicas"><b>Porcentaje de ahorro al consumidor</b></span>'
                     },
                     {
                         width: '30%',
-                        html: '<center class="clsValores" id="precioColectorSust">$ 0.00</center>'
+                        html: '<center class="clsValores" id="precioColectorSust">0.00%</center>'
                     }]
             },
             {
