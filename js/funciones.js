@@ -227,7 +227,7 @@ function limpiarFiltros() {
 }
 
 var mayorConsumoAhorro = 0;
-function aplicarConsejos(idGrid) {
+function aplicarConsejos(idGrid, recordCheck) {
     var optimizacion = 0;
     var ahorro = 0;
     var storeConsejo;
@@ -275,6 +275,10 @@ function aplicarConsejos(idGrid) {
             ahorro += parseFloat(rec.get('ahorro'));
         }
     });
+    if (ahorro > 70) {
+        recordCheck.set('active', false);
+        ahorro = ahorro - parseFloat(recordCheck.get('ahorro'));
+    }
     var record = storeConsumoDispositivos.data.items[numDis];
     var recordFinal = storeConsumoFinal.data.items[numDis];
     optimizacion = 100 - ahorro;

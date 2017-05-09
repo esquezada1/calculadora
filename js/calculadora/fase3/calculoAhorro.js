@@ -108,8 +108,9 @@ Ext.onReady(function () {
         {header: '', xtype: 'checkcolumn', width: 34, sortable: false, dataIndex: 'active', menuDisabled: true,
             listeners: {
                 checkchange: function (comp, rowIndex, checked, eOpts, a, b, c) {
+                    var record = comp.up('grid').store.getAt(rowIndex);
                     var gridId = comp.up('grid').getId();
-                    aplicarConsejos(gridId);
+                    aplicarConsejos(gridId, record);
                 }
             }
         }
