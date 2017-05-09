@@ -99,7 +99,7 @@ Ext.onReady(function () {
                 padding: '3 20 3 20',
                 items: [{
                         width: '70%',
-                        html: '<span class="clsCaracteristicas"><b>Porcentaje de ahorro al consumidor</b></span>'
+                        html: '<span class="clsCaracteristicas"><b>Porcentaje de aporte al consumidor</b></span>'
                     },
                     {
                         width: '30%',

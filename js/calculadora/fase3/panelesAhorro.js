@@ -289,7 +289,7 @@ Ext.onReady(function () {
                 margin: '0 0 10 0',
                 items: [{
                         width: '39%',
-                        html: '<center><b>Porcentaje de ahorro al consumidor</b></center>'
+                        html: '<center><b>Porcentaje de aporte al consumidor</b></center>'
                     },
                     {
                         width: '60%',
