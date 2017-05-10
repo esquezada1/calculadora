@@ -118,8 +118,16 @@ function filtrarStores() {
     var storeDis, idConsumoDis, idEmisionDis, idGridDis, idImgDis, idNameDis;
     var cont = 0, banderaPanel = false;
     mayorConsumo = 0;
+    storeConsumoDispositivos.each(function (rec) {
+        if (cont < 4) {
+            mayorConsumo += rec.get('kwhMes');
+        } else {
+            return false;
+        }
+        cont++;
+    });
+    cont = 0;
     storeConsumoFinal.each(function (rec) {
-        mayorConsumo += rec.get('kwhMes');
         if (rec.get('idMaquina') !== 24) {
             var consumoDis = rec.get('kwhMes').toFixed(2);
             switch (cont) {
