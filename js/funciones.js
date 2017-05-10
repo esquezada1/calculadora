@@ -377,6 +377,7 @@ function calcularCosto(kwh) {
 }
 
 function consumoColectorSust() {
+    colectorAhorro=0;
     var record = storeConsumoFinal.getById('Agua Caliente');
     document.getElementById('consumoColectorSust').innerHTML = record.get('kwhMes') + ' kWh';
     var costoMayoresConsumidores = calcularCosto(mayorConsumo);

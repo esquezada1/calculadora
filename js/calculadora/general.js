@@ -207,7 +207,16 @@ Ext.onReady(function () {
                         cambiarTotalesPaneles();
                         break;
                     case 'tabColector':
-                        formularioColector.down('[name=numeroPersonas]').disable();
+                        if (formularioColector.down('[name=checkPanelSolar]').getValue()) {
+                            consumoColectorSust();
+                            var ahorro = getPorcentajeAhorro(colectorAhorro, mayorConsumo);
+                            cambiarTotales(mayorConsumo, emisionCO2(mayorConsumo), mayorConsumo - colectorAhorro, emisionCO2(mayorConsumo - colectorAhorro), ahorro);
+                            formularioColector.down('[name=numeroPersonas]').enable();
+                        } else {
+                            formularioColector.down('[name=numeroPersonas]').disable();
+                            cambiarTotales(mayorConsumo, emisionCO2(mayorConsumo), mayorConsumo   , emisionCO2(mayorConsumo), 0);
+                            colectorAhorro = 0;
+                        }
                         break;
                 }
             }

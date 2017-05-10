@@ -43,6 +43,7 @@ Ext.onReady(function () {
                         } else {
                             formularioColector.down('[name=numeroPersonas]').disable();
                             cambiarTotales(mayorConsumo, emisionCO2(mayorConsumo), mayorConsumo   , emisionCO2(mayorConsumo), 0);
+                            colectorAhorro = 0;
                         }
                     }
                 }
