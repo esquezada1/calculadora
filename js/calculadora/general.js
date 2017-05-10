@@ -207,9 +207,7 @@ Ext.onReady(function () {
                         cambiarTotalesPaneles();
                         break;
                     case 'tabColector':
-                        consumoColectorSust();
-                        var ahorro = getPorcentajeAhorro(colectorAhorro, mayorConsumo);
-                        cambiarTotales(mayorConsumo, emisionCO2(mayorConsumo), mayorConsumo - colectorAhorro, emisionCO2(mayorConsumo - colectorAhorro), ahorro);
+                        formularioColector.down('[name=numeroPersonas]').disable();
                         break;
                 }
             }

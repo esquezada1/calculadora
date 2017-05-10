@@ -29,6 +29,25 @@ Ext.onReady(function () {
         padding: 15,
         items: [
             {
+                xtype: 'checkbox',
+                name: 'checkPanelSolar',
+                boxLabel: 'Sustituir consumo de agua caliente en el hogar',
+                checked: false,
+                listeners: {
+                    change: function (store, check) {
+                        if (check) {
+                            consumoColectorSust();
+                            var ahorro = getPorcentajeAhorro(colectorAhorro, mayorConsumo);
+                            cambiarTotales(mayorConsumo, emisionCO2(mayorConsumo), mayorConsumo - colectorAhorro, emisionCO2(mayorConsumo - colectorAhorro), ahorro);
+                            formularioColector.down('[name=numeroPersonas]').enable();
+                        } else {
+                            formularioColector.down('[name=numeroPersonas]').disable();
+                            cambiarTotales(mayorConsumo, emisionCO2(mayorConsumo), mayorConsumo   , emisionCO2(mayorConsumo), 0);
+                        }
+                    }
+                }
+            },
+            {
                 xtype: 'panel',
                 layout: 'hbox',
                 items: [
