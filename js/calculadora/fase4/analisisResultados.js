@@ -19,11 +19,11 @@ Ext.onReady(function () {
                         margin: '0 0 10 0',
                         items: [{
                                 width: '65%',
-                                html: '<center><b>Porcentaje de aporte al consumidor</b></center>'
+                                html: '<center><b>Consumo total del hogar</b></center>'
                             },
                             {
                                 width: '35%',
-                                html: '<center><b id="precioSust">0.00 %</b></center>'
+                                html: '<center><b id="resultadosConsumo">0 kWh</b></center>'
                             }]
                     }, {
                         xtype: 'panel',
@@ -32,11 +32,11 @@ Ext.onReady(function () {
                         margin: '0 0 10 0',
                         items: [{
                                 width: '65%',
-                                html: '<center><b>Porcentaje de aporte al consumidor</b></center>'
+                                html: '<center><b>Emisiones de CO<sub>2</sub></b></center>'
                             },
                             {
                                 width: '35%',
-                                html: '<center><b id="precioSust">0.00 %</b></center>'
+                                html: '<center><b id="resultadosEmision">0 kg de CO<sub>2</sub></b></center>'
                             }]
                     }
                 ]
@@ -53,11 +53,11 @@ Ext.onReady(function () {
                         margin: '0 0 10 0',
                         items: [{
                                 width: '60%',
-                                html: '<center><b>Porcentaje de aporte al consumidor</b></center>'
+                                html: '<center><b>Optimización del consumo</b></center>'
                             },
                             {
                                 width: '40%',
-                                html: '<center><b id="precioSust">0.00 %</b></center>'
+                                html: '<center><b id="resultadosOptConsumo">0 kWh</b></center>'
                             }]
                     }, {
                         xtype: 'panel',
@@ -66,11 +66,11 @@ Ext.onReady(function () {
                         margin: '0 0 10 0',
                         items: [{
                                 width: '60%',
-                                html: '<center><b>Porcentaje de aporte al consumidor</b></center>'
+                                html: '<center><b>Optimización de emisiones de CO<sub>2</sub></b></center>'
                             },
                             {
                                 width: '40%',
-                                html: '<center><b id="precioSust">0.00 %</b></center>'
+                                html: '<center><b id="resultadosOptEmision">0 kg de CO<sub>2</sub></b></center>'
                             }]
                     }]
             }
@@ -106,13 +106,19 @@ Ext.onReady(function () {
                                             change: function (object, check) {
                                                 if (check) {
                                                     cambiarResultados(object);
+                                                } else {
+                                                    mostrarResultados();
                                                 }
                                             }
                                         }
                                     },
                                     {
+                                        collapsed: true,
+                                        collapsible: true,
+                                        titleCollapse: true,
                                         id: 'ResumenOptimizacion',
-                                        html: 'Resumen Optimizacion de consumo'
+                                        html: 'Resumen Optimizacion de consumo',
+                                        title: '<span style="color:black">Resumen Optimizacion de consumo</span>'
                                     }
                                 ]
                             }, {
@@ -123,28 +129,40 @@ Ext.onReady(function () {
                                             change: function (object, check) {
                                                 if (check) {
                                                     cambiarResultados(object);
+                                                } else {
+                                                    mostrarResultados();
                                                 }
                                             }
                                         }},
                                     {
+                                        collapsed: true,
+                                        collapsible: true,
+                                        titleCollapse: true,
                                         id: 'ResumenPaneles',
-                                        html: 'Resumen Paneles Solares'
+                                        html: 'Resumen Paneles Solares',
+                                        title: '<span style="color:black">Resumen Paneles Solares</span>'
                                     }
                                 ]
                             }, {
                                 cls: 'resumen-medidas',
                                 items: [
-                                    {id: 'checkColectorRes', xtype: 'checkbox', flex: 1, fieldLabel: '<b>Colector Solar</b>', labelStyle: 'width: 380px', cls: 'checkResultados',
+                                    {id: 'checkColectorRes', disabled: true, xtype: 'checkbox', flex: 1, fieldLabel: '<b>Colector Solar</b>', labelStyle: 'width: 380px', cls: 'checkResultados',
                                         listeners: {
                                             change: function (object, check) {
                                                 if (check) {
                                                     cambiarResultados(object);
+                                                } else {
+                                                    mostrarResultados();
                                                 }
                                             }
                                         }},
                                     {
+                                        collapsed: true,
+                                        collapsible: true,
+                                        titleCollapse: true,
                                         id: 'ResumenColector',
-                                        html: 'Resumen Colector Solar'
+                                        html: 'Resumen Colector Solar',
+                                        title: '<span style="color:red">No aplica</span>'
                                     }
                                 ]
                             }
@@ -152,11 +170,11 @@ Ext.onReady(function () {
                     },
                     {
                         width: '35%',
-                        height: heightResultados,
+                        height: 230,
                         cls: 'consumoTotal',
+                        padding: '70% 0 0 0',
                         margin: margenGeneral,
-                        title: '<center><strong style="color:#003F72;">PORCENTAJE DE AHORRO</strong></center>',
-                        html: '<p class="valorTotal" style="margin-top: 3% !important; font-size: 200% !important;" id="ahorroTotalDis">0%</p>',
+                        html: '<center><strong style="color:#003F72;"><h3>PORCENTAJE DE AHORRO</h3></strong></center><p class="valorTotal" style="margin-top: 3% !important; font-size: 200% !important;" id="resultadosAhorro">0%</p>'
                     }
                 ]
             }]
