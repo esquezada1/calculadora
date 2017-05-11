@@ -395,9 +395,12 @@ Ext.onReady(function () {
                             }
                             checkConsejos();
                         }
+                    },{
+                        cls: 'footer',
+                        text:'<span style="color:#19426E; font-size: 11px;">Copyrigth &copy; 2017 &copy;<br> Leuris T. Garcés | UTPL</span>'
                     }
                 ]
-            },
+          },
 //            {
 //                region: 'south',
 //                title: 'South Panel',

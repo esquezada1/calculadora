@@ -437,6 +437,14 @@ sub{
     width: 120% !important;
 }
 
+.footer{
+    background: rgba(247, 249, 249, 0.8) !important;
+    height: 60px !important;
+    width: 9% !important;
+    position:absolute !important;
+    margin-top: 90px !important;
+}
+
 @media (max-width: 1280px){
     .fondo-casa {
         height: 420px;
