@@ -480,8 +480,19 @@ function emisionCO2(emision) {
     return parseFloat(emision);
 }
 
-function cambiarResultados(object, check) {
-    object.setValue(false);
-    console.log(object);
-    console.log(check);
+function cambiarResultados(object) {
+    switch (object.id) {
+        case 'checkConsejosRes':
+            Ext.getCmp('checkPanelesRes').setValue(false);
+            Ext.getCmp('checkColectorRes').setValue(false);
+            break;
+        case 'checkPanelesRes':
+            Ext.getCmp('checkConsejosRes').setValue(false);
+            Ext.getCmp('checkColectorRes').setValue(false);
+            break;
+        case 'checkColectorRes':
+            Ext.getCmp('checkConsejosRes').setValue(false);
+            Ext.getCmp('checkPanelesRes').setValue(false);
+            break;
+    }
 }

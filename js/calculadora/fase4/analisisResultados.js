@@ -1,5 +1,5 @@
 var resultados, barraResultados;
-var widthTotal = '35%', widthOptimizado = '65%', margenGeneral = '0 5 0 5';
+var widthTotal = '35%', widthOptimizado = '65%', margenGeneral = '5 5 0 5', heightResultados = 270;
 Ext.onReady(function () {
 
     barraResultados = Ext.create('Ext.panel.Panel', {
@@ -10,7 +10,7 @@ Ext.onReady(function () {
                 width: widthTotal,
                 margin: margenGeneral,
                 cls: 'barraResultados',
-                title: '<center><strong style="color:#003F72;">OPCIONES DE AHORRO</strong></center>',
+                title: '<center><strong style="color:#003F72;"><h3>CONSUMO DEL HOGAR</h3></strong></center>',
                 items: [
                     {
                         xtype: 'panel',
@@ -45,7 +45,7 @@ Ext.onReady(function () {
                 width: widthOptimizado,
                 margin: margenGeneral,
                 cls: 'barraResultados',
-                title: '<center><strong style="color:#003F72;">PORCENTAJE DE AHORRO</strong></center>',
+                title: '<center><strong style="color:#003F72;"><h3>OPTIMIZACIÓN DEL HOGAR</h3></strong></center>',
                 items: [{
                         xtype: 'panel',
                         layout: 'hbox',
@@ -80,7 +80,7 @@ Ext.onReady(function () {
     resultados = Ext.create('Ext.panel.Panel', {
         margin: margenGeneral,
         layout: 'hbox',
-        height: 250,
+        height: heightResultados,
         items: [{
                 width: widthTotal,
                 id: 'casa-ahorro',
@@ -90,7 +90,7 @@ Ext.onReady(function () {
             }, {
                 width: widthOptimizado,
                 margin: margenGeneral,
-                height: 250,
+                height: heightResultados,
                 layout: 'hbox',
                 items: [
                     {
@@ -99,54 +99,60 @@ Ext.onReady(function () {
                         title: '<center><strong style="color:black;">RESUMEN DE MEDIDAS DE OPTIMIZACIÓN </strong></center>',
                         items: [
                             {
-                                id: 'checkConsejosRes',
                                 cls: 'resumen-medidas',
                                 items: [
-                                    {xtype: 'checkbox', flex: 1, fieldLabel: '<b>Optimización de Ahorro</b>', labelStyle: 'width: 380px', cls: 'checkResultados',
+                                    {id: 'checkConsejosRes', xtype: 'checkbox', flex: 1, fieldLabel: '<b>Optimización de Ahorro</b>', labelStyle: 'width: 380px', cls: 'checkResultados',
                                         listeners: {
                                             change: function (object, check) {
                                                 if (check) {
-                                                    cambiarResultados(object, check);
+                                                    cambiarResultados(object);
                                                 }
                                             }
                                         }
                                     },
-                                    {html: 'hola'}
+                                    {
+                                        id: 'ResumenOptimizacion',
+                                        html: 'Resumen Optimizacion de consumo'
+                                    }
                                 ]
                             }, {
-                                id: 'checkPanelesRes',
                                 cls: 'resumen-medidas',
                                 items: [
-                                    {xtype: 'checkbox', flex: 1, fieldLabel: '<b>Panel Solar</b>', labelStyle: 'width: 380px', cls: 'checkResultados',
+                                    {id: 'checkPanelesRes', xtype: 'checkbox', flex: 1, fieldLabel: '<b>Panel Solar</b>', labelStyle: 'width: 380px', cls: 'checkResultados',
                                         listeners: {
                                             change: function (object, check) {
                                                 if (check) {
-                                                    cambiarResultados(object, check);
+                                                    cambiarResultados(object);
                                                 }
                                             }
                                         }},
-                                    {html: 'hola'}
+                                    {
+                                        id: 'ResumenPaneles',
+                                        html: 'Resumen Paneles Solares'
+                                    }
                                 ]
                             }, {
-                                id: 'checkColectorRes',
                                 cls: 'resumen-medidas',
                                 items: [
-                                    {xtype: 'checkbox', flex: 1, fieldLabel: '<b>Colector Solar</b>', labelStyle: 'width: 380px', cls: 'checkResultados',
+                                    {id: 'checkColectorRes', xtype: 'checkbox', flex: 1, fieldLabel: '<b>Colector Solar</b>', labelStyle: 'width: 380px', cls: 'checkResultados',
                                         listeners: {
                                             change: function (object, check) {
                                                 if (check) {
-                                                    cambiarResultados(object, check);
+                                                    cambiarResultados(object);
                                                 }
                                             }
                                         }},
-                                    {html: 'hola'}
+                                    {
+                                        id: 'ResumenColector',
+                                        html: 'Resumen Colector Solar'
+                                    }
                                 ]
                             }
                         ]
                     },
                     {
                         width: '35%',
-                        height: 250,
+                        height: heightResultados,
                         cls: 'consumoTotal',
                         margin: margenGeneral,
                         title: '<center><strong style="color:#003F72;">PORCENTAJE DE AHORRO</strong></center>',
