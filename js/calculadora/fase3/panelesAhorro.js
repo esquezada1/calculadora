@@ -299,7 +299,7 @@ Ext.onReady(function () {
             {
                 xtype: 'checkbox',
                 name: 'checkStore',
-                boxLabel: 'Utilizar consejos de ahorro',
+                boxLabel: 'Utilizar Optimización de Ahorro',
                 checked: true,
                 listeners: {
                     change: function (store, check) {

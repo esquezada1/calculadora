@@ -269,7 +269,7 @@ Ext.onReady(function () {
     );
     panelCentral = Ext.create('Ext.panel.Panel', {
         id: 'panelCentral',
-        title: '<center class="title-general">CÁLCULO DE CONSUMO</center>',
+        title: '<center class="title-general">ESTIMACIÓN DE CONSUMO</center>',
         region: 'center',
         bodyStyle: "background: rgba(255, 255, 255, 0.5) !important; padding: 1% 3% 2% 3%;",
         width: '100% !important',
@@ -311,10 +311,10 @@ Ext.onReady(function () {
                         id: 'btnFase1',
                         pressed: true,
                         cls: 'itemMenu fase1',
-                        text: 'CÁLCULO<br>DE CONSUMO',
+                        text: 'ESTIMACIÓN<br>DE CONSUMO',
                         handler: function () {
                             fase = 1;
-                            Ext.getCmp('panelCentral').setTitle('<center class="title-general">CÁLCULO DE CONSUMO</center>');
+                            Ext.getCmp('panelCentral').setTitle('<center class="title-general">ESTIMACIÓN DE CONSUMO</center>');
                             limpiarPanelCentral();
                             panelDerecha.show();
                             panelCentral.add(viewConsumo);
@@ -380,14 +380,14 @@ Ext.onReady(function () {
                     }, {
                         id: 'btnFase4',
                         cls: 'itemMenu fase4',
-                        text: 'ANÁLISIS<br>PLANILLA',
+                        text: 'RESULTADOS DE<br>OPTIMIZACIÓN',
                         handler: function () {
                             if (storeConsumoDispositivos.data.items.length > 0) {
                                 if (sumaTotal === 0) {
                                     document.getElementById("btnFase2").click();
                                 }
                                 fase = 4;
-                                Ext.getCmp('panelCentral').setTitle('<center class="title-general">ANÁLISIS PLANILLA</center>');
+                                Ext.getCmp('panelCentral').setTitle('<center class="title-general">RESULTADOS DE OPTIMIZACIÓN - TOTAL</center>');
                                 limpiarPanelCentral();
                                 panelCentral.add(viewResultados);
                                 panelDerecha.hide();

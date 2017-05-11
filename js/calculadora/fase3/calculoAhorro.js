@@ -468,7 +468,7 @@ Ext.onReady(function () {
     calculoAhorro = Ext.create('Ext.panel.Panel', {
         id: 'tabConsejos',
         cls: 'tabs-ahorro',
-        title: 'Consejos de Ahorro',
+        title: 'Optimización de Ahorro',
         items: [viewConsejos]
     });
 });
