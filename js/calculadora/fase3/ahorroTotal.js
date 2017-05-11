@@ -12,7 +12,7 @@ consumoMayores = Ext.create('Ext.panel.Panel', {
             cls: 'barraDetalle',
             height: heightBarraDetalle,
             title: '<center class="titDetalle"><strong>CONSUMO</strong></center>',
-            html: '<p class="valorTotal" id="consumoTotalDis">0KWH</p>'
+            html: '<p class="valorTotal" id="consumoTotalDis">0 kWh</p>'
         }, {
             flex: 1,
             cls: 'barraDetalle',
