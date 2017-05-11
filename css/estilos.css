@@ -414,11 +414,27 @@ sub{
     border: #1E3C87 solid thin;
 }
 
+.resumen-medidas{
+    border-style: solid !important;
+    padding: 5px !important;
+    margin: 1px !important;
+    border-width: 1px;
+    border-color: #D6DBDF !important;
+    border-radius: 5px;
+}
+
 .checkResultados{
-    margin-left: 40px;
-    margin-right: 40px;
-    margin-bottom: 3px;
-    text-align: center;
+    /*    margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 3px;
+        text-align: left;*/
+}
+.checkResultados .x-form-item-label{
+    margin-right: 15% !important;
+}
+
+.checkResultados .x-form-item-label-inner{
+    width: 120% !important;
 }
 
 @media (max-width: 1280px){

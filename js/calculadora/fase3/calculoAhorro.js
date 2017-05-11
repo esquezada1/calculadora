@@ -2,7 +2,7 @@ var calculoAhorro, gridConsejos, storeConsejos1, storeConsejos2, storeConsejos3,
 var ahorroTotal, consejosAhorro = 0, widthConsumoDis = '40%', widthOptDis = '40%', withPorcentaje = '19%',withValoresDis = '50%';
 
 Ext.onReady(function () {
-    var heightConsejos = 250, heightGridConsejos = 170, heightValores = 46;
+    var heightConsejos = 250, heightGridConsejos = 172, heightValores = 46;
     Ext.define('AhorroModel', {
         extend: 'Ext.data.Model',
         fields: [
