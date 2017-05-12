@@ -81,6 +81,7 @@ Ext.onReady(function () {
         flex: 1,
         layout: 'anchor',
         height: 265,
+        autoScroll: true,
         defaults: {
             margin: '2 0 2 0'
         },
@@ -275,11 +276,11 @@ Ext.onReady(function () {
                 cls: 'panel-valores',
                 margin: '5 0 0 0',
                 items: [{
-                        width: '39%',
+                        width: '60%',
                         html: '<center><b>Consumo a sustituir en el hogar</b></center>'
                     },
                     {
-                        width: '60%',
+                        width: '39%',
                         html: '<center><b id="consumoSust">0 kWh</b></center>'
                     }]
             }, {
@@ -288,11 +289,11 @@ Ext.onReady(function () {
                 cls: 'panel-valores',
                 margin: '0 0 10 0',
                 items: [{
-                        width: '39%',
+                        width: '60%',
                         html: '<center><b>Porcentaje de aporte al consumidor</b></center>'
                     },
                     {
-                        width: '60%',
+                        width: '39%',
                         html: '<center><b id="precioSust">0.00 %</b></center>'
                     }]
             },
@@ -300,7 +301,6 @@ Ext.onReady(function () {
                 xtype: 'checkbox',
                 name: 'checkStore',
                 boxLabel: 'Utilizar Optimización de Ahorro',
-                checked: true,
                 listeners: {
                     change: function (store, check) {
                         if (check) {
@@ -374,12 +374,12 @@ Ext.onReady(function () {
         flex: 1,
         layout: 'anchor',
         margin: '0 0 0 5',
-        height: 270,
+        height: 265,
         items: [{
                 xtype: 'panel',
                 items: [{
                         flex: 1,
-                        padding: '3 10 0 10',
+                        padding: '1 10 0 10',
                         style: 'text-align: center;',
                         html: '<img src="img/casa-verde.png" style="width:62%; height: 80px;">'
                     },
@@ -388,7 +388,7 @@ Ext.onReady(function () {
                         defaults: {
                             margin: '3 0 3 0'
                         },
-                        padding: '10 0 0 0',
+                        padding: '5 0 0 0',
                         items: [{
                                 xtype: 'panel',
                                 layout: 'hbox',

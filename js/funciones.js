@@ -140,7 +140,6 @@ function filtrarStores() {
                 idConsumoDis = 'consumoDis1';
                 idEmisionDis = 'emisionDis1';
                 idGridDis = 'gridConsejos1';
-                Ext.getCmp(idGridDis).getView().emptyText = '<br><center>No tiene optimización de consumo</center>';
                 if (rec.get('idMaquina') === 24) {
                     Ext.getCmp(idGridDis).getView().emptyText = '<br><center>Optimizaciòn disponible en la pestaña "Colector Solar"</center>';
                     viewAhorro.child('#tabColector').tab.show();
@@ -154,7 +153,6 @@ function filtrarStores() {
                 idConsumoDis = 'consumoDis2';
                 idEmisionDis = 'emisionDis2';
                 idGridDis = 'gridConsejos2';
-                Ext.getCmp(idGridDis).getView().emptyText = '<br><center>No tiene optimización de consumo</center>';
                 if (rec.get('idMaquina') === 24) {
                     Ext.getCmp(idGridDis).getView().emptyText = '<br><center>Optimizaciòn disponible en la pestaña "Colector Solar"</center>';
                     viewAhorro.child('#tabColector').tab.show();
@@ -168,7 +166,6 @@ function filtrarStores() {
                 idConsumoDis = 'consumoDis3';
                 idEmisionDis = 'emisionDis3';
                 idGridDis = 'gridConsejos3';
-                Ext.getCmp(idGridDis).getView().emptyText = '<br><center>No tiene optimización de consumo</center>';
                 if (rec.get('idMaquina') === 24) {
                     Ext.getCmp(idGridDis).getView().emptyText = '<br><center>Optimizaciòn disponible en la pestaña "Colector Solar"</center>';
                     viewAhorro.child('#tabColector').tab.show();
@@ -182,7 +179,6 @@ function filtrarStores() {
                 idConsumoDis = 'consumoDis4';
                 idEmisionDis = 'emisionDis4';
                 idGridDis = 'gridConsejos4';
-                Ext.getCmp(idGridDis).getView().emptyText = '<br><center>No tiene optimización de consumo</center>';
                 if (rec.get('idMaquina') === 24) {
                     Ext.getCmp(idGridDis).getView().emptyText = '<br><center>Optimizaciòn disponible en la pestaña "Colector Solar"</center>';
                     viewAhorro.child('#tabColector').tab.show();

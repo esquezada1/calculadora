@@ -94,7 +94,9 @@ Ext.onReady(function () {
                 layout: 'hbox',
                 items: [
                     {
+                        height: 230,
                         width: '65%',
+                        autoScroll: true,
                         margin: margenGeneral,
                         title: '<center><strong style="color:black;">RESUMEN DE MEDIDAS DE OPTIMIZACIÓN </strong></center>',
                         items: [
@@ -116,7 +118,7 @@ Ext.onReady(function () {
                                         collapsed: true,
                                         collapsible: true,
                                         titleCollapse: true,
-                                        cls:'detalleColapse',
+                                        cls: 'detalleColapse',
                                         id: 'ResumenOptimizacion',
                                         padding: '0 15 0 10',
                                         title: '<small style="color:black">Detalle Optimización de consumo</small>'
@@ -139,7 +141,7 @@ Ext.onReady(function () {
                                         collapsed: true,
                                         collapsible: true,
                                         titleCollapse: true,
-                                        cls:'detalleColapse',
+                                        cls: 'detalleColapse',
                                         id: 'ResumenPaneles',
                                         padding: '0 15 0 10',
                                         title: '<small style="color:black">Detalle Paneles Solares</small>'
@@ -162,7 +164,7 @@ Ext.onReady(function () {
                                         collapsed: true,
                                         collapsible: true,
                                         titleCollapse: true,
-                                        cls:'detalleColapse',
+                                        cls: 'detalleColapse',
                                         id: 'ResumenColector',
                                         padding: '0 15 0 10',
                                         title: '<small style="color:black">Detalle Colector Solar</small>'
