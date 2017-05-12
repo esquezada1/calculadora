@@ -116,9 +116,10 @@ Ext.onReady(function () {
                                         collapsed: true,
                                         collapsible: true,
                                         titleCollapse: true,
+                                        cls:'detalleColapse',
                                         id: 'ResumenOptimizacion',
-                                        html: 'Resumen Optimizacion de consumo',
-                                        title: '<span style="color:black">Resumen Optimizacion de consumo</span>'
+                                        padding: '0 15 0 10',
+                                        title: '<small style="color:black">Detalle Optimización de consumo</small>'
                                     }
                                 ]
                             }, {
@@ -138,9 +139,10 @@ Ext.onReady(function () {
                                         collapsed: true,
                                         collapsible: true,
                                         titleCollapse: true,
+                                        cls:'detalleColapse',
                                         id: 'ResumenPaneles',
-                                        html: 'Resumen Paneles Solares',
-                                        title: '<span style="color:black">Resumen Paneles Solares</span>'
+                                        padding: '0 15 0 10',
+                                        title: '<small style="color:black">Detalle Paneles Solares</small>'
                                     }
                                 ]
                             }, {
@@ -160,9 +162,10 @@ Ext.onReady(function () {
                                         collapsed: true,
                                         collapsible: true,
                                         titleCollapse: true,
+                                        cls:'detalleColapse',
                                         id: 'ResumenColector',
-                                        html: 'Resumen Colector Solar',
-                                        title: '<span style="color:red">No aplica</span>'
+                                        padding: '0 15 0 10',
+                                        title: '<small style="color:black">Detalle Colector Solar</small>'
                                     }
                                 ]
                             }

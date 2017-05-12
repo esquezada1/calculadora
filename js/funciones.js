@@ -517,4 +517,123 @@ function mostrarResultados() {
     document.getElementById('resultadosEmision').innerHTML = emisionCO2(sumaTotal) + " kg de CO<sub>2</sub>";
     document.getElementById('resultadosOptConsumo').innerHTML = sumaTotal.toFixed(2) + " kWh";
     document.getElementById('resultadosOptEmision').innerHTML = emisionCO2(sumaTotal) + " kg de CO<sub>2</sub>";
+    checkConsejos();
+}
+
+function checkConsejos() {
+    var x = 0, cont1 = 0, cont2 = 0, cont3 = 0, cont4 = 0;
+    var dispositivo1 = storeConsumoFinal.data.items[0];
+    var dispositivo2 = storeConsumoFinal.data.items[1];
+    var dispositivo3 = storeConsumoFinal.data.items[2];
+    var dispositivo4 = storeConsumoFinal.data.items[3];
+    var consejos = "";
+    x = (dispositivo1.get("idMaquina") === 24 || dispositivo2.get("idMaquina") !== 24 || dispositivo3.get("idMaquina") !== 24 || dispositivo4.get("idMaquina") !== 24) ? 1 : 0;
+    if (dispositivo1.get("idMaquina") !== 24) {
+        consejos += "<strong style = 'font-size:12px; text-transform: capitalize;'><em><u>" + dispositivo1.get("nombreDis") + "</em></u></strong></ul>";
+        storeConsejos1.each(function (rec) {
+            if (dispositivo1.get("idMaquina") === rec.get("idMaquina") && rec.get("active")) {
+                var final = (rec.get("consejo").length <= 50) ? "</li>" : "...</li>";
+                consejos += "<li title= '" + rec.get("consejo") + "' style = 'font-size:12px;'>" + rec.get("consejo").substr(0, 50) + final;
+                cont1++;
+            }
+        });
+        if (cont1 === 0) {
+            consejos += "<li>No tiene optimización de ahorro</li>";
+            x++;
+        }
+        consejos += "</ul>";
+    }
+    if (dispositivo2.get("idMaquina") !== 24) {
+        consejos += "<strong style = 'font-size:12px; text-transform: capitalize;'><em><u>" + dispositivo2.get("nombreDis") + "</em></u></strong></ul>";
+        storeConsejos2.each(function (rec) {
+            if (dispositivo2.get("idMaquina") === rec.get("idMaquina") && rec.get("active")) {
+                var final = (rec.get("consejo").length <= 50) ? "</li>" : "...</li>";
+                consejos += "<li title= '" + rec.get("consejo") + "' style = 'font-size:12px;'>" + rec.get("consejo").substr(0, 50) + final;
+                cont2++;
+            }
+        });
+        if (cont2 === 0) {
+            consejos += "<li>No tiene optimización de ahorro</li>";
+            x++;
+        }
+        consejos += "</ul>";
+    }
+    if (dispositivo3.get("idMaquina") !== 24) {
+        consejos += "<strong style = 'font-size:12px; text-transform: capitalize;'><em><u>" + dispositivo3.get("nombreDis") + "</em></u></strong></ul>";
+        storeConsejos3.each(function (rec) {
+            if (dispositivo1.get("idMaquina") === rec.get("idMaquina") && rec.get("active")) {
+                var final = (rec.get("consejo").length <= 50) ? "</li>" : "...</li>";
+                consejos += "<li title= '" + rec.get("consejo") + "' style = 'font-size:12px;'>" + rec.get("consejo").substr(0, 50) + final;
+                cont3++;
+            }
+        });
+        if (cont3 === 0) {
+            consejos += "<li>No tiene optimización de ahorro</li>";
+            x++;
+        }
+        consejos += "</ul>";
+    }
+    if (dispositivo4.get("idMaquina") !== 24) {
+        consejos += "<strong style = 'font-size:12px; text-transform: capitalize;'><em><u>" + dispositivo4.get("nombreDis") + "</em></u></strong></ul>";
+        storeConsejos4.each(function (rec) {
+            if (dispositivo4.get("idMaquina") === rec.get("idMaquina") && rec.get("active")) {
+                var final = (rec.get("consejo").length <= 50) ? "</li>" : "...</li>";
+                consejos += "<li title= '" + rec.get("consejo") + "' style = 'font-size:12px;'>" + rec.get("consejo").substr(0, 50) + final;
+                cont4++;
+            }
+        });
+        if (cont4 === 0) {
+            consejos += "<li>No tiene optimización de ahorro</li>";
+            x++;
+        }
+        consejos += "</ul>";
+    }
+    if (x === 4) {
+        Ext.getCmp('ResumenOptimizacion').update("<i>No tiene optimización de ahorro</i>");
+    } else {
+        Ext.getCmp('ResumenOptimizacion').update(consejos);
+    }
+
+    var recordPanel = storeMayoresConsumidores.findRecord('excluir', true);
+    if (!recordPanel) {
+        Ext.getCmp('ResumenPaneles').update("<i>No tiene optimización de ahorro</i>");
+    } else {
+        var consejos = "<strong style = 'font-size:12px; text-transform: capitalize;'><em><u>" + recordPanel.get("nombreDis") + "</em></u></strong>";
+        Ext.getCmp('ResumenPaneles').update(consejos);
+    }
+
+
+    var consejos = "<ul>";
+    storeConsumoDispositivos.each(function (rec) {
+        if (rec.get('idCategoria') === 3) {
+            consejos += "<li><strong style = 'font-size:12px; text-transform: capitalize;'><em><u>" + rec.get("nombreDis") + "</em></u></strong></li>";
+        }
+    });
+    consejos += "</ul>";
+    Ext.getCmp('ResumenColector').update(consejos);
+
+    if (consejosAhorro === 0) {
+        Ext.getCmp('ResumenOptimizacion').setTitle('<small style="color:#7B241C">Usted no escogió medidas de ahorro.</small>');
+        Ext.getCmp('ResumenOptimizacion').update('');
+        Ext.getCmp('checkConsejosRes').disable();
+    } else {
+        Ext.getCmp('checkConsejosRes').enable();
+        Ext.getCmp('ResumenOptimizacion').setTitle('<small style="color:black">Detalle optimización de consumo</small>');
+    }
+    if (panelesAhorro === 0) {
+        Ext.getCmp('ResumenPaneles').setTitle('<small style="color:#7B241C">Usted no escogió medidas de ahorro.</small>');
+        Ext.getCmp('ResumenPaneles').update('');
+        Ext.getCmp('checkPanelesRes').disable();
+    } else {
+        Ext.getCmp('checkPanelesRes').enable();
+        Ext.getCmp('ResumenPaneles').setTitle('<small style="color:black">Detalle paneles solares</small>');
+    }
+    if (colectorAhorro === 0) {
+        Ext.getCmp('ResumenColector').setTitle('<small style="color:#7B241C">Usted no escogió medidas de ahorro.</small>');
+        Ext.getCmp('ResumenColector').update('');
+        Ext.getCmp('checkColectorRes').disable();
+    } else {
+        Ext.getCmp('checkColectorRes').enable();
+        Ext.getCmp('ResumenColector').setTitle('<small style="color:black">Detalle colector solar</small>');
+    }
 }

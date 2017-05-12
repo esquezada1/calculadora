@@ -437,6 +437,11 @@ sub{
     width: 120% !important;
 }
 
+.detalleColapse .x-panel-header{
+    margin: 0px !important;
+    padding: 0px 5px 0px 5px !important;
+}
+
 .footer{
     background: rgba(247, 249, 249, 0.8) !important;
     height: 60px !important;
