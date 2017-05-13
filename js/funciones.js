@@ -557,7 +557,7 @@ function checkConsejos() {
     if (dispositivo3.get("idMaquina") !== 24) {
         consejos += "<strong style = 'font-size:12px; text-transform: capitalize;'><em><u>" + dispositivo3.get("nombreDis") + "</em></u></strong></ul>";
         storeConsejos3.each(function (rec) {
-            if (dispositivo1.get("idMaquina") === rec.get("idMaquina") && rec.get("active")) {
+            if (dispositivo3.get("idMaquina") === rec.get("idMaquina") && rec.get("active")) {
                 var final = (rec.get("consejo").length <= 50) ? "</li>" : "...</li>";
                 consejos += "<li title= '" + rec.get("consejo") + "' style = 'font-size:12px;'>" + rec.get("consejo").substr(0, 50) + final;
                 cont3++;

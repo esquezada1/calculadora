@@ -89,11 +89,11 @@ Ext.onReady(function () {
             clicksToEdit: 1,
             listeners: {
                 beforeedit: function (e, editor) {
-                    if (editor.record.get('idMaquina') === 19) {
-                        if (editor.colIdx === 2) {
-                            return false;
-                        }
-                    }
+//                    if (editor.record.get('idMaquina') === 19) {
+//                        if (editor.colIdx === 2) {
+//                            return false;
+//                        }
+//                    }
                 }
             }
         }),
@@ -183,15 +183,26 @@ Ext.onReady(function () {
                     emptyText: 'Nro'
                 },
                 renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
+//                    if (record.get('idMaquina') !== 19) {
+//                        metaData.style = "background-color:#FFF59D !important;";
+//                        if (record.get('idMaquina') !== 22) {
+//                            return value + ' watts <img src="img/help.png" onclick="ayuda(' + record.get('idMaquina') + ');" style="cursor: pointer; width:13px !important; padding: 0px; marin: 0px;">';
+//                        } else {
+//                            return value + ' watts';
+//                        }
+//                    } else {
+//                        return '-';
+//                    }
+                    metaData.style = "background-color:#FFF59D !important;";
                     if (record.get('idMaquina') !== 19) {
-                        metaData.style = "background-color:#FFF59D !important;";
+
                         if (record.get('idMaquina') !== 22) {
                             return value + ' watts <img src="img/help.png" onclick="ayuda(' + record.get('idMaquina') + ');" style="cursor: pointer; width:13px !important; padding: 0px; marin: 0px;">';
                         } else {
                             return value + ' watts';
                         }
                     } else {
-                        return '-';
+                        return value + ' cilindros <img src="img/help.png" onclick="ayuda(' + record.get('idMaquina') + ');" style="cursor: pointer; width:13px !important; padding: 0px; marin: 0px;">';
                     }
                 },
                 field: {
