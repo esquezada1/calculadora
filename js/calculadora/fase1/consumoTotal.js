@@ -89,11 +89,11 @@ Ext.onReady(function () {
             clicksToEdit: 1,
             listeners: {
                 beforeedit: function (e, editor) {
-//                    if (editor.record.get('idMaquina') === 19) {
-//                        if (editor.colIdx === 2) {
-//                            return false;
-//                        }
-//                    }
+                    if (editor.record.get('idMaquina') === 19 || editor.record.get('idMaquina') === 25) {
+                        if (editor.colIdx === 3 || editor.colIdx === 4) {
+                            return false;
+                        }
+                    }
                 }
             }
         }),
@@ -195,8 +195,9 @@ Ext.onReady(function () {
 //                    }
                     metaData.style = "background-color:#FFF59D !important;";
                     if (record.get('idMaquina') !== 19) {
-
-                        if (record.get('idMaquina') !== 22) {
+                        if (record.get('idMaquina') === 25) {
+                            return value + ' cilindros <img src="img/help.png" onclick="ayuda(' + record.get('idMaquina') + ');" style="cursor: pointer; width:13px !important; padding: 0px; marin: 0px;">';
+                        } else if (record.get('idMaquina') !== 22) {
                             return value + ' watts <img src="img/help.png" onclick="ayuda(' + record.get('idMaquina') + ');" style="cursor: pointer; width:13px !important; padding: 0px; marin: 0px;">';
                         } else {
                             return value + ' watts';
@@ -217,10 +218,14 @@ Ext.onReady(function () {
                 },
                 renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
                     metaData.style = "background-color:#FFF59D !important;";
-                    if (record.get('idPeriodo') === 4) {
-                        return value + ' minuto(s)';
+                    if (record.get('idMaquina') === 19 || record.get('idMaquina') === 25) {
+                        return '-';
                     } else {
-                        return value + ' hora(s)';
+                        if (record.get('idPeriodo') === 4) {
+                            return value + ' minuto(s)';
+                        } else {
+                            return value + ' hora(s)';
+                        }
                     }
                 },
                 field: {
@@ -235,6 +240,14 @@ Ext.onReady(function () {
                     displayField: 'name',
                     queryMode: 'local',
                     valueField: 'id'
+                },
+                renderer: function (value, metaData, record, rowIdx, colIdx, store, view) {
+                    metaData.style = "background-color:#FFF59D !important;";
+                    if (record.get('idMaquina') === 19 || record.get('idMaquina') === 25) {
+                        return 'Cil/mes';
+                    } else{
+                        return storePeriodos.getById(value).data.name;
+                    }
                 }
             },
             {header: "<center class='title-column'>kWh/mes</center>", width: 100, dataIndex: 'kwhMes', name: 'kwhMes',
@@ -287,10 +300,11 @@ Ext.onReady(function () {
                     storeConsejos2.getById(2).set('ahorro', ahorro.toFixed(2));
                     storeConsejos3.getById(2).set('ahorro', ahorro.toFixed(2));
                     storeConsejos4.getById(2).set('ahorro', ahorro.toFixed(2));
-                } else if (record.record.get('idMaquina') === 19) {
-                    totalConsumo = record.record.get('cantidad') * 14000 * record.record.get('tiempoUso') * cantPeriodo.get('cant');
-                    totalConsumo = totalConsumo / 2.54;
-                    totalConsumo = totalConsumo / 1000;
+                } else if (record.record.get('idMaquina') === 19 || record.record.get('idMaquina') === 25) {
+                    totalConsumo = record.record.get('cantidad') * record.record.get('potencia') * (190.29);
+//                    totalConsumo = record.record.get('cantidad') * 14000 * record.record.get('tiempoUso') * cantPeriodo.get('cant');
+//                    totalConsumo = totalConsumo / 2.54;
+//                    totalConsumo = totalConsumo / 1000;
                 } else {
                     totalConsumo = record.record.get('cantidad') * record.record.get('potencia') * record.record.get('tiempoUso') * cantPeriodo.get('cant');
                     totalConsumo = totalConsumo / 1000;

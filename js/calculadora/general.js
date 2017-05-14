@@ -85,8 +85,13 @@ Ext.onReady(function () {
                     var cantPeriodo = storePeriodos.getById(record.get('idPeriodo')).get('cant');
                     var tiempoUso = record.get('tiempoUso');
                     var cantidad = 1;
-                    var totalConsumo = cantidad * record.get('potencia') * tiempoUso * cantPeriodo;
-                    totalConsumo = totalConsumo / 1000;
+                    var totalConsumo;
+                    if (record.get('id') === 19 || record.get('id') === 25) {
+                        totalConsumo = cantidad * record.get('potencia') * (190.29);
+                    } else {
+                        totalConsumo = cantidad * record.get('potencia') * tiempoUso * cantPeriodo;
+                        totalConsumo = totalConsumo / 1000;
+                    }
                     var contDis = 1;
                     storeConsumoDispositivos.each(function (rec) {
                         if (rec.get('idMaquina') === record.id) {

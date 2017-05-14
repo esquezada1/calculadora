@@ -37,7 +37,8 @@ Ext.onReady(function () {
         {id: 19, idMaquina: 13, consejo: 'Se recomienda usar microondas', ahorro: 70},
         {id: 20, idMaquina: 23, consejo: 'Cambiar focos incandecentes a led', ahorro: 90, cambio: true},
         {id: 21, idMaquina: 23, consejo: 'Cambiar focos incandecentes a fluoroscentes', ahorro: 80, cambio: true},
-        {id: 22, idMaquina: 23, consejo: 'Cambiar de Fluorescentes a Led ', ahorro: 60, cambio: true}
+        {id: 22, idMaquina: 23, consejo: 'Cambiar de Fluorescentes a Led ', ahorro: 60, cambio: true},
+        {id: 23, idMaquina: 25, consejo: 'Cambiar a cocina de inducción ', ahorro: 47, cambio: true}
     ];
 
     storeConsejos1 = Ext.create('Ext.data.Store', {
