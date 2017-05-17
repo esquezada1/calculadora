@@ -106,12 +106,8 @@ Ext.onReady(function () {
                                     {id: 'checkConsejosRes', xtype: 'checkbox', flex: 1, fieldLabel: '<b>Optimización de Ahorro</b>', labelStyle: 'width: 380px', cls: 'checkResultados',
                                         listeners: {
                                             change: function (object, check) {
-                                                if (check) {
-                                                    cambiarResultados(object);
-                                                } else {
-                                                    mostrarResultados();
-                                                }
-                                            }
+                                                cambiarResultados();
+                                            }                                            
                                         }
                                     },
                                     {
@@ -130,11 +126,7 @@ Ext.onReady(function () {
                                     {id: 'checkPanelesRes', xtype: 'checkbox', flex: 1, fieldLabel: '<b>Panel Solar</b>', labelStyle: 'width: 380px', cls: 'checkResultados',
                                         listeners: {
                                             change: function (object, check) {
-                                                if (check) {
-                                                    cambiarResultados(object);
-                                                } else {
-                                                    mostrarResultados();
-                                                }
+                                                cambiarResultados();
                                             }
                                         }},
                                     {
@@ -153,11 +145,7 @@ Ext.onReady(function () {
                                     {id: 'checkColectorRes', disabled: true, xtype: 'checkbox', flex: 1, fieldLabel: '<b>Colector Solar</b>', labelStyle: 'width: 380px', cls: 'checkResultados',
                                         listeners: {
                                             change: function (object, check) {
-                                                if (check) {
-                                                    cambiarResultados(object);
-                                                } else {
-                                                    mostrarResultados();
-                                                }
+                                                cambiarResultados();
                                             }
                                         }},
                                     {

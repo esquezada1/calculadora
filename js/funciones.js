@@ -476,45 +476,59 @@ function emisionCO2(emision) {
     return parseFloat(emision);
 }
 
-function cambiarResultados(object) {
-    switch (object.id) {
-        case 'checkConsejosRes':
-            Ext.getCmp('checkPanelesRes').setValue(false);
-            Ext.getCmp('checkColectorRes').setValue(false);
-            var optimizacionConsumo = sumaTotal - consejosAhorro;
-            var optimizacionTotal = getPorcentajeAhorro(consejosAhorro, sumaTotal);
-            document.getElementById('resultadosAhorro').innerHTML = optimizacionTotal + "%";
-            document.getElementById('resultadosOptConsumo').innerHTML = optimizacionConsumo.toFixed(2) + " kWh";
-            document.getElementById('resultadosOptEmision').innerHTML = emisionCO2(optimizacionConsumo) + " kg de CO<sub>2</sub>";
-            break;
-        case 'checkPanelesRes':
+function cambiarResultados() {
+    var optimizacionConsumo = 0, optimizacionTotal = 0, consumoTotal = 0;
+    var cont = 0;
+    if (Ext.getCmp('checkConsejosRes').checked) {
+        optimizacionTotal += getPorcentajeAhorro(consejosAhorro, sumaTotal);
+        consumoTotal += consejosAhorro;
+        if (optimizacionTotal > 70) {
             Ext.getCmp('checkConsejosRes').setValue(false);
-            Ext.getCmp('checkColectorRes').setValue(false);
-            var optimizacionConsumo = sumaTotal - panelesAhorro;
-            var optimizacionTotal = getPorcentajeAhorro(panelesAhorro, sumaTotal);
-            document.getElementById('resultadosAhorro').innerHTML = optimizacionTotal + "%";
-            document.getElementById('resultadosOptConsumo').innerHTML = optimizacionConsumo.toFixed(2) + " kWh";
-            document.getElementById('resultadosOptEmision').innerHTML = emisionCO2(optimizacionConsumo) + " kg de CO<sub>2</sub>";
-            break;
-        case 'checkColectorRes':
-            Ext.getCmp('checkConsejosRes').setValue(false);
+            optimizacionTotal -= getPorcentajeAhorro(consejosAhorro, sumaTotal);
+            consumoTotal -= consejosAhorro;
+        }
+        cont++;
+    }
+    if (Ext.getCmp('checkPanelesRes').checked) {
+        optimizacionTotal += getPorcentajeAhorro(panelesAhorro, sumaTotal);
+        consumoTotal += panelesAhorro;
+        if (optimizacionTotal > 70) {
             Ext.getCmp('checkPanelesRes').setValue(false);
-            var optimizacionConsumo = sumaTotal - colectorAhorro;
-            var optimizacionTotal = getPorcentajeAhorro(colectorAhorro, sumaTotal);
-            document.getElementById('resultadosAhorro').innerHTML = optimizacionTotal + "%";
-            document.getElementById('resultadosOptConsumo').innerHTML = optimizacionConsumo.toFixed(2) + " kWh";
-            document.getElementById('resultadosOptEmision').innerHTML = emisionCO2(optimizacionConsumo) + " kg de CO<sub>2</sub>";
-            break;
+            optimizacionTotal -= getPorcentajeAhorro(panelesAhorro, sumaTotal);
+            consumoTotal -= panelesAhorro;
+        }
+        cont++;
+    }
+    if (Ext.getCmp('checkColectorRes').checked) {
+        optimizacionTotal += getPorcentajeAhorro(colectorAhorro, sumaTotal);
+        consumoTotal += colectorAhorro;
+        if (optimizacionTotal > 70) {
+            Ext.getCmp('checkPanelesRes').setValue(false);
+            optimizacionTotal -= getPorcentajeAhorro(colectorAhorro, sumaTotal);
+            consumoTotal -= colectorAhorro;
+        }
+        cont++;
+    }
+    optimizacionConsumo = sumaTotal - consumoTotal;
+    if (cont === 0) {
+        mostrarResultados();
+    } else {
+        document.getElementById('resultadosAhorro').innerHTML = optimizacionTotal.toFixed(2) + "%";
+        document.getElementById('resultadosOptConsumo').innerHTML = optimizacionConsumo.toFixed(2) + " kWh";
+        document.getElementById('resultadosOptEmision').innerHTML = emisionCO2(optimizacionConsumo) + " kg de CO<sub>2</sub>";
+
     }
 }
 
 function mostrarResultados() {
+    document.getElementById('resultadosAhorro').innerHTML = "0%";
     document.getElementById('resultadosConsumo').innerHTML = sumaTotal.toFixed(2) + " kWh";
     document.getElementById('resultadosEmision').innerHTML = emisionCO2(sumaTotal) + " kg de CO<sub>2</sub>";
     document.getElementById('resultadosOptConsumo').innerHTML = sumaTotal.toFixed(2) + " kWh";
     document.getElementById('resultadosOptEmision').innerHTML = emisionCO2(sumaTotal) + " kg de CO<sub>2</sub>";
     checkConsejos();
 }
+
 
 function checkConsejos() {
     var x = 0, cont1 = 0, cont2 = 0, cont3 = 0, cont4 = 0;
