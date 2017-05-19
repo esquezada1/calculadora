@@ -90,7 +90,7 @@ Ext.onReady(function () {
     });
 
     var columnsGrids = [
-        {header: '<center>Optimización de consumo</center>', dataIndex: 'consejo', width: 289,
+        {header: '<center>Optimización de consumo</center>', dataIndex: 'consejo', width: 289, 
             renderer: function (value, metaData, record, rowIdx, colIdx, store) {
                 metaData.tdAttr = 'data-qtip=\"' + value + '\"';
                 var srcIcon = "";

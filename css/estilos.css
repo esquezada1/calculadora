@@ -383,7 +383,7 @@ body{
 }
 
 .x-grid-cell-inner{
-    text-align: center !important;
+    text-align: left !important;
 }
 
 .tabs-ahorro{
